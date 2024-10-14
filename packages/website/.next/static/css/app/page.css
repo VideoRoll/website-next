@@ -1,0 +1,75 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../node_modules/.pnpm/next@14.2.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!../../node_modules/.pnpm/next@14.2.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./app/Page.module.css ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.Page_bannerTitle__Eu8eI {
+    font-size:48px;
+    /* font-weight:bold; */
+    text-align: center;
+}
+
+.Page_bannerDes__YhZz_ {
+    font-size:18px;
+    text-align: center;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ../../node_modules/.pnpm/next@14.2.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!../../node_modules/.pnpm/next@14.2.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./components/ui/NavBar/NavBar.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.NavBar_header__UeYMM {
+  height: calc(3.5rem * var(--mantine-scale));
+  margin-bottom: calc(0.625rem * var(--mantine-scale));
+  background-color: var(--mantine-color-body);
+  border-bottom: calc(0.0625rem * var(--mantine-scale)) solid
+    var(--mantine-color-gray-3);
+}
+  [data-mantine-color-scheme='dark'] .NavBar_header__UeYMM {
+  border-bottom: calc(0.0625rem * var(--mantine-scale)) solid
+    var(--mantine-color-dark-4);
+}
+
+.NavBar_inner__vXtZH {
+  height: calc(3.5rem * var(--mantine-scale));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.NavBar_link__IGrj4 {
+  display: block;
+  line-height: 1;
+  padding: calc(0.5rem * var(--mantine-scale)) calc(0.75rem * var(--mantine-scale));
+  border-radius: var(--mantine-radius-sm);
+  text-decoration: none;
+  color: var(--mantine-color-gray-7);
+}
+
+[data-mantine-color-scheme='dark'] .NavBar_link__IGrj4 {
+  color: var(--mantine-color-dark-0);
+}
+
+.NavBar_link__IGrj4 {
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+}
+
+@media (hover: hover) {
+  .NavBar_link__IGrj4:hover {
+    background-color: var(--mantine-color-gray-0);
+  }
+    [data-mantine-color-scheme='dark'] .NavBar_link__IGrj4:hover {
+    background-color: var(--mantine-color-dark-6);
+  }
+}
+
+@media (hover: none) {
+  .NavBar_link__IGrj4:active {
+    background-color: var(--mantine-color-gray-0);
+  }
+    [data-mantine-color-scheme='dark'] .NavBar_link__IGrj4:active {
+    background-color: var(--mantine-color-dark-6);
+  }
+}
+
+.NavBar_linkLabel__iqus5 {
+  margin-right: calc(0.3125rem * var(--mantine-scale));
+}
+
