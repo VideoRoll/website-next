@@ -8,8 +8,8 @@ import {
     createTheme,
     MantineColorsTuple,
 } from "@mantine/core";
-import { NavigationProgress } from "@mantine/nprogress";
 import "./globals.css";
+import React from "react";
 
 export const metadata = {
     title: "My Mantine app",
