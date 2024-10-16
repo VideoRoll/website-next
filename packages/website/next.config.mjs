@@ -7,6 +7,11 @@ const nextConfig = {
         // !! WARN !!
         ignoreBuildErrors: true,
     },
+    experimental: {
+        serverActions: {
+            allowedOrigins: ["videoroll.app", "*.videoroll.app", "localhost:3000"],
+        },
+    },
 };
 
 export default nextConfig;

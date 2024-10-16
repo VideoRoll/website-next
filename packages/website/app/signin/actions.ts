@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { createClient } from "../../utils/supabase/server";
+import { createClient } from "@/utils/supabase/server";
 
 export async function login(value: string) {
     const supabase = createClient();
@@ -46,12 +46,13 @@ export async function signup(formData: FormData) {
     redirect("/");
 }
 
-export async function loginWithGoogle() {
+export async function loginWithGoogle(origin: string) {
     const supabase = createClient();
+
     const { data } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-            redirectTo: "http://localhost:3000/auth/callback",
+            redirectTo: `${origin}/auth/callback`,
         },
     });
 
