@@ -53,7 +53,7 @@ export default function Signin(props: Props) {
                 {submitText}
             </Button>
             <Divider my="xs" label="or" labelPosition="center" />
-            <Button fullWidth variant="outline" leftSection={<IconBrandGoogleFilled></IconBrandGoogleFilled>} onClick={() => onGoogleSignin()}>
+            <Button fullWidth variant="outline" leftSection={<IconBrandGoogleFilled></IconBrandGoogleFilled>} onClick={() => onGoogleSignin(window.location.origin)}>
                 Sign in with Google
             </Button>
             <p>Don&apos;t have an account? Sign up</p>
