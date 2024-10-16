@@ -15,7 +15,6 @@ export default function SigninLayout({
     <div className={classes.signin}>
       <div className={classes.siginBox}>{children}</div>
       <div className={classes.signinBanner}>
-        Video Roll
         <Banner></Banner>
       </div>
     </div>
