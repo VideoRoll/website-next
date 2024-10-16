@@ -10,7 +10,9 @@
 /coverage
 
 # next.js
-/.next/
+packages/website/.next/
+packages/website/node_modules/
+packages/website/out/
 /out/
 
 # production
