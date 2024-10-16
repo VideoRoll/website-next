@@ -47,7 +47,10 @@ const links = [
 ];
 
 type Props = {
-  currentUser: any;
+  currentUser: {
+    email: string
+    [key:string]: string
+  };
 };
 
 export default function NavBar(props: Props) {

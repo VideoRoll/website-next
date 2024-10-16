@@ -1,9 +1,9 @@
 import React from "react";
 // import { motion } from "framer-motion";
-import Navbar from "../components/ui/NavBar";
+import Navbar from "@/components/ui/NavBar";
 import { Button, Container, Group, Rating, Text } from "@mantine/core";
 import * as motion from "framer-motion/client";
-import { getUserServerSideProps } from "../utils/auth-helpers/props";
+import { getUserServerSideProps } from "@/utils/auth-helpers/props";
 import classes from "./Page.module.css";
 import { IconArrowRight, IconMedal, IconUsers } from "@tabler/icons-react";
 

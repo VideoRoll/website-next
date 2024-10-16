@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { IconLock, IconBrandGoogleFilled } from "@tabler/icons-react";
+import { IconBrandGoogleFilled } from "@tabler/icons-react";
 import { useForm } from "@mantine/form";
 import { Button, Divider, PasswordInput, TextInput } from "@mantine/core";
 import classes from "./Sign.module.css";
@@ -56,7 +56,7 @@ export default function Signin(props: Props) {
             <Button fullWidth variant="outline" leftSection={<IconBrandGoogleFilled></IconBrandGoogleFilled>} onClick={() => onGoogleSignin()}>
                 Sign in with Google
             </Button>
-            <p>Don't have an account? Sign up</p>
+            <p>Don&apos;t have an account? Sign up</p>
         </form>
     );
 }

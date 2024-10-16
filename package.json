@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev:website": "pnpm -F @website-next/website dev",
-    "build": "next build",
-    "start": "next start",
+    "build:website": "pnpm -F @website-next/website build",
+    "start:website": "pnpm -F @website-next/website start",
     "lint": "next lint"
   },
   "dependencies": {
