@@ -22,6 +22,7 @@ import {
 } from "@tabler/icons-react";
 import { createClient } from "../../../utils/supabase/client";
 import classes from "./NavBar.module.css";
+import { nprogress } from "@mantine/nprogress";
 
 const links = [
   {
@@ -119,6 +120,10 @@ export default function NavBar(props: Props) {
     );
   });
 
+  const ng = () => {
+    nprogress.start()
+  }
+
   return (
     <nav className={classes.header}>
       <Container size="lg">
@@ -168,6 +173,7 @@ export default function NavBar(props: Props) {
                 }}
                 leftSection={<IconUser size={14}></IconUser>}
                 size="compact-sm"
+                onClick={ng}
               >
                 Sign in
               </Button>
@@ -198,8 +204,9 @@ export default function NavBar(props: Props) {
                 />
               </ActionIcon>
             )}
+            <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
           </Group>
-          <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
+          
         </div>
       </Container>
     </nav>

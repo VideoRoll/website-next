@@ -9,9 +9,10 @@ import classes from "./Sign.module.css";
 type Props = {
     submitText: string;
     onSubmit: (data: string) => void;
+    onGoogleSignin: (data: string) => void;
 };
 export default function Signin(props: Props) {
-    const { submitText, onSubmit } = props;
+    const { submitText, onSubmit, onGoogleSignin } = props;
 
     // useForm hook to create a form with controlled state and validation
     const form = useForm({
@@ -43,7 +44,6 @@ export default function Signin(props: Props) {
             />
             <PasswordInput
                 withAsterisk
-                leftSection={<IconLock />}
                 label="Password"
                 placeholder="Password"
                 key={form.key("password")}
@@ -53,7 +53,7 @@ export default function Signin(props: Props) {
                 {submitText}
             </Button>
             <Divider my="xs" label="or" labelPosition="center" />
-            <Button fullWidth variant="outline" leftSection={<IconBrandGoogleFilled></IconBrandGoogleFilled>}>
+            <Button fullWidth variant="outline" leftSection={<IconBrandGoogleFilled></IconBrandGoogleFilled>} onClick={() => onGoogleSignin()}>
                 Sign in with Google
             </Button>
             <p>Don't have an account? Sign up</p>

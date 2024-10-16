@@ -5,11 +5,23 @@
     font-size:48px;
     /* font-weight:bold; */
     text-align: center;
+    font-family: var(--mantine-font-family-headings);
 }
 
 .Page_bannerDes__YhZz_ {
-    font-size:18px;
+    font-size:20px;
     text-align: center;
+    color: var(--mantine-color-gray-text)
+}
+
+.Page_bannerAchievement__qFtsg {
+    display: flex;
+    justify-content: center;
+}
+
+.Page_rate__HgBxa {
+    display: flex;
+    align-items: center;
 }
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ../../node_modules/.pnpm/next@14.2.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!../../node_modules/.pnpm/next@14.2.15_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./components/ui/NavBar/NavBar.module.css ***!
