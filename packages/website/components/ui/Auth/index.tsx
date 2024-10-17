@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import {
-    IconBrandGithubFilled,
-    IconBrandGoogleFilled,
-} from "@tabler/icons-react";
+import React, { useRef, useState } from "react";
+import Google from "@/components/icons/Google";
+import Github from "@/components/icons/Github";
 import { useForm } from "@mantine/form";
 import {
     Button,
@@ -23,7 +21,7 @@ import { Turnstile } from "@marsidev/react-turnstile";
 type Props = {
     type: "signin" | "signup";
     submitText: string;
-    onSubmit: (data: string) => Promise<any>;
+    onSubmit: (data: FormData) => Promise<any>;
     onGoogleSignin: (data: string) => void;
     onGithubSignin: (data: string) => void;
 };
@@ -33,7 +31,7 @@ export default function Auth(props: Props) {
         props;
     const [visible, handlers] = useDisclosure(false);
     const [captchaToken, setCaptchaToken] = useState();
-
+    const turnstileRef = useRef();
     // useForm hook to create a form with controlled state and validation
     const form = useForm({
         mode: "uncontrolled",
@@ -49,19 +47,43 @@ export default function Auth(props: Props) {
         },
     });
 
+    const handleOAuthSignin = (callback: (data: string) => Promise<any>) => {
+        handlers.open();
+        callback(window.location.origin).catch((error: any) => {
+            handlers.close()
+            notifications.show({
+                position: "top-center",
+                withCloseButton: true,
+                autoClose: 3000,
+                title: "",
+                message: 'Login credentials or grant type not recognized',
+                color: "red"
+            });
+            console.log(error);
+        });
+    }
+
     const handleSubmit = (value: any) => {
-        if (type === "signup") {
-            value.captchaToken = captchaToken;
-        }
+        value.captchaToken = captchaToken;
 
         const formData = new FormData();
         Object.keys(value).forEach((key) => {
             formData.append(key, value[key]);
         });
 
+        handlers.open();
         onSubmit(formData).catch((error) => {
+            notifications.show({
+                position: "top-center",
+                withCloseButton: true,
+                autoClose: 3000,
+                title: "",
+                message: 'Login credentials or grant type not recognized',
+                color: "red"
+            });
+            turnstileRef.current?.reset();
             console.log(error);
-        });
+        }).finally(() => handlers.close());
     };
 
     return (
@@ -89,15 +111,21 @@ export default function Auth(props: Props) {
                 key={form.key("password")}
                 {...form.getInputProps("password")}
             />
-            {type === "signup" ? (
-                <Turnstile
-                    className={classes.turnstile}
-                    siteKey="0x4AAAAAAAxryjpkBF1lWMCb"
-                    onSuccess={(token) => {
-                        setCaptchaToken(token);
-                    }}
-                ></Turnstile>
-            ) : null}
+            <Turnstile
+                ref={turnstileRef}
+                options={{
+                    size: "flexible",
+                    retryInterval: 2000,
+                }}
+                className={classes.turnstile}
+                siteKey="0x4AAAAAAAxryjpkBF1lWMCb"
+                onSuccess={(token) => {
+                    setCaptchaToken(token);
+                }}
+                onError={() => {
+                    turnstileRef.current?.reset();
+                }}
+            ></Turnstile>
 
             <Button fullWidth type="submit" mt="sm">
                 {submitText}
@@ -106,8 +134,8 @@ export default function Auth(props: Props) {
             <Button
                 fullWidth
                 variant="outline"
-                leftSection={<IconBrandGoogleFilled></IconBrandGoogleFilled>}
-                onClick={() => onGoogleSignin(window.location.origin)}
+                leftSection={<Google></Google>}
+                onClick={() => handleOAuthSignin(onGoogleSignin)}
             >
                 Sign in with Google
             </Button>
@@ -115,15 +143,20 @@ export default function Auth(props: Props) {
             <Button
                 fullWidth
                 variant="outline"
-                leftSection={<IconBrandGithubFilled></IconBrandGithubFilled>}
-                onClick={() => onGithubSignin(window.location.origin)}
+                leftSection={<Github></Github>}
+                onClick={() => handleOAuthSignin(onGithubSignin)}
             >
                 Sign in with Github
             </Button>
             {type === "signin" ? (
-                <p>Don&apos;t have an account? <Link href="/signup">Sign up</Link></p>
+                <p>
+                    Don&apos;t have an account?{" "}
+                    <Link href="/signup">Sign up</Link>
+                </p>
             ) : (
-                <p>Already have an account? <Link href="/signin">Sign in</Link></p>
+                <p>
+                    Already have an account? <Link href="/signin">Sign in</Link>
+                </p>
             )}
         </form>
     );

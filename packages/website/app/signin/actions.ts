@@ -12,7 +12,8 @@ export async function login(formData: FormData) {
     // in practice, you should validate your inputs
     const data = {
         email: formData.get('email') as string,
-        password: formData.get('password') as string
+        password: formData.get('password') as string,
+        options: { captchaToken: formData.get('captchaToken') as string },
     };
 
     const { error } = await supabase.auth.signInWithPassword(data);
@@ -39,11 +40,13 @@ export async function loginWithGoogle(origin: string) {
     });
 
     if (error) {
-        return;
+        return Promise.reject(error);
     }
 
     if (data.url) {
-        redirect(data.url); // use the redirect API for your server framework
+        return Promise.resolve().then(() => {
+            redirect(data.url); // use the redirect API for your server framework
+        })
     }
 }
 
@@ -58,10 +61,12 @@ export async function loginWithGithub(origin: string) {
     });
 
     if (error) {
-        return;
+        return Promise.reject(error);
     }
 
     if (data.url) {
-        redirect(data.url); // use the redirect API for your server framework
+        return Promise.resolve().then(() => {
+            redirect(data.url); // use the redirect API for your server framework
+        })
     }
 }

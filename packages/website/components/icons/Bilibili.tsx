@@ -1,4 +1,4 @@
-export default function Instagram() {
+export default function Bilibili() {
     return (
         <svg
             t="1728921334167"
