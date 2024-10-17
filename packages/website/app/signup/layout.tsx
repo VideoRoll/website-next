@@ -4,7 +4,8 @@
 // adjust the path if necessary
 import React from "react";
 import classes from "./Signup.module.css"
-import Banner from "../../components/icons/Banner"
+import Banner from "@/components/icons/Banner"
+import { Container } from "@mantine/core";
 
 export default function SigninLayout({
   children,
@@ -14,9 +15,9 @@ export default function SigninLayout({
   return (
     <div className={classes.signin}>
       <div className={classes.siginBox}>{children}</div>
-      <div className={classes.signinBanner}>
+      <Container visibleFrom="md" className={classes.signinBanner}>
         <Banner></Banner>
-      </div>
+      </Container >
     </div>
   );
 }

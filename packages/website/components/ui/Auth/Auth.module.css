@@ -1,7 +1,7 @@
 .sign {
-  width: rem(360);
+  width: rem('50%');
 }
 
 .turnstile {
-  margin-top: 5px;
+  margin-top: 10px;
 }

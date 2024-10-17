@@ -12,6 +12,7 @@ import "./globals.css";
 import React from "react";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { Notifications } from '@mantine/notifications';
+import '@mantine/notifications/styles.css';
 
 export const metadata = {
     title: "Video Roll",
@@ -61,8 +62,8 @@ export default function RootLayout({
             </head>
             <body>
                 <MantineProvider theme={theme}>
-                    <Notifications></Notifications>
                     <ProgressBar></ProgressBar>
+                    <Notifications position="top-center" zIndex={1000}></Notifications>
                     {children}
                 </MantineProvider>
                 <div
