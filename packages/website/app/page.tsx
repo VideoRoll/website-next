@@ -9,17 +9,35 @@ import { IconArrowRight, IconMedal, IconUsers } from "@tabler/icons-react";
 
 export default async function Page() {
     const { currentUser } = await getUserServerSideProps();
+
+    const container = {
+        hidden: { opacity: 0, y: -150 },
+        show: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                // 每个子元素的延迟时间会逐个递增0.5秒，也就是每个的启动时间都会比前一个有0.5s的延迟
+                staggerChildren: 0.3,
+            },
+        },
+    };
+
+    const item = {
+        hidden: { opacity: 0, x: -10 },
+        show: { opacity: 1, x: 0 },
+    };
+
     return (
         <div>
             <Navbar currentUser={currentUser}></Navbar>
             <Container size="lg">
                 <section id="hero">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
+                        variants={container}
+                        initial="hidden"
+                        animate="show"
                     >
-                        <div>
+                        <motion.div variants={item}>
                             <h1 className={classes.bannerTitle}>
                                 <Text
                                     className={classes.bannerTitle}
@@ -38,9 +56,9 @@ export default async function Page() {
                             <p className={classes.bannerDes}>
                                 Easily enhance your video watching experience
                             </p>
-                        </div>
+                        </motion.div>
                         <Group gap={100} justify="center">
-                            <div>
+                            <motion.div variants={item}>
                                 <div className={classes.rate}>
                                     <Text fw={600} size="lg" variant="default">
                                         17K+
@@ -51,8 +69,8 @@ export default async function Page() {
                                 <Text fw={200} size="sm" variant="default">
                                     Over 17,000 users globally
                                 </Text>
-                            </div>
-                            <div>
+                            </motion.div>
+                            <motion.div variants={item}>
                                 <div className={classes.rate}>
                                     <Text
                                         style={{ marginRight: "5px" }}
@@ -72,8 +90,8 @@ export default async function Page() {
                                 <Text fw={200} size="sm" variant="default">
                                     Average rating 4.6 out of 5
                                 </Text>
-                            </div>
-                            <div>
+                            </motion.div>
+                            <motion.div variants={item}>
                                 <div className={classes.rate}>
                                     <Text fw={600} size="lg" variant="default">
                                         Featured
@@ -83,13 +101,13 @@ export default async function Page() {
                                 <Text fw={200} size="sm" variant="default">
                                     Marked as featured extension
                                 </Text>
-                            </div>
+                            </motion.div>
                         </Group>
                     </motion.div>
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
+                        variants={container}
+                        initial="hidden"
+                        animate="show"
                     >
                         <Group gap="lg" justify="center" p="40">
                             <Button

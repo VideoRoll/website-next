@@ -13,16 +13,17 @@ import {
 import Link from "next/link";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
-import logo from "../../icons/logo.png";
+import logo from "@/components/icons/logo.png";
 import {
   IconMoon,
   IconChevronDown,
   IconBrightnessUp,
   IconUser,
 } from "@tabler/icons-react";
-import { createClient } from "../../../utils/supabase/client";
+import { createClient } from "@/utils/supabase/client";
 import classes from "./NavBar.module.css";
 import { nprogress } from "@mantine/nprogress";
+import React from "react";
 
 const links = [
   {
@@ -71,13 +72,15 @@ export default function NavBar(props: Props) {
   };
 
   const signout = () => {
+    nprogress.start();
     supabase.auth.signOut().then((res) => {
+      nprogress.complete();
         if (res.error) {
           console.error(res.error)
           return;
         }
 
-        
+        window.location.reload()
     })
   }
 
@@ -122,10 +125,6 @@ export default function NavBar(props: Props) {
       </a>
     );
   });
-
-  const ng = () => {
-    nprogress.start()
-  }
 
   return (
     <nav className={classes.header}>
@@ -176,7 +175,6 @@ export default function NavBar(props: Props) {
                 }}
                 leftSection={<IconUser size={14}></IconUser>}
                 size="compact-sm"
-                onClick={ng}
               >
                 Sign in
               </Button>
