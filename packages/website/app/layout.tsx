@@ -6,14 +6,16 @@ import {
     ColorSchemeScript,
     MantineProvider,
     createTheme,
-    MantineColorsTuple,
+    MantineColorsTuple
 } from "@mantine/core";
 import "./globals.css";
 import React from "react";
+import ProgressBar from "@/components/ui/ProgressBar";
+import { Notifications } from '@mantine/notifications';
 
 export const metadata = {
-    title: "My Mantine app",
-    description: "I have followed setup instructions carefully",
+    title: "Video Roll",
+    description: "All-in-one video enhancements",
 };
 
 const myColor: MantineColorsTuple = [
@@ -52,12 +54,22 @@ export default function RootLayout({
         <html lang="en">
             <head>
                 <ColorSchemeScript />
+                <script
+                    src="https://accounts.google.com/gsi/client"
+                    async
+                ></script>
             </head>
             <body>
                 <MantineProvider theme={theme}>
-                    {/* <NavigationProgress /> */}
+                    <Notifications></Notifications>
+                    <ProgressBar></ProgressBar>
                     {children}
                 </MantineProvider>
+                <div
+                    id="g_id_onload"
+                    data-client_id="53679872686-uvfd0t7q1tlje7o6dj381c77m26lrph7.apps.googleusercontent.com"
+                    data-login_uri="https://cvsunicdltfduyijjnlo.supabase.co/auth/v1/callback"
+                ></div>
             </body>
         </html>
     );
