@@ -8,12 +8,8 @@ export const getUserServerSideProps = async () => {
   const {
     data: { user },
   } = await supabase.auth.getUser()
-//   const {
-//     data: { session },
-//   } = await supabase.auth.getSession();
 
   return {
-    type: "aaa",
     currentUser: user,
   };
 };

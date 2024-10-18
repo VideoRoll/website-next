@@ -57,6 +57,7 @@ export default function RootLayout({
                 <ColorSchemeScript />
                 <script
                     src="https://accounts.google.com/gsi/client"
+                    defer
                     async
                 ></script>
             </head>
