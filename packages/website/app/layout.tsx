@@ -6,13 +6,15 @@ import {
     ColorSchemeScript,
     MantineProvider,
     createTheme,
-    MantineColorsTuple
+    MantineColorsTuple,
 } from "@mantine/core";
 import "./globals.css";
 import React from "react";
+import path from 'node:path'
+import Script from "next/script";
 import ProgressBar from "@/components/ui/ProgressBar";
-import { Notifications } from '@mantine/notifications';
-import '@mantine/notifications/styles.css';
+import { Notifications } from "@mantine/notifications";
+import "@mantine/notifications/styles.css";
 
 export const metadata = {
     title: "Video Roll",
@@ -64,7 +66,10 @@ export default function RootLayout({
             <body>
                 <MantineProvider theme={theme}>
                     <ProgressBar></ProgressBar>
-                    <Notifications position="top-center" zIndex={1000}></Notifications>
+                    <Notifications
+                        position="top-center"
+                        zIndex={1000}
+                    ></Notifications>
                     {children}
                 </MantineProvider>
                 <div
