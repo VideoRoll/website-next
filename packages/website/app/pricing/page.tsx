@@ -8,7 +8,7 @@ import Plan from './Plan';
 
 export default async function PricingPage() {
     const { currentUser } = await getUserServerSideProps();
-
+    
     return (
         <div>
             <Navbar currentUser={currentUser}></Navbar>
