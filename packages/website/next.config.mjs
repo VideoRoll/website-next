@@ -7,6 +7,7 @@ const nextConfig = {
         // !! WARN !!
         ignoreBuildErrors: true,
     },
+    reactStrictMode: false,
     experimental: {
         serverActions: {
             allowedOrigins: ["videoroll.app", "*.videoroll.app", "localhost:3000"],

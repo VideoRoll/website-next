@@ -16,10 +16,17 @@ import {
     Divider,
 } from "@mantine/core";
 import { IconCheck, IconCircleCheck, IconX } from "@tabler/icons-react";
-import { redirect } from "next/navigation";
+import { useRouter } from 'next/navigation'
 import classes from "./Pricing.module.css";
 
-export default function PricingPage() {
+type Props = {
+    currentUser: any
+}
+
+export default function PricingPage(props: Props) {
+    const { currentUser } = props;
+
+    const router = useRouter();
     const plans = useMemo(() => {
         return [
             {
@@ -55,7 +62,7 @@ export default function PricingPage() {
                 title: "Pro",
                 target: "Unlimited features",
                 des: "Everything in Free plan, plus more comprehensive features.",
-                price: "2.9",
+                price: "1.9",
                 price_id: "prod_685a565c9b454ff8",
                 payType: "month",
                 buttonText: "Get Started",
@@ -89,7 +96,7 @@ export default function PricingPage() {
                 badge: "Best Value",
                 target: "Pay once, use forever",
                 des: "Everything in Pro plan, free upgrade to get the latest features.",
-                price: "19.9",
+                price: "14.9",
                 price_id: "prod_f98090efd3c048e8",
                 payType: "lifetime",
                 buttonText: "Get Started",
@@ -129,15 +136,14 @@ export default function PricingPage() {
     }
 
     useEffect(() => {
-        window.KODEPAY_APPLICATION_ID = "8b34e240-c369-11ee-899a-a2470496a586"; // application_id
-        window.KODEPAY_CLIENT_ID = "429e48ee-768a-11ef-9cf3-928f62f479bc"; //client_id
-        window.KODEPAY_ENV = "development"; //env，development 和  production
+        window.KODEPAY_APPLICATION_ID = process.env.NEXT_PUBLIC_KODEPAY_APPLICATION_ID!; // application_id
+        window.KODEPAY_CLIENT_ID = process.env.NEXT_PUBLIC_KODEPAY_CLIENT_ID!; //client_id
+        window.KODEPAY_ENV = process.env.NEXT_PUBLIC_KODEPAY_ENV!; //env，development 和  production
 
         const dom = document.querySelector("kodepay-script");
         if (!dom) {
             const script = document.createElement("script");
-            script.src =
-                "https://kodepay-global.zingfront.com/resource/kodepay/2.1.3/kodepay-website.js";
+            script.src = process.env.NEXT_PUBLIC_KODEPAY_SRC!;
             script.async = true;
             script.setAttribute("id", "kodepay-script");
             document.head.appendChild(script);
@@ -147,13 +153,18 @@ export default function PricingPage() {
     }, []);
 
     const getPlan = (plan) => {
+        if (!currentUser) {
+            router.push('/signin');
+            return;
+        }
+
         if (plan.id === "pro") {
             // const origial_data = { user_id: 3242422, order_id: 123123 }; // 支付时可以额外透传的一些信息，我们会在支付回调中将这些信息传递给你的服务器，建议通过这些信息(例如自己的订单号)你可以唯一标识你系统的用户
             const price_id = plan.price_id; // price_id
             const currency = "cny"; // 目前支持usd, cny
             const origial_data = {
                 payment_channel: 'stripe', // "stripe","paypal"
-                payment_method: 'alipay', //"stripe" =>"card","alipay","wechat", k"paypal"=>"paypal"
+                payment_method: 'card', //"stripe" =>"card","alipay","wechat", k"paypal"=>"paypal"
                 currency: 'cny',    //"usd","cny'","inr"
                 // origin_data: Optional[Dict],  //开发者侧自定义的参数，自己决定是否透传
                 redirect_url: 'https://videoroll.app' //支付成功后的跳转链接，自己决定是否透传
@@ -161,9 +172,12 @@ export default function PricingPage() {
             //下面这两个方法，由开发者二选一。
             //这个是直接打开支付页面，没有支付方式选择的过程。
             // window.KodePay.open_payment_page(price_id, origial_data);
+            window.KodePay.register_login_information(currentUser.user_metadata.user_key).then(res => {
+                console.log('模拟登录', res);
+            });
             window.KodePay.open_payment_page_new(price_id, origial_data).then(res => {
                 console.log(res);// print succeed or failed
-
+                // 
                 if (res.code === 'success') {
                     window.location.href = res.data;
                 }

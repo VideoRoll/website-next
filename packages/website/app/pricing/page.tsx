@@ -7,12 +7,12 @@ import Plan from './Plan';
 // import { notifications } from "@mantine/notifications";
 
 export default async function PricingPage() {
-    const { currentUser } = await getUserServerSideProps();
+    const { currentUser, error } = await getUserServerSideProps();
     
     return (
         <div>
-            <Navbar currentUser={currentUser}></Navbar>
-            <Plan></Plan>
+            <Navbar currentUser={currentUser} error={error}></Navbar>
+            <Plan currentUser={currentUser}></Plan>
         </div>
     );
 }

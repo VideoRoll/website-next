@@ -8,8 +8,9 @@ import classes from "./Page.module.css";
 import { IconArrowRight, IconMedal, IconUsers } from "@tabler/icons-react";
 
 export default async function Page() {
-    const { currentUser } = await getUserServerSideProps();
+    const { currentUser, error } = await getUserServerSideProps();
 
+    // 定义framer-motion的variants
     const container = {
         hidden: { opacity: 0, y: -150 },
         show: {
@@ -29,7 +30,7 @@ export default async function Page() {
 
     return (
         <div>
-            <Navbar currentUser={currentUser}></Navbar>
+            <Navbar currentUser={currentUser} error={error}></Navbar>
             <Container size="lg">
                 <section id="hero">
                     <motion.div

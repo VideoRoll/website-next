@@ -23,7 +23,8 @@ import {
 import { createClient } from "@/utils/supabase/client";
 import classes from "./NavBar.module.css";
 import { nprogress } from "@mantine/nprogress";
-import React from "react";
+import { notifications } from "@mantine/notifications";
+import React, { useEffect, useMemo } from "react";
 
 const links = [
     {
@@ -52,10 +53,12 @@ type Props = {
         email: string;
         [key: string]: string;
     };
+    error?: string;
 };
 
 export default function NavBar(props: Props) {
-    const { currentUser } = props;
+    const { currentUser, error } = props;
+
     const supabase = createClient();
 
     const [opened, { toggle }] = useDisclosure(false);
@@ -84,46 +87,92 @@ export default function NavBar(props: Props) {
         });
     };
 
-    const items = links.map((link) => {
-        const menuItems = link.links?.map((item) => (
-            <Menu.Item key={item.link} component={Link} href={item.link}>
-                {item.label}
-            </Menu.Item>
-        ));
+    const items = useMemo(
+        () =>
+            links.map((link) => {
+                const menuItems = link.links?.map((item) => (
+                    <Menu.Item
+                        key={item.link}
+                        component={Link}
+                        href={item.link}
+                    >
+                        {item.label}
+                    </Menu.Item>
+                ));
 
-        if (menuItems) {
-            return (
-                <Menu
-                    key={link.label}
-                    trigger="hover"
-                    transitionProps={{ exitDuration: 0 }}
-                    withinPortal
-                >
-                    <Menu.Target>
-                        <a
-                            href={link.link}
-                            className={classes.link}
-                            onClick={(event) => event.preventDefault()}
+                if (menuItems) {
+                    return (
+                        <Menu
+                            key={link.label}
+                            trigger="hover"
+                            transitionProps={{ exitDuration: 0 }}
+                            withinPortal
                         >
-                            <Center>
-                                <span className={classes.linkLabel}>
-                                    {link.label}
-                                </span>
-                                <IconChevronDown size="0.9rem" stroke={1.5} />
-                            </Center>
-                        </a>
-                    </Menu.Target>
-                    <Menu.Dropdown>{menuItems}</Menu.Dropdown>
-                </Menu>
-            );
+                            <Menu.Target>
+                                <a
+                                    href={link.link}
+                                    className={classes.link}
+                                    onClick={(event) => event.preventDefault()}
+                                >
+                                    <Center>
+                                        <span className={classes.linkLabel}>
+                                            {link.label}
+                                        </span>
+                                        <IconChevronDown
+                                            size="0.9rem"
+                                            stroke={1.5}
+                                        />
+                                    </Center>
+                                </a>
+                            </Menu.Target>
+                            <Menu.Dropdown>{menuItems}</Menu.Dropdown>
+                        </Menu>
+                    );
+                }
+
+                return (
+                    <Link
+                        key={link.label}
+                        href={link.link}
+                        className={classes.link}
+                    >
+                        {link.label}
+                    </Link>
+                );
+            }),
+        []
+    );
+
+    useEffect(() => {
+        if (error) {
+            notifications.show({
+                position: "top-center",
+                withCloseButton: true,
+                autoClose: 3000,
+                title: "Error",
+                message: error,
+                color: "red",
+            });
         }
 
-        return (
-            <Link key={link.label} href={link.link} className={classes.link}>
-                {link.label}
-            </Link>
-        );
-    });
+        if (currentUser) {
+            window.postMessage(
+                {
+                    type: "videoroll-auth-signin",
+                    data: { success: true, user: currentUser },
+                },
+                "*"
+            );
+        } else {
+            window.postMessage(
+                {
+                    type: "videoroll-auth-signout",
+                    data: { success: true, user: null },
+                },
+                "*"
+            );
+        }
+    }, [currentUser]);
 
     return (
         <nav className={classes.header}>
