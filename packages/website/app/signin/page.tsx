@@ -1,5 +1,6 @@
 import React from "react";
 import { login, loginWithGoogle, loginWithGithub } from "./actions";
+// import { loginWithGoogle, loginWithGithub } from "@/utils/supabase/login";
 import Auth from "../../components/ui/Auth";
 import { Title } from "@mantine/core";
 // import { notifications } from "@mantine/notifications";

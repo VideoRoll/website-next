@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
+import { loginWithGoogle as google, loginWithGithub as github } from '@/utils/supabase/login';
 
 export async function signup(formData: FormData) {
     const supabase = createClient();
@@ -29,43 +30,9 @@ export async function signup(formData: FormData) {
 }
 
 export async function loginWithGoogle(origin: string) {
-    const supabase = createClient();
-
-    const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-            redirectTo: `${origin}/auth/callback`,
-        },
-    });
-
-    if (error) {
-        return Promise.reject(error);
-    }
-
-    if (data.url) {
-        return Promise.resolve().then(() => {
-            redirect(data.url); // use the redirect API for your server framework
-        })
-    }
+    return google(origin);
 }
 
 export async function loginWithGithub(origin: string) {
-    const supabase = createClient();
-
-    const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "github",
-        options: {
-            redirectTo: `${origin}/auth/callback`,
-        },
-    });
-
-    if (error) {
-        return Promise.reject(error);
-    }
-
-    if (data.url) {
-        return Promise.resolve().then(() => {
-            redirect(data.url); // use the redirect API for your server framework
-        })
-    }
+    return github(origin);
 }
