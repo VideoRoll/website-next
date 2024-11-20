@@ -2,11 +2,12 @@
     position: sticky;
     top: 0;
     z-index: 99;
-    height: rem(56px);
+    /* height: rem(56px); */
     margin-bottom: rem(10px);
     background-color: var(--mantine-color-body);
-    border-bottom: rem(1px) solid
-        light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    padding: 14px 0px;
+    /* border-bottom: rem(1px) solid
+        light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)); */
 }
 
 .inner {
