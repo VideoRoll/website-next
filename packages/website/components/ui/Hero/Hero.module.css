@@ -1,0 +1,123 @@
+.hero {
+    width: 100%;
+    padding-top: 40px;
+}
+
+.heroBackground1 {
+    width: 100px;
+    height: 100px;
+    right: 200px;
+    top: 200px;
+    position: absolute;
+    background-image: radial-gradient(#cd6dfd, rgb(199 210 254 / 0));
+    filter: blur(40px);
+}
+
+.heroBackground2 {
+    width: 180px;
+    height: 180px;
+    right: 30px;
+    top: 80px;
+    position: absolute;
+    background-image: radial-gradient(#bdacea, rgb(199 210 254 / 0));
+    filter: blur(40px);
+}
+
+.bannerTitle {
+    font-size: 48px;
+    /* font-weight:bold; */
+    text-align: center;
+    font-family: var(--mantine-font-family-headings);
+}
+
+.bannerDes {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 30px;
+    color: var(--mantine-color-gray-text);
+}
+
+.bannerAchievement {
+    display: flex;
+    justify-content: center;
+}
+
+.rate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter {
+    display: none;
+}
+
+.animateContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 80px;
+    filter: url(#threshold) blur(0.6px);
+}
+
+.text1,
+.text2 {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    /* font-family: "Raleway", sans-serif; */
+    text-align: center;
+    user-select: none;
+}
+
+.iconWrapper {
+    width: 100%;
+    position: absolute;
+}
+
+.iconBilibili {
+    top: 240px;
+    right: 0
+}
+
+.iconYoutube {
+    top: 70px;
+    left: 0;
+}
+.iconFacebook {
+    top: 120px;
+    left: 140px;
+}
+
+.iconTwitch {
+    top: 280px;
+    left: 70px;
+}
+
+.iconX {
+    top: 210px;
+    right: 120px;
+}
+
+.iconInstagram {
+    top: 200px;
+    left: 40px;
+}
+
+.iconVimeo {
+    top: 300px;
+    right: 80px;
+}
+
+.iconTicktok {
+    top: 110px;
+    right: 20px;
+}
+
+.icons {
+    width: 100%;
+    background-image: url('../../icons/bg.png');
+    background-size: auto;
+    background-position-y: center;
+}
+

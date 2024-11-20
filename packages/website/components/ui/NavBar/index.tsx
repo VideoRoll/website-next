@@ -28,12 +28,8 @@ import React, { useEffect, useMemo } from "react";
 
 const links = [
     {
-        link: "#1",
-        label: "Products",
-        links: [
-            { link: "/", label: "Video Roll" },
-            { link: "/videoroll-player", label: "Video Roll Player" },
-        ],
+        link: "/",
+        label: "Features"
     },
     { link: "/pricing", label: "Pricing" },
     { link: "/blog", label: "Blog" },
@@ -66,7 +62,7 @@ export default function NavBar(props: Props) {
     // -> colorScheme is 'auto' | 'light' | 'dark'
     const { colorScheme, setColorScheme } = useMantineColorScheme();
 
-    // Incorrect color scheme toggle implementation
+    // Incorrect color scheme toggle implementationconst { colorScheme, setColorScheme } = useMantineColorScheme();
     // If colorScheme is 'auto', then it is not possible to
     // change color scheme correctly in all cases:
     // 'auto' can mean both light and dark
@@ -207,7 +203,7 @@ export default function NavBar(props: Props) {
                                         leftSection={
                                             <IconUser size={14}></IconUser>
                                         }
-                                        size="compact-sm"
+                                        size="compact-md"
                                     >
                                         {currentUser.email ?? ""}
                                     </Button>
