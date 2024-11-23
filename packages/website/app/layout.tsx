@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import "./globals.css";
 import React from "react";
-import path from 'node:path'
+import path from "node:path";
 import Script from "next/script";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { Notifications } from "@mantine/notifications";
@@ -22,23 +22,53 @@ export const metadata = {
 };
 
 const myColor: MantineColorsTuple = [
-    "#ebecff",
-    "#d3d4ff",
-    "#a3a5f8",
-    "#7174f2",
-    "#474aed",
-    "#2d2feb",
-    "#1d22eb",
-    "#1016d1",
-    "#0713bc",
-    "#000ea6",
+    "#f3edff",
+    "#e0d7fa",
+    "#beabf0",
+    "#9a7de6",
+    "#7c55de",
+    "#693cd9",
+    "#5f30d8",
+    "#4f23c0",
+    "#461eac",
+    "#3b1898",
+];
+
+const dark: MantineColorsTuple = [
+    "#141420",
+    "#141420",
+    "#141420",
+    "#141420",
+    "#141420",
+    "#141420",
+    "#141420",
+    "#141420",
+    "#141420",
+    "#141420",
+];
+
+const white: MantineColorsTuple = [
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
 ];
 
 const theme = createTheme({
     colors: {
         myColor,
+        dark,
+        white
     },
     primaryColor: "myColor",
+    white: "white",
+    black: "dark",
     breakpoints: {
         xs: "30em",
         sm: "48em",
