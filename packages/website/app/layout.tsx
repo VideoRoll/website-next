@@ -62,13 +62,11 @@ const white: MantineColorsTuple = [
 
 const theme = createTheme({
     colors: {
-        myColor,
-        dark,
-        white
+        myColor
     },
     primaryColor: "myColor",
     white: "white",
-    black: "dark",
+    // black: "dark",
     breakpoints: {
         xs: "30em",
         sm: "48em",

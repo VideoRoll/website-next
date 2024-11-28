@@ -181,7 +181,6 @@ export default function NavBar(props: Props) {
                             width={30}
                             height={30}
                         ></Image>
-                        <span>Video Roll</span>
                     </Group>
 
                     <Group gap={5} visibleFrom="sm">
