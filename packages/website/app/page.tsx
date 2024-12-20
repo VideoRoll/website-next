@@ -13,7 +13,7 @@ export default async function Page() {
         <div style={{ height: '100%'}}>
             <Navbar currentUser={currentUser} error={error}></Navbar>
             <Hero></Hero>
-            {/* <FeatureVideo></FeatureVideo> */}
+            <FeatureVideo></FeatureVideo>
         </div>
     );
 }
