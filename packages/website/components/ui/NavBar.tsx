@@ -9,6 +9,7 @@ import {
   IconChevronDown,
   IconBrightnessUp,
   IconUser,
+  IconLanguage
 } from "@tabler/icons-react";
 import { createClient } from "@/utils/supabase/client";
 import React, { useCallback, useEffect, useMemo } from "react";
@@ -20,23 +21,28 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link,
   Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
   addToast,
+  User,
+  Avatar,
+  DropdownSection,
 } from "@heroui/react";
+import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import { useLocale } from "next-intl";
+import { useTopLoader } from "nextjs-toploader";
+
 
 type Props = {
   currentUser: {
     email: string;
-    [key: string]: string;
+    [key: string]: any;
   };
   error?: string;
 };
@@ -49,6 +55,7 @@ export default function NavBar(props: Props) {
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
+  const loader = useTopLoader();
   const supabase = createClient();
 
   const locale = useLocale();
@@ -66,6 +73,7 @@ export default function NavBar(props: Props) {
     (keys) => {
       setSelectedKeys(keys);
       const data = Array.from(keys).join(", ").replace(/_/g, "");
+      // 显示
       setTimeout(() => {
         router.replace({ pathname, params }, { locale: data });
       });
@@ -74,16 +82,20 @@ export default function NavBar(props: Props) {
   );
 
   const signout = () => {
-    // nprogress.start();
-    supabase.auth.signOut().then((res) => {
-      //   nprogress.complete();
-      if (res.error) {
-        console.error(res.error);
-        return;
-      }
+    loader.start();
+    supabase.auth
+      .signOut()
+      .then((res) => {
+        loader.done();
+        if (res.error) {
+          console.error(res.error);
+          return;
+        }
 
-      window.location.reload();
-    });
+        window.location.reload();
+      })
+      .catch(() => {})
+      .finally(() => {});
   };
 
   useEffect(() => {
@@ -94,6 +106,8 @@ export default function NavBar(props: Props) {
         color: "danger",
       });
     }
+
+    console.log("----currentUser", currentUser);
 
     if (currentUser) {
       window.postMessage(
@@ -149,15 +163,49 @@ export default function NavBar(props: Props) {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Button as={Link} color="primary" href="/signin" variant="flat">
-            Login
-          </Button>
+        <NavbarItem>
+          {currentUser ? (
+            <Dropdown>
+              <DropdownTrigger tr>
+                <Avatar
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  src={currentUser.user_metadata?.avatar_url}
+                />
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Single selection example"
+                variant="flat"
+                onAction={() => {}}
+              >
+                <DropdownSection aria-label="Profile & Actions">
+                  <DropdownItem key="profile">
+                    <User avatarProps={{size: 'sm', src:currentUser.user_metadata?.avatar_url}} name={currentUser.user_metadata?.name} description={currentUser.email}></User>
+                  </DropdownItem>
+                </DropdownSection>
+                <DropdownSection showDivider aria-label="Profile & Actions">
+                  <DropdownItem key="dashboard">
+                    Dashboard
+                  </DropdownItem>
+                </DropdownSection>
+                <DropdownSection aria-label="Profile & Actions">
+                  <DropdownItem key="logout" onClick={signout}>
+                    Log out
+                  </DropdownItem>
+                </DropdownSection>
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <Button as={Link} color="primary" href="/signin" variant="flat">
+              Login
+            </Button>
+          )}
         </NavbarItem>
         <NavbarItem>
           <Dropdown>
             <DropdownTrigger>
-              <Button variant="bordered">{selectedValue}</Button>
+              <Button variant="bordered" startContent={<IconLanguage />}>{selectedValue}</Button>
             </DropdownTrigger>
             <DropdownMenu
               disallowEmptySelection
@@ -167,7 +215,7 @@ export default function NavBar(props: Props) {
               variant="flat"
               onSelectionChange={select}
             >
-              <DropdownItem key="en">english</DropdownItem>
+              <DropdownItem key="en">English</DropdownItem>
               <DropdownItem key="zh">简体中文</DropdownItem>
             </DropdownMenu>
           </Dropdown>

@@ -8,12 +8,14 @@ import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
+import { GlobalLoadingProvider } from "@/components/ui/GlobalLoadingProvider";
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 
 type Props = {
   children: React.ReactNode;
@@ -42,6 +44,11 @@ export async function generateMetadata({
   };
 }
 
+const GlobalLoadingPortal = dynamic(
+  () => import("@/components/ui/GlobalLoading").then(m => m.default),
+  { ssr: false }
+);
+
 export default async function LocaleLayout({
   children,
   params,
@@ -65,14 +72,12 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <ToastProvider placement='top-center' toastOffset={60} />
+      <ToastProvider placement="top-center" toastOffset={60} />
       <HeroUIProvider>
-        <NextThemesProvider forcedTheme="dark">{children}</NextThemesProvider>
-        {/* <ProgressBar></ProgressBar>
-                    <Notifications
-                        position="top-center"
-                        zIndex={1000}
-                    ></Notifications> */}
+        <NextThemesProvider forcedTheme="dark">
+          {children}
+          <GlobalLoadingPortal />
+        </NextThemesProvider>
       </HeroUIProvider>
     </NextIntlClientProvider>
   );

@@ -9,6 +9,7 @@ import {
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
+import NextTopLoader from "nextjs-toploader";
 
 type Props = {
   children: React.ReactNode;
@@ -64,7 +65,10 @@ export default async function LocaleLayout({
           async
         ></script>
       </head>
-      <body>{children}</body>
+      <body>
+        <NextTopLoader color="#6563e0"></NextTopLoader>
+        {children}
+      </body>
     </html>
   );
 }

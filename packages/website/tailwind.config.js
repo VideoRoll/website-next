@@ -22,7 +22,7 @@ module.exports = {
           colors: {
             background: "#0a0a0a",
             background2: "#17181c", // 新增
-            background3: "#18181b", // 新增
+            background3: "#6563e0", // 新增
             foreground: "#fff",
             primary: {
               DEFAULT: "#6563e0",
