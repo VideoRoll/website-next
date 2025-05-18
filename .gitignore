@@ -6,6 +6,7 @@
 .pnp.js
 .yarn/install-state.gz
 
+
 # testing
 /coverage
 
@@ -13,6 +14,7 @@
 packages/website/.next/
 packages/website/node_modules/
 packages/website/out/
+packages/website/_pagefind/
 /out/
 
 # production

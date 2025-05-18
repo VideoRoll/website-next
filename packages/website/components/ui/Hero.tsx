@@ -138,6 +138,7 @@ export default function Hero() {
               variant="shadow"
               startContent={<Chrome size={22} />}
               className="mr-4"
+              onPress={() => window.open("https://chromewebstore.google.com/detail/cokngoholafkeghnhhdlmiadlojpindm", "_blank")}
             >
               {t("chrome")}
             </Button>
@@ -147,6 +148,7 @@ export default function Hero() {
               variant="shadow"
               startContent={<Edge size={22} />}
               className="mr-4"
+              onPress={() => window.open("https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn", "_blank")}
             >
               {t("edge")}
             </Button>
@@ -155,6 +157,7 @@ export default function Hero() {
               radius="full"
               variant="shadow"
               startContent={<Firefox size={22} />}
+              onPress={() => window.open("https://addons.mozilla.org/en-US/firefox/addon/videoroll/", "_blank")}
             >
               {t("firefox")}
             </Button>

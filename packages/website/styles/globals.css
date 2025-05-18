@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import 'nextra-theme-docs/style.css'; */
+ 
+@variant dark (&:where(.dark *));
+
 :root {
   /* Your default theme */
   --background: red;

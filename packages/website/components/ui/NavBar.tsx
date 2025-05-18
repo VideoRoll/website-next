@@ -32,12 +32,12 @@ import {
   DropdownSection,
 } from "@heroui/react";
 import { Link } from "@/i18n/navigation";
+import { Link as RegularLink } from "@heroui/react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { useTopLoader } from "nextjs-toploader";
-
 
 type Props = {
   currentUser: {
@@ -126,7 +126,7 @@ export default function NavBar(props: Props) {
         "*"
       );
     }
-  }, [currentUser]);
+  }, [currentUser, error]);
 
   return (
     <Navbar className="w-full" maxWidth="xl" onMenuOpenChange={setIsMenuOpen}>
@@ -141,25 +141,27 @@ export default function NavBar(props: Props) {
             alt="video roll logo"
             width={30}
             height={30}
+            className="mr-2"
           ></Image>
+          Video Roll
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/">
+          <Link className="font-bold" color="foreground" href="/">
             Features
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link aria-current="page" href="/pricing">
+          <Link className="font-bold" aria-current="page" href="/pricing">
             Pricing
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            Docs
-          </Link>
+          <RegularLink className="font-bold" color="foreground" showAnchorIcon href="https://docs.videoroll.app">
+            Documentation
+          </RegularLink>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">

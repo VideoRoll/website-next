@@ -1,0 +1,84 @@
+---
+
+title: Video Roll 插件 – Rotate 功能使用指南
+sidebarTitle: Rotate
+description: 了解如何在 Video Roll 插件中使用旋转（rotate）功能来调整视频方向。
+
+---
+
+import { Callout } from 'nextra/components'
+
+
+
+# 🎞️ Video Roll 插件使用指南：Rotate 功能
+
+`rotate` 是 Video Roll 插件中一个用于**旋转视频画面**的功能，适用于矫正录制时角度错误或想实现特殊视觉效果的场景。
+
+---
+
+## ✨ 功能简介
+
+`rotate` 可以让你将视频画面**顺时针或逆时针旋转**指定的角度，例如 90°、180° 或 270°。该操作不会破坏原始视频，仅作用于当前显示或导出版本。
+
+---
+
+## 🛠️ 如何使用
+
+### 1. 打开插件面板
+
+在浏览器中打开包含视频的页面，点击浏览器工具栏中的 Video Roll 插件图标，即可打开控制面板。
+
+### 2. 寻找「Rotate」按钮
+
+在控制面板中，找到标注为 **Rotate** 或带有旋转图标（🔄）的按钮。
+
+### 3. 点击旋转
+
+每次点击按钮，视频将按照预设角度（默认 90°）**顺时针旋转一次**。可多次点击实现 180° 或 270° 效果。
+
+> **提示：** 部分版本中，可能支持下拉选择旋转角度（例如：90°、180°、270°）。
+
+---
+
+## 🧩 示例代码（开发者模式）
+
+如果你在开发自定义配置，可以使用如下 API：
+
+```ts
+videoRoll.rotate(90); // 顺时针旋转 90 度
+videoRoll.rotate(-90); // 逆时针旋转 90 度
+```
+
+> 注意：该方法仅影响前端 DOM 表现，并不会修改视频文件本身。
+
+---
+
+## ❓ 常见问题
+
+### Q: 为什么旋转后视频被裁剪了？
+A: 某些视频容器的样式可能限制了宽高，请确保使用了合适的 CSS：
+
+```css
+video {
+  transform: rotate(90deg);
+  transform-origin: center center;
+}
+```
+
+### Q: 可以恢复默认方向吗？
+A: 可以。再次点击「Rotate」直到角度为 0，或使用「Reset」按钮。
+
+---
+
+<Callout>📌 **小贴士：** `rotate` 与 `zoom` 和 `flip` 功能可以组合使用，打造更复杂的视频特效。</Callout>
+
+---
+
+## 🧭 下一步
+
+- 了解 [Zoom 功能使用方法](/docs/video-roll/zoom)
+- 阅读 [如何组合多个视觉效果](/docs/video-roll/composing-effects)
+
+---
+
+如有更多问题或反馈，欢迎访问 [插件支持页面](https://github.com/your-repo/video-roll/issues) 提交 Issue。

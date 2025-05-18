@@ -6,14 +6,12 @@
     "dev:website": "pnpm -F @website-next/website dev",
     "build:website": "pnpm -F @website-next/website build",
     "start:website": "pnpm -F @website-next/website start",
+    "dev:docs": "pnpm -F @website-next/documentation dev",
+    "build:docs": "pnpm -F @website-next/documentation build",
+    "start:docs": "pnpm -F @website-next/documentation start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@mantine/core": "^7.13.2",
-    "@mantine/form": "^7.13.2",
-    "@mantine/hooks": "^7.13.2",
-    "@mantine/notifications": "^7.13.3",
-    "@mantine/nprogress": "^7.13.2",
     "@marsidev/react-turnstile": "^1.0.2",
     "@ricons/tabler": "^0.12.0",
     "@ricons/utils": "^0.1.6",
