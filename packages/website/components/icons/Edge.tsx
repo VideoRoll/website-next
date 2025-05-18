@@ -21,9 +21,9 @@ export default function Edge(props) {
                     gradientTransform="matrix(1 0 0 1.1083 0 -3.529)"
                     gradientUnits="userSpaceOnUse"
                 >
-                    <stop offset=".652" stop-color="#0083de"></stop>
-                    <stop offset=".822" stop-color="#006aac"></stop>
-                    <stop offset=".944" stop-color="#005a8c"></stop>
+                    <stop offset=".652" stopColor="#0083de"></stop>
+                    <stop offset=".822" stopColor="#006aac"></stop>
+                    <stop offset=".944" stopColor="#005a8c"></stop>
                 </radialGradient>
                 <path
                     fill="url(#2pm2zgLwrfHW4PMfqfOjYa_dGm9KIZPpukc_gr1)"
@@ -37,9 +37,9 @@ export default function Edge(props) {
                     gradientTransform="matrix(1 0 0 1.0028 0 -.067)"
                     gradientUnits="userSpaceOnUse"
                 >
-                    <stop offset=".69" stop-color="#05509b"></stop>
-                    <stop offset=".717" stop-color="#054e98"></stop>
-                    <stop offset="1" stop-color="#033e78"></stop>
+                    <stop offset=".69" stopColor="#05509b"></stop>
+                    <stop offset=".717" stopColor="#054e98"></stop>
+                    <stop offset="1" stopColor="#033e78"></stop>
                 </radialGradient>
                 <path
                     fill="url(#2pm2zgLwrfHW4PMfqfOjYb_dGm9KIZPpukc_gr2)"
@@ -53,16 +53,16 @@ export default function Edge(props) {
                     gradientTransform="matrix(-1 0 0 -1.5084 95.296 40.31)"
                     gradientUnits="userSpaceOnUse"
                 >
-                    <stop offset="0" stop-color="#5eeb69"></stop>
-                    <stop offset=".214" stop-color="#4bc958"></stop>
-                    <stop offset=".225" stop-color="#4ac862"></stop>
-                    <stop offset=".272" stop-color="#47c68b"></stop>
-                    <stop offset=".323" stop-color="#44c4ae"></stop>
-                    <stop offset=".376" stop-color="#41c2cb"></stop>
-                    <stop offset=".433" stop-color="#3fc1e1"></stop>
-                    <stop offset=".495" stop-color="#3ec0f1"></stop>
-                    <stop offset=".565" stop-color="#3dbffa"></stop>
-                    <stop offset=".664" stop-color="#3dbffd"></stop>
+                    <stop offset="0" stopColor="#5eeb69"></stop>
+                    <stop offset=".214" stopColor="#4bc958"></stop>
+                    <stop offset=".225" stopColor="#4ac862"></stop>
+                    <stop offset=".272" stopColor="#47c68b"></stop>
+                    <stop offset=".323" stopColor="#44c4ae"></stop>
+                    <stop offset=".376" stopColor="#41c2cb"></stop>
+                    <stop offset=".433" stopColor="#3fc1e1"></stop>
+                    <stop offset=".495" stopColor="#3ec0f1"></stop>
+                    <stop offset=".565" stopColor="#3dbffa"></stop>
+                    <stop offset=".664" stopColor="#3dbffd"></stop>
                 </radialGradient>
                 <path
                     fill="url(#2pm2zgLwrfHW4PMfqfOjYc_dGm9KIZPpukc_gr3)"

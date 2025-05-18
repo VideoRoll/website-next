@@ -1,0 +1,32 @@
+// app/layout.tsx
+
+// globals.css includes @tailwind directives
+// adjust the path if necessary
+import React from "react";
+import classes from "./Signup.module.css";
+import Banner from "@/components/icons/Banner";
+// import { Container } from "@mantine/core";
+import BackButton from "@/components/ui/NavBar/BackButton";
+
+export default function SigninLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex flex-row">
+      <BackButton
+        style={{
+          position: "absolute",
+          top: "50px",
+          left: "50px",
+          cursor: "pointer",
+        }}
+      ></BackButton>
+      <div>{children}</div>
+      <div className="hidden md:block">
+        <Banner></Banner>
+      </div>
+    </div>
+  );
+}

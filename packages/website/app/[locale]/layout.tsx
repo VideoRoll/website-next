@@ -1,14 +1,19 @@
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
 
-import "../styles/globals.css";
 import React from "react";
+import path from "node:path";
+import Script from "next/script";
+import { HeroUIProvider, ToastProvider } from "@heroui/react";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
+import { notFound } from "next/navigation";
 
 type Props = {
   children: React.ReactNode;
@@ -45,26 +50,30 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  // // unstable_setRequestLocale(locale);
+  if (!hasLocale(routing.locales, locale)) {
+    // 不允许在 root layout 直接调用 notFound
+    return notFound();
+  }
 
-  // // Providing all messages to the client
-  // // side is the easiest way to get started
-  // const messages = await getMessages();
   setRequestLocale(locale);
+
+  // unstable_setRequestLocale(locale);
+
+  // Providing all messages to the client
+  // side is the easiest way to get started
+  const messages = await getMessages();
+
   return (
-    <html
-      suppressHydrationWarning
-      lang={locale}
-      className="bg-background dark:bg-background-dark"
-    >
-      <head>
-        <script
-          src="https://accounts.google.com/gsi/client"
-          defer
-          async
-        ></script>
-      </head>
-      <body>{children}</body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <ToastProvider placement='top-center' toastOffset={60} />
+      <HeroUIProvider>
+        <NextThemesProvider forcedTheme="dark">{children}</NextThemesProvider>
+        {/* <ProgressBar></ProgressBar>
+                    <Notifications
+                        position="top-center"
+                        zIndex={1000}
+                    ></Notifications> */}
+      </HeroUIProvider>
+    </NextIntlClientProvider>
   );
 }
