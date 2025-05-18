@@ -6,19 +6,17 @@
     "dev:website": "pnpm -F @website-next/website dev",
     "build:website": "pnpm -F @website-next/website build",
     "start:website": "pnpm -F @website-next/website start",
+    "dev:docs": "pnpm -F @website-next/documentation dev",
+    "build:docs": "pnpm -F @website-next/documentation build",
+    "start:docs": "pnpm -F @website-next/documentation start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@mantine/core": "^7.13.2",
-    "@mantine/form": "^7.13.2",
-    "@mantine/hooks": "^7.13.2",
-    "@mantine/notifications": "^7.13.3",
-    "@mantine/nprogress": "^7.13.2",
     "@marsidev/react-turnstile": "^1.0.2",
     "@ricons/tabler": "^0.12.0",
     "@ricons/utils": "^0.1.6",
     "@tabler/icons-react": "^3.19.0",
-    "next": "14.2.15",
+    "next": "14.2.28",
     "react": "^18",
     "react-dom": "^18",
     "zustand": "5.0.0-rc.2"
@@ -29,7 +27,6 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
-    "postcss": "^8",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
     "typescript": "^5"

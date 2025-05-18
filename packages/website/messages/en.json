@@ -1,0 +1,50 @@
+{
+  "hero": {
+    "title": "All-in-One Video Enhancements",
+    "subtitle": "One-stop video enhancement extension, supporting multiple platforms, empowering your video experience.",
+    "chrome": "Chrome",
+    "edge": "Edge",
+    "firefox": "Firefox",
+    "featuresTitle": "Core Features",
+    "advantagesTitle": "Why Choose Us?",
+    "reviewsTitle": "User Reviews",
+    "animation": {
+      "prefix": "Your personal Video",
+      "0": { "text": "Rotater." },
+      "1": { "text": "Downloader." },
+      "2": { "text": "Recorder." },
+      "3": { "text": "VR Glasses." },
+      "4": { "text": "Pitch Shifter." },
+      "5": { "text": "Delayer." },
+      "6": { "text": "Looper." },
+      "7": { "text": "Zoomer." },
+      "8": { "text": "Player." },
+      "9": { "text": "Filter." },
+      "10": { "text": "Speeder." },
+      "11": { "text": "Ad Skipper." }
+    },
+    "features": [
+      { "title": "Multi-platform Support", "desc": "Compatible with major video sites and platforms, enjoy enhanced experience anytime, anywhere." },
+      { "title": "One-click Speedup", "desc": "Quickly switch playback speed, improve viewing and learning efficiency." },
+      { "title": "Ad Auto-skip", "desc": "Intelligently detect and skip video ads, saving your precious time." },
+      { "title": "Picture-in-Picture", "desc": "Support PiP playback, multitask while watching videos." },
+      { "title": "Custom Shortcuts", "desc": "Customize shortcuts for more efficient and handy operation." },
+      { "title": "Danmaku Filter", "desc": "Smartly filter irrelevant comments, focus on great content." },
+      { "title": "Multi-window Sync", "desc": "Sync playback progress across windows, switch freely." },
+      { "title": "Volume Booster", "desc": "Increase volume limit, hear more clearly." },
+      { "title": "Subtitle Translation", "desc": "One-click subtitle translation, barrier-free across languages." }
+    ],
+    "advantages": [
+      { "title": "More Features", "desc": "Support more platforms and features" },
+      { "title": "Better Experience", "desc": "Clean UI, smooth operation" },
+      { "title": "Open Source", "desc": "Open source code, safe and reliable" }
+    ],
+    "reviews": [
+      { "user": "Xiaoming", "comment": "Five stars! Super convenient!" },
+      { "user": "Alice", "comment": "Ad skip is awesome, great experience." },
+      { "user": "Bob", "comment": "Multi-platform support, highly recommended." },
+      { "user": "Zhang San", "comment": "Rich features, easy to use." },
+      { "user": "Li Si", "comment": "Beautiful UI, five stars!" }
+    ]
+  }
+}

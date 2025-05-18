@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Button, Container, Group, Rating, Text } from "@mantine/core";
 import * as motion from "framer-motion/client";
 import {
     IconArrowRight,
@@ -13,7 +12,7 @@ import {
 export default function Video() {
     return (
         <section>
-            <Container size="lg" mt="lg">
+            <div size="lg" mt="lg">
                 <motion.div
                     initial={{ opacity: 0, y: -100 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -30,7 +29,7 @@ export default function Video() {
                         allowfullscreen
                     ></iframe>
                 </motion.div>
-            </Container>
+            </div>
         </section>
     );
 }

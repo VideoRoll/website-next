@@ -9,7 +9,7 @@ export const getUserServerSideProps = async () => {
     const {
         data: { user },
     } = await supabase.auth.getUser();
-    console.log(user, "---------");
+
     // Encrypt user email if user exists
     if (user && !user.user_metadata.user_key) {
         const dataToEncrypt = { email: user.email };
@@ -34,7 +34,6 @@ export const getUserServerSideProps = async () => {
 
         const result = await res.json();
 
-        console.log(result, "---------");
         if (result.code === 100000) {
             const { error } = await supabase.auth.updateUser({
                 data: {

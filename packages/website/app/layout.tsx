@@ -1,111 +1,75 @@
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
-import "@mantine/core/styles.css";
 
-import {
-    ColorSchemeScript,
-    MantineProvider,
-    createTheme,
-    MantineColorsTuple,
-} from "@mantine/core";
-import "./globals.css";
+import "../styles/globals.css";
+import 'nextra-theme-docs/style-prefixed.css'
 import React from "react";
-import path from "node:path";
-import Script from "next/script";
-import ProgressBar from "@/components/ui/ProgressBar";
-import { Notifications } from "@mantine/notifications";
-import "@mantine/notifications/styles.css";
+import { routing } from "@/i18n/routing";
+import {
+  getMessages,
+  getTranslations,
+  setRequestLocale,
+} from "next-intl/server";
+import NextTopLoader from "nextjs-toploader";
 
-export const metadata = {
-    title: "Video Roll",
-    description: "All-in-one video enhancements",
+type Props = {
+  children: React.ReactNode;
+  params: { locale: string };
 };
 
-const myColor: MantineColorsTuple = [
-    "#f3edff",
-    "#e0d7fa",
-    "#beabf0",
-    "#9a7de6",
-    "#7c55de",
-    "#693cd9",
-    "#5f30d8",
-    "#4f23c0",
-    "#461eac",
-    "#3b1898",
-];
+// export const metadata = {
+//   title: "Video Roll",
+//   description: "All-in-one video enhancements",
+// };
 
-const dark: MantineColorsTuple = [
-    "#141420",
-    "#141420",
-    "#141420",
-    "#141420",
-    "#141420",
-    "#141420",
-    "#141420",
-    "#141420",
-    "#141420",
-    "#141420",
-];
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
-const white: MantineColorsTuple = [
-    "#000000",
-    "#000000",
-    "#000000",
-    "#000000",
-    "#000000",
-    "#000000",
-    "#000000",
-    "#000000",
-    "#000000",
-    "#000000",
-];
+// For the Purpose of Updating MetaData from Locale
+// in this case updating the title
+export async function generateMetadata({
+  params: { locale },
+}: Omit<Props, "children">) {
+  const t = await getTranslations({ locale, namespace: "hero" });
 
-const theme = createTheme({
-    colors: {
-        myColor
-    },
-    primaryColor: "myColor",
-    white: "white",
-    // black: "dark",
-    breakpoints: {
-        xs: "30em",
-        sm: "48em",
-        md: "64em",
-        lg: "74em",
-        xl: "90em",
-    },
-});
+  return {
+    title: t("title"),
+    description: "All-in-one video enhancements",
+  };
+}
 
-export default function RootLayout({
-    children,
+export default async function LocaleLayout({
+  children,
+  params,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
-    return (
-        <html lang="en">
-            <head>
-                <ColorSchemeScript />
-                <script
-                    src="https://accounts.google.com/gsi/client"
-                    defer
-                    async
-                ></script>
-            </head>
-            <body>
-                <MantineProvider theme={theme}>
-                    <ProgressBar></ProgressBar>
-                    <Notifications
-                        position="top-center"
-                        zIndex={1000}
-                    ></Notifications>
-                    {children}
-                </MantineProvider>
-                <div
-                    id="g_id_onload"
-                    data-client_id="53679872686-uvfd0t7q1tlje7o6dj381c77m26lrph7.apps.googleusercontent.com"
-                    data-login_uri="https://cvsunicdltfduyijjnlo.supabase.co/auth/v1/callback"
-                ></div>
-            </body>
-        </html>
-    );
+  const { locale } = await params;
+  // // unstable_setRequestLocale(locale);
+
+  // // Providing all messages to the client
+  // // side is the easiest way to get started
+  // const messages = await getMessages();
+  setRequestLocale(locale);
+  return (
+    <html
+      suppressHydrationWarning
+      lang={locale}
+      className="bg-background dark:bg-background-dark"
+    >
+      <head>
+        <script
+          src="https://accounts.google.com/gsi/client"
+          defer
+          async
+        ></script>
+      </head>
+      <body>
+        <NextTopLoader color="#6563e0"></NextTopLoader>
+        {children}
+      </body>
+    </html>
+  );
 }
