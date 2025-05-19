@@ -7,10 +7,10 @@ let show: (title?: string) => void;
 let hide: () => void;
 
 export function showGlobalLoading(title?: string) {
-  show && show(title);
+  if (show) show(title);
 }
 export function hideGlobalLoading() {
-  hide && hide();
+  if (hide) hide();
 }
 
 export default function GlobalLoadingPortal() {
