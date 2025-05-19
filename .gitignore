@@ -11,10 +11,10 @@
 /coverage
 
 # next.js
-packages/website/.next/
-packages/website/node_modules/
-packages/website/out/
-packages/website/_pagefind/
+packages/**/.next/
+packages/**/node_modules/
+packages/**/out/
+packages/**/_pagefind/
 /out/
 
 # production
