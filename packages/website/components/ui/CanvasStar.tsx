@@ -42,8 +42,9 @@ export default function CanvasStar() {
     handleResize();
 
     function draw() {
+      if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
-      for (let s of starsRef.current) {
+      for (const s of starsRef.current) {
         // 慢速闪烁
         s.twinkle += 0.008 * s.speed;
         const a = s.alpha + Math.sin(s.twinkle) * 0.18;
