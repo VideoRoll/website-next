@@ -8,7 +8,6 @@ import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
-import { GlobalLoadingProvider } from "@/components/ui/GlobalLoadingProvider";
 import {
   getMessages,
   getTranslations,
@@ -46,7 +45,7 @@ export async function generateMetadata({
 
 const GlobalLoadingPortal = dynamic(
   () => import("@/components/ui/GlobalLoading").then(m => m.default),
-  { ssr: false }
+  { ssr: true }
 );
 
 export default async function LocaleLayout({

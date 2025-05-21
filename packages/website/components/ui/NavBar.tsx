@@ -107,8 +107,6 @@ export default function NavBar(props: Props) {
       });
     }
 
-    console.log("----currentUser", currentUser);
-
     if (currentUser) {
       window.postMessage(
         {
@@ -159,7 +157,7 @@ export default function NavBar(props: Props) {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <RegularLink className="font-bold" color="foreground" showAnchorIcon href="https://docs.videoroll.app">
+          <RegularLink className="font-bold" color="foreground" showAnchorIcon target="_blank" href="https://docs.videoroll.app">
             Documentation
           </RegularLink>
         </NavbarItem>
@@ -168,7 +166,7 @@ export default function NavBar(props: Props) {
         <NavbarItem>
           {currentUser ? (
             <Dropdown>
-              <DropdownTrigger tr>
+              <DropdownTrigger>
                 <Avatar
                   isBordered
                   as="button"
