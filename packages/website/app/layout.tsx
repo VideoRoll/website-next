@@ -2,7 +2,6 @@
 // All packages except `@mantine/hooks` require styles imports
 
 import "../styles/globals.css";
-import 'nextra-theme-docs/style-prefixed.css'
 import React from "react";
 import { routing } from "@/i18n/routing";
 import {
