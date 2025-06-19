@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 
 export async function loginWithGoogle(origin: string) {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
@@ -23,7 +23,7 @@ export async function loginWithGoogle(origin: string) {
 }
 
 export async function loginWithGithub(origin: string) {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "github",

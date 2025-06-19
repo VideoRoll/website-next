@@ -2,8 +2,7 @@
 // All packages except `@mantine/hooks` require styles imports
 
 import React from "react";
-import path from "node:path";
-import Script from "next/script";
+
 import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
@@ -33,9 +32,10 @@ export function generateStaticParams() {
 // For the Purpose of Updating MetaData from Locale
 // in this case updating the title
 export async function generateMetadata({
-  params: { locale },
+  params,
 }: Omit<Props, "children">) {
-  const t = await getTranslations({ locale, namespace: "hero" });
+  const paramsData = await params;
+  const t = await getTranslations({ locale: paramsData.locale, namespace: "hero" });
 
   return {
     title: t("title"),
@@ -63,17 +63,15 @@ export default async function LocaleLayout({
 
   setRequestLocale(locale);
 
-  // unstable_setRequestLocale(locale);
-
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <ToastProvider placement="top-center" toastOffset={60} />
       <HeroUIProvider>
         <NextThemesProvider forcedTheme="dark">
+          <ToastProvider placement="top-center" toastOffset={60} />
           {children}
           <GlobalLoadingPortal />
         </NextThemesProvider>
