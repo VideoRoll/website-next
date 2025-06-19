@@ -40,17 +40,14 @@ import { useLocale } from "next-intl";
 import { useTopLoader } from "nextjs-toploader";
 
 type Props = {
-  currentUser: {
-    email: string;
-    [key: string]: any;
-  };
+  currentUser: any;
   error?: string;
 };
 
 const menuItems = ["Features", "Pricing", "Docs"];
 
 export default function NavBar(props: Props) {
-  const { currentUser, error } = props;
+  const { currentUser } = props;
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
   const params = useParams();
@@ -59,8 +56,6 @@ export default function NavBar(props: Props) {
   const supabase = createClient();
 
   const locale = useLocale();
-
-  const { theme, setTheme } = useTheme();
 
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([locale]));
 
@@ -99,18 +94,19 @@ export default function NavBar(props: Props) {
   };
 
   useEffect(() => {
-    if (error) {
-      addToast({
-        title: "Error",
-        description: error,
-        color: "danger",
-      });
-    }
+    // if (error) {
+    //   addToast({
+    //     title: "Error",
+    //     description: error,
+    //     color: "danger",
+    //   });
+    // }
 
+    console.log('---currentUser', currentUser);
     if (currentUser) {
       window.postMessage(
         {
-          type: "videoroll-auth-signin",
+          type: "videoroll_auth_signin",
           data: { success: true, user: currentUser },
         },
         "*"
@@ -118,16 +114,16 @@ export default function NavBar(props: Props) {
     } else {
       window.postMessage(
         {
-          type: "videoroll-auth-signout",
+          type: "videoroll_auth_signout",
           data: { success: true, user: null },
         },
         "*"
       );
     }
-  }, [currentUser, error]);
+  }, [currentUser]);
 
   return (
-    <Navbar className="w-full" maxWidth="xl" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar className="z-50 mx-auto max-w-screen-2xl px-[5vw]" maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -161,8 +157,13 @@ export default function NavBar(props: Props) {
             Documentation
           </RegularLink>
         </NavbarItem>
+        <NavbarItem>
+          <RegularLink className="font-bold" color="foreground" showAnchorIcon target="_blank" href="https://docs.videoroll.app/en/docs/installation">
+            Installation
+          </RegularLink>
+        </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
+      <NavbarContent className="hidden md:flex" justify="end">
         <NavbarItem>
           {currentUser ? (
             <Dropdown>

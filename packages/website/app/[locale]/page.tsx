@@ -11,14 +11,15 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
+  const paramsData = await params;
   // 设置当前请求的 locale
-  setRequestLocale(params.locale);
+  setRequestLocale(paramsData.locale);
 
-  const { currentUser, error } = await getUserServerSideProps();
+  const { currentUser } = await getUserServerSideProps();
 
   return (
     <main style={{ height: "100%" }} className="bg-background">
-      <Navbar currentUser={currentUser} error={error}></Navbar>
+      <Navbar currentUser={currentUser} ></Navbar>
       <Hero></Hero>
       {/* <FeatureVideo></FeatureVideo> */}
     </main>

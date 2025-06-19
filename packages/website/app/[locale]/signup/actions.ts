@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 import { loginWithGoogle as google, loginWithGithub as github } from '@/utils/supabase/login';
 
 export async function signup(formData: FormData) {
-    const supabase = createClient();
+    const supabase = await createClient();
 
     // type-casting here for convenience
     // in practice, you should validate your inputs
