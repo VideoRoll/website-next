@@ -1,17 +1,26 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Google from "@/components/icons/Google";
 import Github from "@/components/icons/Github";
 
 import { Link } from "@/i18n/navigation";
-import { Turnstile } from "@marsidev/react-turnstile";
+// import { Turnstile } from "@marsidev/react-turnstile";
+import Turnstile, { useTurnstile } from "react-turnstile";
 
-import { Form, Input, Button, addToast, Divider } from "@heroui/react";
+import {
+  Form,
+  Input,
+  Button,
+  addToast,
+  Divider,
+  Skeleton,
+} from "@heroui/react";
 import {
   showGlobalLoading,
   hideGlobalLoading,
 } from "@/components/ui/GlobalLoading";
+import { useLocale } from "next-intl";
 
 type Props = {
   type: "signin" | "signup";
@@ -20,7 +29,6 @@ type Props = {
   onGoogleSignin: (data: string) => void;
   onGithubSignin: (data: string) => void;
 };
-
 
 export const EyeSlashFilledIcon = (props) => {
   return (
@@ -84,10 +92,13 @@ export const EyeFilledIcon = (props) => {
 
 export default function Auth(props: Props) {
   const { submitText, type, onSubmit, onGoogleSignin, onGithubSignin } = props;
+  const locale = useLocale();
   const [errors, setErrors] = React.useState({});
+  const turnstile = useTurnstile();
   // const [visible, handlers] = useDisclosure(false);
-  const [captchaToken, setCaptchaToken] = useState();
-  const turnstileRef = useRef();
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [loaded, setLoaded] = useState(false);
+  const errorTimes = useRef(0);
 
   const [email, setEmail] = React.useState("");
   const [isVisible, setIsVisible] = React.useState(false);
@@ -100,6 +111,23 @@ export default function Auth(props: Props) {
     if (email === "") return false;
     return validateEmail(email) ? false : true;
   }, [email]);
+
+  const handleError = useCallback(
+    (error) => {
+      console.log("Captcha error", error, errorTimes.current);
+      if (errorTimes.current >= 3) {
+        addToast({
+          title: "Can't verify captcha",
+          description: "Please try again later.",
+          color: "danger",
+        });
+        return;
+      }
+      errorTimes.current += 1;
+      turnstile.reset();
+    },
+    [errorTimes, turnstile]
+  );
 
   const handleOAuthSignin = (callback: (data: string) => Promise<any>) => {
     showGlobalLoading();
@@ -114,27 +142,30 @@ export default function Auth(props: Props) {
     });
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (e: any) => {
+      e.preventDefault();
 
-    const form = document.querySelector("form") as HTMLFormElement;
-    const formData = new FormData(form);
+      const form = document.querySelector("form") as HTMLFormElement;
+      const formData = new FormData(form);
 
-    formData.append("captchaToken", captchaToken);
+      formData.append("captchaToken", captchaToken);
 
-    showGlobalLoading();
-    onSubmit(formData)
-      .catch((error) => {
-        addToast({
-          title: "Error",
-          description: error,
-          color: "danger",
-        });
-        turnstileRef.current?.reset();
-        console.log(error);
-      })
-      .finally(() => hideGlobalLoading());
-  };
+      showGlobalLoading();
+      onSubmit(formData)
+        .catch((error) => {
+          addToast({
+            title: "Error",
+            description: error,
+            color: "danger",
+          });
+          turnstile.reset();
+          console.log(error);
+        })
+        .finally(() => hideGlobalLoading());
+    },
+    [turnstile, captchaToken, onSubmit]
+  );
 
   return (
     <Form
@@ -160,7 +191,7 @@ export default function Auth(props: Props) {
         color={isInvalid ? "danger" : "success"}
         errorMessage={isInvalid && "Please enter a valid email"}
         onValueChange={setEmail}
-        className="mb-4 w-full"
+        className="w-full"
       />
       <Input
         type={isVisible ? "text" : "password"}
@@ -173,7 +204,7 @@ export default function Auth(props: Props) {
         placeholder="Enter your password"
         isInvalid={false}
         errorMessage={false}
-        className="mb-4 w-full"
+        className="w-full"
         endContent={
           <button
             aria-label="toggle password visibility"
@@ -189,23 +220,31 @@ export default function Auth(props: Props) {
           </button>
         }
       />
-
+      {!loaded && (
+        <Skeleton className="w-full rounded-lg">
+          <div className="h-[65px] rounded-lg bg-default-300" ></div>
+        </Skeleton>
+      )}
       <Turnstile
-        ref={turnstileRef}
-        options={{
-          size: "flexible",
-          retryInterval: 2000,
-        }}
-        siteKey="0x4AAAAAAAxryjpkBF1lWMCb"
-        onSuccess={(token) => {
+        size="flexible"
+        onVerify={(token) => {
           setCaptchaToken(token);
         }}
-        onError={() => {
-        //   turnstileRef.current?.reset();
+        className="w-full"
+        sitekey="0x4AAAAAAAxryjpkBF1lWMCb"
+        onError={handleError}
+        language={locale}
+        onLoad={() => {
+          setLoaded(true);
         }}
       ></Turnstile>
 
-      <Button fullWidth type="submit" mt="sm" color="primary">
+      <Button
+        isDisabled={captchaToken === ""}
+        fullWidth
+        type="submit"
+        color="primary"
+      >
         {submitText}
       </Button>
       <Divider className="my-4" />

@@ -1,50 +1,148 @@
 {
   "hero": {
     "title": "All-in-One Video Enhancements",
-    "subtitle": "One-stop video enhancement extension, supporting multiple platforms, empowering your video experience.",
+    "subtitle": "30+ features in one, the ultimate video experience enhancement browser extension with multi-platform support, helping you easily master your video experience.",
     "chrome": "Chrome",
     "edge": "Edge",
     "firefox": "Firefox",
-    "featuresTitle": "Core Features",
+    "featuresTitle": "Everything You Need for Video",
     "advantagesTitle": "Why Choose Us?",
-    "reviewsTitle": "User Reviews",
-    "animation": {
-      "prefix": "Your personal Video",
-      "0": { "text": "Rotater." },
+    "reviewsTitle": "User Reviews",    "animation": {
+      "prefix": "Your exclusive Video",
+      "0": { "text": "Rotator." },
       "1": { "text": "Downloader." },
       "2": { "text": "Recorder." },
-      "3": { "text": "VR Glasses." },
-      "4": { "text": "Pitch Shifter." },
-      "5": { "text": "Delayer." },
-      "6": { "text": "Looper." },
-      "7": { "text": "Zoomer." },
-      "8": { "text": "Player." },
-      "9": { "text": "Filter." },
-      "10": { "text": "Speeder." },
-      "11": { "text": "Ad Skipper." }
-    },
-    "features": [
-      { "title": "Multi-platform Support", "desc": "Compatible with major video sites and platforms, enjoy enhanced experience anytime, anywhere." },
-      { "title": "One-click Speedup", "desc": "Quickly switch playback speed, improve viewing and learning efficiency." },
-      { "title": "Ad Auto-skip", "desc": "Intelligently detect and skip video ads, saving your precious time." },
-      { "title": "Picture-in-Picture", "desc": "Support PiP playback, multitask while watching videos." },
-      { "title": "Custom Shortcuts", "desc": "Customize shortcuts for more efficient and handy operation." },
-      { "title": "Danmaku Filter", "desc": "Smartly filter irrelevant comments, focus on great content." },
-      { "title": "Multi-window Sync", "desc": "Sync playback progress across windows, switch freely." },
-      { "title": "Volume Booster", "desc": "Increase volume limit, hear more clearly." },
-      { "title": "Subtitle Translation", "desc": "One-click subtitle translation, barrier-free across languages." }
+      "3": { "text": "AI Summarizer." },
+      "4": { "text": "VR Glasses." },
+      "5": { "text": "Pitch Shifter." },
+      "6": { "text": "Audio Delayer." },
+      "7": { "text": "Looper." },
+      "8": { "text": "Zoomer." },
+      "9": { "text": "Player." },
+      "10": { "text": "Filter." },
+      "11": { "text": "Speeder." },
+      "12": { "text": "Ad Accelerator." }
+    },    "features": [
+      {
+        "title": "Absolute Privacy Protection",
+        "desc": "The extension does not collect any user information and we use Chrome's built-in API to ensure user privacy and security."
+      },
+      {
+        "title": "Extensive Platform Support",
+        "desc": "Supports all websites and platforms using HTML5 video, enjoy enhanced experience anytime, anywhere."
+      },
+      {
+        "title": "30+ Features",
+        "desc": "30+ features in one, no need to download multiple extensions, one extension handles all your needs. Not just rotation, zoom, picture-in-picture, stretch, loop, speed control, VR, screenshot, filters, download... but also volume enhancement, audio delay, pitch adjustment, 3D surround effects, and more."
+      },
+      {
+        "title": "Built-in Independent Web Player",
+        "desc": "For features not supported by local players, you can directly upload video files to Video Roll for playback and enjoy all Video Roll features."
+      },
+      {
+        "title": "Customizable Shortcuts",
+        "desc": "Support custom shortcuts, operate more efficiently and conveniently without opening the extension."
+      },
+      {
+        "title": "YouTube Feature Enhancement",
+        "desc": "For YouTube, provides automatic ad detection and accelerated playback (not ad blocking), and video AI summarization. Making your YouTube experience richer."
+      },
+      {
+        "title": "Multi-window Sync",
+        "desc": "Sync playback progress across multiple windows, switch more freely."
+      },
+      {
+        "title": "Volume Enhancement",
+        "desc": "Increase volume limit, hear more clearly."
+      },
+      {
+        "title": "Subtitle Translation",
+        "desc": "One-click subtitle translation, barrier-free across languages."
+      }
     ],
     "advantages": [
-      { "title": "More Features", "desc": "Support more platforms and features" },
+      {
+        "title": "More Features",
+        "desc": "Support more platforms and features"
+      },
       { "title": "Better Experience", "desc": "Clean UI, smooth operation" },
       { "title": "Open Source", "desc": "Open source code, safe and reliable" }
     ],
     "reviews": [
       { "user": "Xiaoming", "comment": "Five stars! Super convenient!" },
       { "user": "Alice", "comment": "Ad skip is awesome, great experience." },
-      { "user": "Bob", "comment": "Multi-platform support, highly recommended." },
+      {
+        "user": "Bob",
+        "comment": "Multi-platform support, highly recommended."
+      },
       { "user": "Zhang San", "comment": "Rich features, easy to use." },
       { "user": "Li Si", "comment": "Beautiful UI, five stars!" }
     ]
+  },
+  "dashboard": {
+    "navigation": {
+      "profile": "Profile",
+      "privacy": "Data & Privacy",
+      "subscription": "Subscription",
+      "about": "About"
+    },
+    "profile": {
+      "googleAccount": "Google Account",
+      "githubAccount": "GitHub Account",
+      "accountInfo": "Account Information",
+      "loginEmail": "Login Email",
+      "loginMethod": "Login Method",
+      "googleOAuth": "Google OAuth",
+      "githubOAuth": "GitHub OAuth"
+    },
+    "privacy": {
+      "title": "Data and Privacy Statement",
+      "intro": "We take your data security and privacy protection very seriously. This plugin promises:",
+      "policies": {
+        "0": "Your personal information is only used for account login and basic service functions",
+        "1": "We will not use your data for any commercial promotion purposes",
+        "2": "Your data will not be leaked or sold to any third parties",
+        "3": "All data transmission is encrypted",
+        "4": "You can delete your account and related data at any time"
+      },
+      "footer": "For more details, please check our complete privacy policy. If you have any questions, please contact us at any time."
+    },
+    "subscription": {
+      "title": "Subscription Information",
+      "freePlan": "Free Plan",
+      "freePlanDesc": "You are using the free plan and enjoying all basic features",
+      "features": {
+        "0": "Basic video download features",
+        "1": "Multi-format support",
+        "2": "Basic technical support"
+      },
+      "upgrade": "Upgrade Plan (Coming Soon)"
+    },
+    "about": {
+      "title": "About VideoRoll Pro",
+      "description": "VideoRoll Pro is a powerful video download browser extension that supports multiple video formats and websites.",
+      "pluginInfo": "Plugin Information",
+      "version": "Version:",
+      "developer": "Developer:",
+      "contact": "Contact Information",
+      "email": "Email:",
+      "website": "Website:"
+    }
+  },
+  "footer": {
+    "links": {
+      "privacy": "Privacy Policy",
+      "about": "About Us",
+      "contact": "Contact Us",
+      "friendlyLinks": "Friendly Links",
+      "bugReport": "Bug Report"
+    },
+    "copyright": "All rights reserved"
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "faq": "FAQ",
+    "documentation": "Documentation"
   }
 }

@@ -110,16 +110,16 @@ export default function Instagram(props) {
                             id="Shape"
                             d="M24.9705 0L9.19967 0C4.07414 0 0 4.13333 0 9.33332L0 25.3333C0 30.5333 4.07414 34.6666 9.19967 34.6666L24.9705 34.6666C30.0961 34.6666 34.1702 30.5333 34.1702 25.3333L34.1702 9.33332C34.1702 4.13333 30.0961 0 24.9705 0L24.9705 0Z"
                             fill="none"
-                            stroke-width="3"
+                            strokeWidth="3"
                             stroke="#FFFFFF"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                         />
                         <path
                             id="Circle"
                             d="M0 1.33333C0 0.596952 0.588396 0 1.31422 0C2.04004 0 2.62844 0.596952 2.62844 1.33333C2.62844 2.06971 2.04004 2.66666 1.31422 2.66666C0.588396 2.66666 0 2.06971 0 1.33333Z"
                             fill="#FFFFFF"
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             transform="translate(24.971 5.333)"
                         />
                     </g>
@@ -127,10 +127,10 @@ export default function Instagram(props) {
                         id="Group"
                         d="M2.74127 2.79014Q0 5.57125 0 9.49992Q0 13.4286 2.74127 16.2097Q5.49144 18.9998 9.38531 18.9998Q13.2792 18.9998 16.0293 16.2097Q18.7706 13.4286 18.7706 9.49992Q18.7706 5.57125 16.0293 2.79014Q13.2792 9.53674e-07 9.38531 0Q5.49144 0 2.74127 2.79014ZM4.87784 14.1037Q3 12.1986 3 9.49992Q3 6.80123 4.87784 4.8961Q6.74677 3 9.38531 3Q12.0238 3 13.8928 4.8961Q15.7706 6.80123 15.7706 9.49992Q15.7706 12.1986 13.8928 14.1037Q12.0238 15.9998 9.38531 15.9998Q6.74677 15.9998 4.87784 14.1037Z"
                         fill="none"
-                        stroke-width="3"
+                        strokeWidth="3"
                         stroke="#FFFFFF"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         transform="translate(16.458 16)"
                     />
                 </g>
