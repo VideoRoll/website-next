@@ -44,9 +44,10 @@ type Props = {
   error?: string;
 };
 
-const menuItems = ["Features", "Pricing", "Docs"];
+// const menuItems = ["Features", "Pricing", "Docs"];
 
 export default function NavBar(props: Props) {
+  const t = useTranslations("nav");
   const { currentUser } = props;
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const pathname = usePathname();
@@ -54,6 +55,15 @@ export default function NavBar(props: Props) {
   const router = useRouter();
   const loader = useTopLoader();
   const supabase = createClient();
+
+  const menuItems = useMemo(
+    () => [
+      t("features"),
+      t("pricing"),
+      t("documentation"),
+    ],
+    [t]
+  );
 
   const locale = useLocale();
 
@@ -144,22 +154,17 @@ export default function NavBar(props: Props) {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
           <Link className="font-bold" color="foreground" href="/">
-            Features
+            {t("features")}
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link className="font-bold" aria-current="page" href="/pricing">
-            Pricing
+            {t("pricing")}
           </Link>
         </NavbarItem>
         <NavbarItem>
           <RegularLink className="font-bold" color="foreground" showAnchorIcon target="_blank" href="https://docs.videoroll.app">
-            Documentation
-          </RegularLink>
-        </NavbarItem>
-        <NavbarItem>
-          <RegularLink className="font-bold" color="foreground" showAnchorIcon target="_blank" href="https://docs.videoroll.app/en/docs/installation">
-            Installation
+            {t("documentation")}
           </RegularLink>
         </NavbarItem>
       </NavbarContent>
@@ -186,7 +191,7 @@ export default function NavBar(props: Props) {
                   </DropdownItem>
                 </DropdownSection>
                 <DropdownSection showDivider aria-label="Profile & Actions">
-                  <DropdownItem key="dashboard">
+                  <DropdownItem key="dashboard" as={Link} href="/dashboard">
                     Dashboard
                   </DropdownItem>
                 </DropdownSection>
