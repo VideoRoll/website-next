@@ -7,6 +7,7 @@ import Github from "@/components/icons/Github";
 import { Link } from "@/i18n/navigation";
 // import { Turnstile } from "@marsidev/react-turnstile";
 import Turnstile, { useTurnstile } from "react-turnstile";
+import debounce from 'lodash-es/debounce'
 
 import {
   Form,
@@ -21,6 +22,7 @@ import {
   hideGlobalLoading,
 } from "@/components/ui/GlobalLoading";
 import { useLocale } from "next-intl";
+import { redirect } from "next/navigation";
 
 type Props = {
   type: "signin" | "signup";
@@ -154,6 +156,7 @@ export default function Auth(props: Props) {
       showGlobalLoading();
       onSubmit(formData)
         .catch((error) => {
+          hideGlobalLoading();
           addToast({
             title: "Error",
             description: error,
@@ -161,6 +164,7 @@ export default function Auth(props: Props) {
           });
           turnstile.reset();
           console.log(error);
+          window.location.reload();
         })
         .finally(() => hideGlobalLoading());
     },
@@ -173,11 +177,6 @@ export default function Auth(props: Props) {
       validationErrors={errors}
       onSubmit={handleSubmit}
     >
-      {/* <LoadingOverlay
-        visible={visible}
-        zIndex={1000}
-        overlayProps={{ radius: "sm", blur: 2 }}
-      /> */}
       <Input
         value={email}
         type="email"
@@ -186,9 +185,9 @@ export default function Auth(props: Props) {
         id="email"
         variant="bordered"
         isInvalid={isInvalid}
-        labelPlacement="inside"
+        labelPlacement="outside"
         placeholder="Enter your email"
-        color={isInvalid ? "danger" : "success"}
+        color={isInvalid ? "danger" : "default"}
         errorMessage={isInvalid && "Please enter a valid email"}
         onValueChange={setEmail}
         className="w-full"
@@ -200,7 +199,7 @@ export default function Auth(props: Props) {
         label="Password"
         variant="bordered"
         defaultValue=""
-        labelPlacement="inside"
+        labelPlacement="outside"
         placeholder="Enter your password"
         isInvalid={false}
         errorMessage={false}
@@ -264,11 +263,11 @@ export default function Auth(props: Props) {
       </Button>
       {type === "signin" ? (
         <p>
-          Don&apos;t have an account? <Link href="/signup">Sign up</Link>
+          Don&apos;t have an account? <Link href="/signup" className="text-sky-800">Sign up</Link>
         </p>
       ) : (
         <p>
-          Already have an account? <Link href="/signin">Sign in</Link>
+          Already have an account? <Link href="/signin" className="text-sky-800">Sign in</Link>
         </p>
       )}
     </Form>
