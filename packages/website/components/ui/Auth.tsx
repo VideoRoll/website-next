@@ -164,7 +164,6 @@ export default function Auth(props: Props) {
           });
           turnstile.reset();
           console.log(error);
-          window.location.reload();
         })
         .finally(() => hideGlobalLoading());
     },
