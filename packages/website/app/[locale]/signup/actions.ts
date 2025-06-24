@@ -14,8 +14,7 @@ export async function signup(formData: FormData, locale: string = 'en') {
         email: formData.get('email') as string,
         password: formData.get('password') as string,
         options: { 
-            captchaToken: formData.get('captchaToken') as string, 
-            emailRedirectTo: `https://videoroll.app/${locale}/dashboard` 
+            captchaToken: formData.get('captchaToken') as string
         },
     };
 
