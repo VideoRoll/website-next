@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
 import { loginWithGoogle as google, loginWithGithub as github } from '@/utils/supabase/login';
 
-export async function signup(formData: FormData) {
+export async function signup(formData: FormData, locale: string = 'en') {
     const supabase = await createClient();
 
     // type-casting here for convenience
@@ -13,19 +13,22 @@ export async function signup(formData: FormData) {
     const data = {
         email: formData.get('email') as string,
         password: formData.get('password') as string,
-        options: { captchaToken: formData.get('captchaToken') as string },
+        options: { 
+            captchaToken: formData.get('captchaToken') as string, 
+            emailRedirectTo: `https://videoroll.app/${locale}/dashboard` 
+        },
     };
 
     const { error } = await supabase.auth.signUp(data);
 
     if (error) {
         // return JSON.stringify(error)
-        return Promise.reject(error);
+        return Promise.reject(error.message || "An error occurred during signup.");
     }
 
     return Promise.resolve().then(() => {
-        revalidatePath("/signin", "layout");
-        redirect("/signin");
+        revalidatePath(`/${locale}/confirm-email`, "layout");
+        redirect(`/${locale}/confirm-email`);
     });
 }
 
