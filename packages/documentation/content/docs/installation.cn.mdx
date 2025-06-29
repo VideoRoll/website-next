@@ -1,17 +1,57 @@
 ---
 title: 安装
-description: How to install Video Roll
+description: 如何安装 Video Roll
 ---
 
-You can install the Video Roll extension through the following methods:
+import Google from "../../assets/image/Google";
+import Edge from "../../assets/image/Edge";
+import Firefox from "../../assets/image/Firefox";
 
-- **Chrome Web Store**: [Click to Install](https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en)
-- **Microsoft Edge Add-ons**: [Click to Install](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn)
-- **Firefox Add-ons**: [Click to Install](https://addons.mozilla.org/firefox/addon/videoroll/)
+## 浏览器扩展商店
 
-If you encounter issues with direct installation, you can also manually install the extension via developer mode.
+您可以通过以下官方浏览器扩展商店安装 Video Roll 扩展：
+
+<div className="flex flex-col space-y-4 md:space-y-6">
+  <div className="flex items-center gap-3">
+    <Google className="w-6 h-6" />
+    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">点击安装</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Edge className="w-6 h-6" />
+    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">点击安装</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Firefox className="w-6 h-6" />
+    <div><strong>Firefox 附加组件</strong>：<a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">点击安装</a></div>
+  </div>
+</div>
+
+## 离线安装
+
+如果您更喜欢离线安装 VideoRoll 或无法访问扩展商店，可以手动下载并安装：
+
+### Chrome/Edge 浏览器：
+
+1. 从<a href="/chromiumExt.zip" download>这里</a>下载 `.zip` 文件
+2. 打开 Chrome/Edge 浏览器并导航至 `chrome://extensions` 或 `edge://extensions`
+3. 使用右上角的开关启用"开发者模式"
+4. 将下载的 `.zip` 文件直接拖入扩展页面
+5. VideoRoll 现在应该已安装并可以使用
+
+### Firefox 浏览器：
+
+1. 从 [GitHub Releases](https://github.com/VideoRoll/VideoRoll/releases) 下载最新的 `.xpi` 文件
+2. 打开 Firefox 浏览器并导航至 `about:addons`
+3. 点击齿轮图标并选择"从文件安装附加组件..."
+4. 浏览到下载的 `.xpi` 文件并打开它
+5. 出现提示时点击"添加"
+6. VideoRoll 现在应该已安装并可以使用
+
+如果在安装过程中遇到任何问题，请访问我们的[故障排除指南](/docs/troubleshooting)或[联系我们的支持团队](/contact)。
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+  <Card title="了解更多关于 Next.js" href="https://nextjs.org/docs" />
+  <Card title="了解更多关于 Fumadocs" href="https://fumadocs.vercel.app" />
 </Cards>
