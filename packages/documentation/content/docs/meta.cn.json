@@ -29,6 +29,9 @@
     "---设置---",
     "feature-memory",
     "feature-shortcut",
-    "feature-autoadapt"
+    "feature-autoadapt",
+    "---其他---",
+    "release-notes",
+    "help"
   ]
 }
