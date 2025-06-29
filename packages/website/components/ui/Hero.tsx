@@ -152,34 +152,7 @@ export default function Hero() {
           "Best video enhancement extension I've used. The quality improvements are noticeable immediately and the rotation controls are so smooth.",
         stars: 5,
         avatar: "CS",
-      },
-      {
-        user: "Sophie Martin",
-        comment: "Perfect!",
-        stars: 5,
-        avatar: "SM",
-      },
-      {
-        user: "Robert Zhang",
-        comment:
-          "Outstanding extension! The video enhancement features work seamlessly across all major platforms. I particularly love the keyboard shortcuts and how responsive the controls are.",
-        stars: 5,
-        avatar: "RZ",
-      },
-      {
-        user: "Maria Garcia",
-        comment:
-          "Excellent tool for content creators. Makes video editing workflow much smoother.",
-        stars: 5,
-        avatar: "MG",
-      },
-      {
-        user: "Thomas Lee",
-        comment:
-          "Incredibly reliable and well-designed. I've recommended this to all my colleagues and they all love it too. The development team really knows what they're doing!",
-        stars: 5,
-        avatar: "TL",
-      },
+      }
     ],
     []
   );
@@ -230,10 +203,36 @@ export default function Hero() {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-base md:text-lg text-gray-500 dark:text-gray-300 max-w-xl mb-8"
+            className="text-base md:text-lg text-gray-500 dark:text-gray-300 max-w-xl mb-6"
           >
             {t("subtitle")}
           </motion.p>
+
+          {/* 五星评级和用户数量 */}
+          <motion.div
+            style={{ y: iconTranstion3 }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex items-center gap-6 mb-8"
+          >
+            {/* 五星评级 */}
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1 text-yellow-400">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <IconStarFilled key={i} size={18} />
+                ))}
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                  {t("usersTrust")}
+                </span>
+              </div>
+            </div>
+
+            {/* 用户数量 */}
+          </motion.div>
+
           <motion.div style={{ y: iconTranstion3 }}>
             <Button
               color="primary"
@@ -402,7 +401,7 @@ export default function Hero() {
       {/* 3. 功能网格 - 高级卡片式 */}
       <section className="relative z-30 py-20">
         <div className="max-w-screen-2xl px-[5vw] mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mt-4 mb-4">
             {t("featuresTitle")}
           </h2>
           <div className="mb-16 flex justify-center">
@@ -440,9 +439,10 @@ export default function Hero() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="group relative overflow-hidden md:col-span-2"
-              >                <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-900/10 backdrop-blur-sm rounded-2xl p-8 min-h-[200px] border border-gray-700/30 hover:border-purple-500/30 transition-all duration-500 overflow-hidden">
+              >
+                {" "}
+                <div className="relative bg-gradient-to-br from-gray-900/50 to-gray-900/10 backdrop-blur-sm rounded-2xl p-8 min-h-[200px] border border-gray-700/30 hover:border-purple-500/30 transition-all duration-500 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
                   <div className="relative z-10">
                     <h3 className="text-xl font-bold mb-4 group-hover:text-purple-200 transition-colors duration-300">
                       {features[1]?.title}
@@ -450,10 +450,22 @@ export default function Hero() {
                     <p className="text-gray-500 dark:text-gray-300 leading-relaxed">
                       {features[1]?.desc}
                     </p>
-                  </div>                  {/* 视频网站图标 - 绝对定位在卡片底部 */}
+                  </div>{" "}
+                  {/* 视频网站图标 - 绝对定位在卡片底部 */}
                   <div className="absolute bottom-0 left-0 right-0 flex items-center justify-end gap-4 p-8 transform translate-y-1/3">
                     {platforms
-                      .filter(platform => ['YouTube', 'Bilibili', 'Vimeo', 'Twitch', 'Tiktok', 'X', 'Instagram', 'Facebook'].includes(platform.name))
+                      .filter((platform) =>
+                        [
+                          "YouTube",
+                          "Bilibili",
+                          "Vimeo",
+                          "Twitch",
+                          "Tiktok",
+                          "X",
+                          "Instagram",
+                          "Facebook",
+                        ].includes(platform.name)
+                      )
                       .map((platform, index) => (
                         <div
                           key={platform.name}
@@ -461,10 +473,8 @@ export default function Hero() {
                         >
                           {platform.icon}
                         </div>
-                      ))
-                    }
+                      ))}
                   </div>
-
                   <div className="absolute top-4 right-4 w-2 h-2 bg-purple-400 rounded-full opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </motion.div>
@@ -565,8 +575,15 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </section>{" "}      {/* 4. 图片展示区块 */}
+      </section>{" "}
+      {/* 4. 图片展示区块 */}
       <section className="max-w-screen-2xl px-[5vw] mx-auto py-20">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
+          {t("interfaceTitle")}
+        </h2>
+        <div className="mb-16 flex justify-center">
+          <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
+        </div>
         <div className="flex items-center justify-center gap-0 max-w-4xl mx-auto">
           {/* 左边图片 - 逆时针旋转15度 */}
           <motion.div
@@ -576,18 +593,20 @@ export default function Hero() {
             className="relative"
             style={{ transformOrigin: "right bottom" }}
           >
-            <div 
+            <div
               className="relative transform -rotate-[15deg]"
               style={{
-                filter: "drop-shadow(0 0 40px rgba(147, 51, 234, 0.4)) drop-shadow(0 0 80px rgba(147, 51, 234, 0.2))"
+                filter:
+                  "drop-shadow(0 0 30px rgba(147, 51, 234, 0.25)) drop-shadow(0 0 60px rgba(59, 130, 246, 0.15))",
               }}
-            >              <Image
+            >
+              <Image
                 src={Item1}
                 alt="Item 1"
                 className="w-48 md:w-64 h-auto object-contain rounded-2xl"
               />
               {/* 发光效果背景 */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-2xl blur-xl -z-10 scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/15 via-blue-500/15 to-indigo-500/20 rounded-2xl blur-xl -z-10 scale-110" />
             </div>
           </motion.div>
 
@@ -598,18 +617,20 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative z-10 -mx-8"
           >
-            <div 
+            <div
               className="relative"
               style={{
-                filter: "drop-shadow(0 0 50px rgba(147, 51, 234, 0.5)) drop-shadow(0 0 100px rgba(147, 51, 234, 0.3))"
+                filter:
+                  "drop-shadow(0 0 40px rgba(147, 51, 234, 0.3)) drop-shadow(0 0 80px rgba(59, 130, 246, 0.2))",
               }}
-            >              <Image
+            >
+              <Image
                 src={Item2}
                 alt="Item 2"
                 className="w-56 md:w-72 h-auto object-contain rounded-2xl"
               />
               {/* 发光效果背景 */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-blue-500/30 rounded-2xl blur-xl -z-10 scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/20 via-blue-500/20 to-indigo-500/25 rounded-2xl blur-xl -z-10 scale-110" />
             </div>
           </motion.div>
 
@@ -621,18 +642,20 @@ export default function Hero() {
             className="relative"
             style={{ transformOrigin: "left bottom" }}
           >
-            <div 
+            <div
               className="relative transform rotate-[15deg]"
               style={{
-                filter: "drop-shadow(0 0 40px rgba(147, 51, 234, 0.4)) drop-shadow(0 0 80px rgba(147, 51, 234, 0.2))"
+                filter:
+                  "drop-shadow(0 0 30px rgba(147, 51, 234, 0.25)) drop-shadow(0 0 60px rgba(59, 130, 246, 0.15))",
               }}
-            >              <Image
+            >
+              <Image
                 src={Item3}
                 alt="Item 3"
                 className="w-48 md:w-64 h-auto object-contain rounded-2xl"
               />
               {/* 发光效果背景 */}
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-2xl blur-xl -z-10 scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/15 via-blue-500/15 to-indigo-500/20 rounded-2xl blur-xl -z-10 scale-110" />
             </div>
           </motion.div>
         </div>
@@ -797,7 +820,6 @@ export default function Hero() {
           {/* 底部渐变遮罩 */}
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
         </div>
-        
       </section>
     </div>
   );

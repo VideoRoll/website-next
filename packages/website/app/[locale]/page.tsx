@@ -1,13 +1,4 @@
-/*
- * @Author: gomi gxy880520@qq.com
- * @Date: 2024-10-16 10:34:26
- * @LastEditors: gomi gxy880520@qq.com
- * @LastEditTime: 2025-06-22 09:26:40
- * @FilePath: \website-next\packages\website\app\[locale]\page.tsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import React from "react";
-// import { motion } from "framer-motion";
 import Navbar from "@/components/ui/NavBar";
 import { getUserServerSideProps } from "@/utils/auth-helpers/props";
 import Hero from "@/components/ui/Hero.tsx";
@@ -27,7 +18,7 @@ export default async function Page({ params }: Props) {
   const { currentUser } = await getUserServerSideProps();
 
   return (
-    <main style={{ height: "100%" }} className="bg-background">
+    <main style={{ height: "100%" }} className="bg-background overflow-x-hidden">
       <Navbar currentUser={currentUser} ></Navbar>
       <Hero></Hero>
       <Footer></Footer>

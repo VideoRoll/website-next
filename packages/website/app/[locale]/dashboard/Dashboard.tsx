@@ -68,11 +68,22 @@ export default function DashboardPage(props: Props) {
         <div className="space-y-2 text-center sm:text-left">
           <h3 className="text-xl font-semibold">{userMeta.full_name}</h3>
           <p className="text-gray-600 break-all">{userMeta.email}</p>          <Chip
-            color={appMeta.provider === "google" ? "primary" : "secondary"}
+            color={
+              appMeta.provider === "google" 
+                ? "primary" 
+                : appMeta.provider === "github"
+                ? "secondary"
+                : "default"
+            }
             variant="flat"
             size="sm"
           >
-            {appMeta.provider === "google" ? t("profile.googleAccount") : t("profile.githubAccount")}
+            {appMeta.provider === "google" 
+              ? t("profile.googleAccount") 
+              : appMeta.provider === "github"
+              ? t("profile.githubAccount")
+              : t("profile.emailAccount")
+            }
           </Chip>
         </div>
       </div>
@@ -87,7 +98,12 @@ export default function DashboardPage(props: Props) {
           <div>
             <p className="text-sm text-gray-500">{t("profile.loginMethod")}</p>
             <p className="font-medium">
-              {appMeta.provider === "google" ? t("profile.googleOAuth") : t("profile.githubOAuth")}
+              {appMeta.provider === "google" 
+                ? t("profile.googleOAuth") 
+                : appMeta.provider === "github"
+                ? t("profile.githubOAuth")
+                : t("profile.emailPassword")
+              }
             </p>
           </div>
         </div>

@@ -25,10 +25,9 @@ export async function signup(formData: FormData, locale: string = 'en') {
         return Promise.reject(error.message || "An error occurred during signup.");
     }
 
-    return Promise.resolve().then(() => {
-        revalidatePath(`/${locale}/confirm-email`, "layout");
-        redirect(`/${locale}/confirm-email`);
-    });
+    // 成功时直接重定向，不要包装在 Promise 中
+    revalidatePath(`/${locale}/confirm-email`, "layout");
+    redirect(`/${locale}/confirm-email`);
 }
 
 export async function loginWithGoogle(origin: string) {

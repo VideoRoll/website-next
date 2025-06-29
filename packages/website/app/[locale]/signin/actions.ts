@@ -6,7 +6,7 @@ import { createClient } from "@/utils/supabase/server";
 import { loginWithGoogle as google, loginWithGithub as github } from '@/utils/supabase/login';
 
 export async function login(formData: FormData) {
-    const supabase = createClient();
+    const supabase = await createClient();
     // const formData = JSON.parse(value);
 
     // type-casting here for convenience
@@ -21,13 +21,12 @@ export async function login(formData: FormData) {
 
     if (error) {
         // return JSON.stringify(error)
-        return Promise.reject(error);
+        return Promise.reject(error.message || "An error occurred during signin.");
     }
 
-    return Promise.resolve().then(() => {
-        revalidatePath("/", "layout");
-        redirect("/");
-    });
+    // 成功时直接重定向，不要包装在 Promise 中
+    revalidatePath("/", "layout");
+    redirect("/");
 }
 
 export async function loginWithGoogle(origin: string) {

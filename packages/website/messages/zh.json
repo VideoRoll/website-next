@@ -8,6 +8,9 @@
     "featuresTitle": "任何你想要的",
     "advantagesTitle": "为什么选择我们？",
     "reviewsTitle": "用户评价",
+    "interfaceTitle": "友好的用户界面",
+    "rating": "5.0",
+    "usersTrust": "全球超过 20,000+ 用户信赖",
     "animation": {
       "prefix": "你的专属视频",
       "0": { "text": "旋转器。" },
@@ -58,11 +61,13 @@
     "profile": {
       "googleAccount": "Google 账号",
       "githubAccount": "GitHub 账号",
+      "emailAccount": "邮箱账号",
       "accountInfo": "账号信息",
       "loginEmail": "登录邮箱",
       "loginMethod": "登录方式",
       "googleOAuth": "Google OAuth",
-      "githubOAuth": "GitHub OAuth"
+      "githubOAuth": "GitHub OAuth",
+      "emailPassword": "邮箱密码"
     },    "privacy": {
       "title": "数据和隐私声明",
       "intro": "我们非常重视您的数据安全和隐私保护。本插件承诺：",
@@ -97,6 +102,75 @@
       "website": "官网："
     }
   },
+  "pricing": {
+    "title": "选择适合您的计划",
+    "subtitle": "VideoRoll 提供灵活的计划选择，满足不同用户的需求",
+    "free": {
+      "title": "Free 计划",
+      "price": "免费",
+      "description": "✨ 不需要登录和付费，即可免费使用",
+      "button": "立即使用"
+    },
+    "pro": {
+      "title": "Pro 计划",
+      "price": "免费",
+      "priceNote": "(限时)",
+      "description": "🎉 该计划目前免费开放注册",
+      "disclaimer": "* 后续可能会调整为收费功能",
+      "button": "注册获取 Pro",
+      "recommended": "推荐"
+    },
+    "features": {
+      "video": {
+        "title": "视频功能",
+        "rotate": "视频旋转",
+        "download": "视频下载",
+        "video_url": "视频流复制",
+        "video_url_qr": "视频流二维码",
+        "loop": "视频循环",
+        "zoom": "视频缩放",
+        "rotate_adaptive": "旋转自适应容器",
+        "reposition": "视频位置移动",
+        "focus": "关灯专注",
+        "player": "内置播放器",
+        "filter": "视频滤镜",
+        "speed": "播放速度控制",
+        "pip": "画中画模式",
+        "web_qr": "网页二维码",
+        "screenshot": "视频截图",
+        "video_stretch": "视频拉伸",
+        "advanced_pip": "视频窗口分离",
+        "ai_summary": "YouTube AI 视频总结",
+        "record": "视频录制",
+        "ab_loop": "A-B点循环",
+        "vr": "VR 模式"
+      },
+      "audio": {
+        "title": "音频功能",
+        "volume_boost": "音量增强",
+        "pitch": "音调调节",
+        "audio_delay": "音频延迟",
+        "audio_stereo": "音频立体声",
+        "3d_surround": "3D 环绕音效"
+      },
+      "other": {
+        "title": "其他功能",
+        "ad_accelerator": "YouTube 广告加速",
+        "platform_support": "多平台支持",
+        "disable": "一键禁用",
+        "cache_list": "缓存网站",
+        "disable_list": "禁用网站",
+        "custom_shortcuts": "自定义快捷键",
+        "custom_layout": "自定义界面布局"
+      }
+    },
+    "whyChoose": {
+      "title": "为什么选择 VideoRoll？",
+      "feature1": "完全免费的核心功能",
+      "feature2": "无需强制注册",
+      "feature3": "隐私安全保护"
+    }
+  },
   "footer": {
     "links": {
       "privacy": "隐私政策",
@@ -111,6 +185,38 @@
     "features": "功能",
     "pricing": "定价",
     "faq": "常见问题",
-    "documentation": "文档"
+    "documentation": "文档",
+    "language": "语言"
+  },
+  "welcome": {
+    "congratulations": "恭喜你成功安装",
+    "appName": "Video Roll",
+    "subtitle": "开启你的视频增强体验之旅吧~",
+    "exploreButton": "前往官网探索更多 →"
+  },
+  "auth": {
+    "signinTitle": "登录到 Video Roll",
+    "signupTitle": "注册 Video Roll 账户",
+    "email": "邮箱",
+    "password": "密码",
+    "enterEmail": "请输入您的邮箱",
+    "enterPassword": "请输入您的密码",
+    "emailInvalid": "请输入有效的邮箱地址",
+    "signin": "登录",
+    "signup": "注册",
+    "signinWithGoogle": "使用 Google 登录",
+    "signinWithGithub": "使用 Github 登录",
+    "signupWithGoogle": "使用 Google 注册",
+    "signupWithGithub": "使用 Github 注册",
+    "noAccount": "还没有账户？",
+    "hasAccount": "已有账户？",
+    "signupLink": "注册",
+    "signinLink": "登录",
+    "captchaError": "无法验证验证码",
+    "captchaErrorDesc": "请稍后再试。",
+    "error": "错误",
+    "oauthError": "登录凭据或授权类型不被识别",
+    "oauthFailed": "OAuth 认证失败",
+    "unexpectedError": "发生了意外错误"
   }
 }

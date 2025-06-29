@@ -50,20 +50,29 @@ export default function NavBar(props: Props) {
   const t = useTranslations("nav");
   const { currentUser } = props;
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  // 手动切换菜单的函数（用于调试）
+  const toggleMenu = (e?: React.MouseEvent | React.TouchEvent) => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  // 处理触摸事件（移动端优化）
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleMenu(e);
+  };
+
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
   const loader = useTopLoader();
   const supabase = createClient();
-
-  const menuItems = useMemo(
-    () => [
-      t("features"),
-      t("pricing"),
-      t("documentation"),
-    ],
-    [t]
-  );
 
   const locale = useLocale();
 
@@ -112,7 +121,6 @@ export default function NavBar(props: Props) {
     //   });
     // }
 
-    console.log('---currentUser', currentUser);
     if (currentUser) {
       window.postMessage(
         {
@@ -133,12 +141,33 @@ export default function NavBar(props: Props) {
   }, [currentUser]);
 
   return (
-    <Navbar className="z-50 mx-auto max-w-screen-2xl px-[5vw]" maxWidth="full" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar 
+      className="z-[9999] mx-auto max-w-screen-2xl px-[5vw] touch-manipulation" 
+      maxWidth="full" 
+      isMenuOpen={isMenuOpen}
+      shouldHideOnScroll={false}
+      position="sticky"
+      classNames={{
+        menu: "bg-background/95 backdrop-blur-md mt-4 touch-manipulation",
+        menuItem: "py-2 touch-manipulation",
+        toggle: "touch-manipulation select-none cursor-pointer"
+      }}
+    >
       <NavbarContent>
-        <NavbarMenuToggle
+        <div 
+          className="sm:hidden cursor-pointer touch-manipulation select-none p-2 -m-2 active:scale-95 transition-transform"
+          onClick={toggleMenu}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          role="button"
+          tabIndex={0}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
+        >
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="pointer-events-none"
+          />
+        </div>
         <NavbarBrand>
           <Image
             src={logo}
@@ -211,7 +240,7 @@ export default function NavBar(props: Props) {
         <NavbarItem>
           <Dropdown>
             <DropdownTrigger>
-              <Button variant="bordered" startContent={<IconLanguage />}>{selectedValue}</Button>
+              <Button variant="bordered" startContent={<IconLanguage />}>{selectedValue === "en" ? "English" : "简体中文"}</Button>
             </DropdownTrigger>
             <DropdownMenu
               disallowEmptySelection
@@ -250,24 +279,139 @@ export default function NavBar(props: Props) {
         </NavbarItem> */}
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
+        {/* 主要功能菜单 */}
+        <NavbarMenuItem key="features">
+          <Link
+            className="w-full"
+            color="foreground"
+            href="/"
+            size="lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("features")}
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="pricing">
+          <Link
+            className="w-full"
+            color="foreground"
+            href="/pricing"
+            size="lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("pricing")}
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="documentation">
+          <Link
+            className="w-full"
+            color="primary"
+            href="https://docs.videoroll.app"
+            target="_blank"
+            size="lg"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("documentation")}
+          </Link>
+        </NavbarMenuItem>
+
+        {/* 分隔线 */}
+        <NavbarMenuItem key="divider">
+          <div className="h-px bg-divider my-2"></div>
+        </NavbarMenuItem>
+
+        {/* 用户登录/登出 */}
+        {currentUser ? (
+          <>
+            <NavbarMenuItem key="user-info">
+              <div className="flex items-center gap-3 py-2">
+                <Avatar
+                  size="sm"
+                  src={currentUser.user_metadata?.avatar_url}
+                />
+                <div className="flex flex-col">
+                  <p className="text-sm font-medium">{currentUser.user_metadata?.name}</p>
+                  <p className="text-xs text-default-500">{currentUser.email}</p>
+                </div>
+              </div>
+            </NavbarMenuItem>
+            <NavbarMenuItem key="dashboard">
+              <Link
+                className="w-full"
+                color="foreground"
+                href="/dashboard"
+                size="lg"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem key="logout">
+              <Button
+                className="w-full justify-start"
+                color="danger"
+                variant="light"
+                size="lg"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  signout();
+                }}
+              >
+                Log out
+              </Button>
+            </NavbarMenuItem>
+          </>
+        ) : (
+          <NavbarMenuItem key="login">
+            <Button
+              as={Link}
               className="w-full"
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              href="#"
+              color="primary"
+              href="/signin"
+              variant="flat"
               size="lg"
+              onClick={() => setIsMenuOpen(false)}
             >
-              {item}
-            </Link>
+              Login
+            </Button>
           </NavbarMenuItem>
-        ))}
+        )}
+
+        {/* 分隔线 */}
+        <NavbarMenuItem key="divider2">
+          <div className="h-px bg-divider my-2"></div>
+        </NavbarMenuItem>
+
+        {/* 语言切换 */}
+        <NavbarMenuItem key="language">
+          <div className="w-full">
+            <p className="text-sm text-default-500 mb-2">{t("language") || "Language"}</p>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                className={`justify-start ${locale === 'en' ? 'bg-primary text-primary-foreground' : ''}`}
+                variant={locale === 'en' ? 'solid' : 'flat'}
+                size="sm"
+                onClick={() => {
+                  select(new Set(['en']));
+                  setIsMenuOpen(false);
+                }}
+              >
+                English
+              </Button>
+              <Button
+                className={`justify-start ${locale === 'zh' ? 'bg-primary text-primary-foreground' : ''}`}
+                variant={locale === 'zh' ? 'solid' : 'flat'}
+                size="sm"
+                onClick={() => {
+                  select(new Set(['zh']));
+                  setIsMenuOpen(false);
+                }}
+              >
+                简体中文
+              </Button>
+            </div>
+          </div>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
 
