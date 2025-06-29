@@ -1,18 +1,10 @@
-/*
- * @Author: gomi gxy880520@qq.com
- * @Date: 2024-10-16 10:34:26
- * @LastEditors: gomi gxy880520@qq.com
- * @LastEditTime: 2025-06-28 18:26:42
- * @FilePath: \website-next\packages\website\components\ui\Auth.tsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 "use client";
 
 import React, { useCallback, useRef, useState } from "react";
-import Google from "../icons/Google";
-import Github from "../icons/Github";
+import Google from "@/components/icons/Google";
+import Github from "@/components/icons/Github";
 
-import { Link } from "../../i18n/navigation";
+import { Link } from "@/i18n/navigation";
 // import { Turnstile } from "@marsidev/react-turnstile";
 import Turnstile, { useTurnstile } from "react-turnstile";
 import debounce from 'lodash-es/debounce'
@@ -28,15 +20,16 @@ import {
 import {
   showGlobalLoading,
   hideGlobalLoading,
-} from "./GlobalLoading";
+} from "@/components/ui/GlobalLoading";
 import { useLocale, useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 
 type Props = {
   type: "signin" | "signup";
+  submitText: string;
   onSubmit: (data: FormData) => Promise<any>;
-  onGoogleSignin: (data: string) => Promise<any> | void;
-  onGithubSignin: (data: string) => Promise<any> | void;
+  onGoogleSignin: (data: string) => void;
+  onGithubSignin: (data: string) => void;
 };
 
 export const EyeSlashFilledIcon = (props) => {
@@ -141,53 +134,17 @@ export default function Auth(props: Props) {
 
   const handleOAuthSignin = (callback: (data: string) => Promise<any> | void) => {
     showGlobalLoading();
-    
-    try {
-      const result = callback(window.location.origin);
-      // 如果返回Promise，处理它；如果不返回，直接处理
-      if (result && typeof result.catch === 'function') {
-        result.catch((error: any) => {
-          hideGlobalLoading();
-          
-          // 检查是否是 Next.js 重定向错误
-          if (error?.message?.includes('NEXT_REDIRECT') || error?.digest?.includes('NEXT_REDIRECT')) {
-            // 这是正常的重定向，不显示错误
-            return;
-          }
-          
-          const errorMessage = typeof error === 'string' ? error : 
-                              error?.message || 
-                              error?.toString() || 
-                              t('oauthFailed');
-          
-          addToast({
-            title: t('oauthError'),
-            description: errorMessage,
-            color: "danger",
-          });
-          console.log('OAuth error details:', error);
+    const result = callback(window.location.origin);
+    if (result && typeof result.catch === 'function') {
+      result.catch((error: any) => {
+        hideGlobalLoading();
+        addToast({
+          title: t('oauthError'),
+          description: error,
+          color: "danger",
         });
-      }
-    } catch (error: any) {
-      hideGlobalLoading();
-      
-      // 检查是否是 Next.js 重定向错误
-      if (error?.message?.includes('NEXT_REDIRECT') || error?.digest?.includes('NEXT_REDIRECT')) {
-        // 这是正常的重定向，不显示错误
-        return;
-      }
-      
-      const errorMessage = typeof error === 'string' ? error : 
-                          error?.message || 
-                          error?.toString() || 
-                          t('oauthFailed');
-      
-      addToast({
-        title: t('oauthError'), 
-        description: errorMessage,
-        color: "danger",
+        console.log(error);
       });
-      console.log('OAuth error details:', error);
     }
   };
 
@@ -204,26 +161,13 @@ export default function Auth(props: Props) {
       onSubmit(formData)
         .catch((error) => {
           hideGlobalLoading();
-          
-          // 检查是否是 Next.js 重定向错误
-          if (error?.message?.includes('NEXT_REDIRECT') || error?.digest?.includes('NEXT_REDIRECT')) {
-            // 这是正常的重定向，不显示错误
-            return;
-          }
-          
-          // 确保 error 是字符串，而不是对象
-          const errorMessage = typeof error === 'string' ? error : 
-                              error?.message || 
-                              error?.toString() || 
-                              t('unexpectedError');
-          
           addToast({
             title: t('error'),
-            description: errorMessage,
+            description: error,
             color: "danger",
           });
           turnstile.reset();
-          console.log('Error details:', error);
+          console.log(error);
         })
         .finally(() => hideGlobalLoading());
     },
@@ -322,13 +266,19 @@ export default function Auth(props: Props) {
       </Button>
       {type === "signin" ? (
         <p>
-          {t('noAccount')} <Link href="/signup" className="text-sky-800">{t('signupLink')}</Link>
+          {t('noAccount')} <Link href="/signup" className="text-blue-600">{t('signupLink')}</Link>
         </p>
       ) : (
         <p>
-          {t('hasAccount')} <Link href="/signin" className="text-sky-800">{t('signinLink')}</Link>
+          {t('hasAccount')} <Link href="/signin" className="text-blue-600">{t('signinLink')}</Link>
         </p>
       )}
+      <p className="text-xs text-gray-200 mt-2 text-center">
+        {t('agreementText')}
+        <a href={`https://docs.videoroll.app/${locale === 'zh' ? 'cn' : 'en'}/docs/terms`} target="_blank" rel="noopener noreferrer" className="underline mx-1 text-blue-600">{t('termsOfService')}</a>
+        {t('and')}
+        <a href={`https://docs.videoroll.app/${locale === 'zh' ? 'cn' : 'en'}/docs/privacy`} target="_blank" rel="noopener noreferrer" className="underline mx-1 text-blue-600">{t('privacyPolicy')}</a>{locale === 'zh' ? '。' : '.'}
+      </p>
     </Form>
   );
 }

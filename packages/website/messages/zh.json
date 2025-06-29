@@ -217,6 +217,10 @@
     "error": "错误",
     "oauthError": "登录凭据或授权类型不被识别",
     "oauthFailed": "OAuth 认证失败",
-    "unexpectedError": "发生了意外错误"
+    "unexpectedError": "发生了意外错误",
+    "agreementText": "注册/登录即表示您同意",
+    "termsOfService": "用户服务条款",
+    "and": "和",
+    "privacyPolicy": "隐私政策"
   }
 }

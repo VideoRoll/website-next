@@ -3,13 +3,53 @@ title: Installation
 description: How to install Video Roll
 ---
 
-You can install the Video Roll extension through the following methods:
+import Google from "../../assets/image/Google";
+import Edge from "../../assets/image/Edge";
+import Firefox from "../../assets/image/Firefox";
 
-- **Chrome Web Store**: [Click to Install](https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en)
-- **Microsoft Edge Add-ons**: [Click to Install](https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn)
-- **Firefox Add-ons**: [Click to Install](https://addons.mozilla.org/firefox/addon/videoroll/)
+## Browser Extension Stores
 
-If you encounter issues with direct installation, you can also manually install the extension via developer mode.
+You can install the Video Roll extension through the following official browser extension stores:
+
+<div className="flex flex-col space-y-4 md:space-y-6">
+  <div className="flex items-center gap-3">
+    <Google className="w-6 h-6" />
+    <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">Click to Install</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Edge className="w-6 h-6" />
+    <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">Click to Install</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Firefox className="w-6 h-6" />
+    <div><strong>Firefox Add-ons</strong>: <a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">Click to Install</a></div>
+  </div>
+</div>
+
+## Offline Installation
+
+If you prefer to install VideoRoll offline or can't access the extension stores, you can download and install it manually:
+
+### For Chrome/Edge:
+
+1. Download the `.zip` file from <a href="/chromiumExt.zip" download>here</a>
+2. Open Chrome/Edge and navigate to `chrome://extensions` or `edge://extensions`
+3. Enable "Developer mode" using the toggle in the top-right corner
+4. Drag and drop the downloaded `.zip` file directly onto the extensions page
+5. VideoRoll should now be installed and ready to use
+
+### For Firefox:
+
+1. Download the latest `.xpi` file from [GitHub Releases](https://github.com/VideoRoll/VideoRoll/releases)
+2. Open Firefox and navigate to `about:addons`
+3. Click the gear icon and select "Install Add-on From File..."
+4. Browse to the downloaded `.xpi` file and open it
+5. Click "Add" when prompted
+6. VideoRoll should now be installed and ready to use
+
+If you encounter any issues during installation, please visit our [troubleshooting guide](/docs/troubleshooting) or [contact our support team](/contact).
 
 <Cards>
   <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />

@@ -152,7 +152,7 @@ export default function Hero() {
           "Best video enhancement extension I've used. The quality improvements are noticeable immediately and the rotation controls are so smooth.",
         stars: 5,
         avatar: "CS",
-      }
+      },
     ],
     []
   );
@@ -357,14 +357,16 @@ export default function Hero() {
                       </p>
                     </div>
                   </div> */}
-                  {/* <iframe
-                    height="100%"
-                    width="100%;"
-                    src="https://embed.wave.video/sHNa0OoGuLrsYO4i"
-                    allow="autoplay; fullscreen"
+                  <iframe
+                    src="//player.bilibili.com/player.html?isOutside=true&aid=114728089157681&bvid=BV1tAKpz3EP5&cid=30644634279&p=1"
                     scrolling="no"
-                  ></iframe> */}
-                  <div
+                    border="0"
+                    frameBorder="no"
+                    framespacing="0"
+                    allowFullScreen={true}
+                    className="w-full h-full"
+                  ></iframe>
+                  {/* <div
                     className="wave_popover_embed z-10 absolute inset-0"
                     data-id="sHNa0OoGuLrsYO4i"
                     data-width="560"
@@ -384,7 +386,7 @@ export default function Hero() {
                       />
                     </div>
                     <script src="https://wave.video/embed/popover-embed.js"></script>
-                  </div>
+                  </div> */}
                   {/* 视频覆盖层 - 功能标签 */}
                   <div className="absolute top-4 left-4">
                     <div className="bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1 text-white text-sm">
