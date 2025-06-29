@@ -7,7 +7,10 @@
     "firefox": "Firefox",
     "featuresTitle": "Everything You Need for Video",
     "advantagesTitle": "Why Choose Us?",
-    "reviewsTitle": "User Reviews",    "animation": {
+    "reviewsTitle": "User Reviews",
+    "interfaceTitle": "Friendly User Interface",
+    "rating": "5.0",
+    "usersTrust": "Trusted by 20,000+ users around the world",    "animation": {
       "prefix": "Your exclusive Video",
       "0": { "text": "Rotator." },
       "1": { "text": "Downloader." },
@@ -89,11 +92,13 @@
     "profile": {
       "googleAccount": "Google Account",
       "githubAccount": "GitHub Account",
+      "emailAccount": "Email Account",
       "accountInfo": "Account Information",
       "loginEmail": "Login Email",
       "loginMethod": "Login Method",
       "googleOAuth": "Google OAuth",
-      "githubOAuth": "GitHub OAuth"
+      "githubOAuth": "GitHub OAuth",
+      "emailPassword": "Email & Password"
     },
     "privacy": {
       "title": "Data and Privacy Statement",
@@ -129,6 +134,75 @@
       "website": "Website:"
     }
   },
+  "pricing": {
+    "title": "Choose Your Plan",
+    "subtitle": "VideoRoll offers flexible plan options to meet different user needs",
+    "free": {
+      "title": "Free Plan",
+      "price": "Free",
+      "description": "✨ No login or payment required, use for free immediately",
+      "button": "Get Started"
+    },
+    "pro": {
+      "title": "Pro Plan",
+      "price": "Free",
+      "priceNote": "(Limited Time)",
+      "description": "🎉 This plan is currently open for free registration",
+      "disclaimer": "* May be adjusted to paid features in the future",
+      "button": "Register for Pro",
+      "recommended": "Recommended"
+    },
+    "features": {
+      "video": {
+        "title": "Video Features",
+        "rotate": "Video Rotation",
+        "download": "Video Download",
+        "video_url": "Video Stream Copy",
+        "video_url_qr": "Video Stream QR Code",
+        "loop": "Video Loop",
+        "zoom": "Video Zoom",
+        "rotate_adaptive": "Rotation Adaptive Container",
+        "reposition": "Video Position Movement",
+        "focus": "Focus Mode",
+        "player": "Built-in Player",
+        "filter": "Video Filters",
+        "speed": "Playback Speed Control",
+        "pip": "Picture-in-Picture",
+        "web_qr": "Web QR Code",
+        "screenshot": "Video Screenshot",
+        "video_stretch": "Video Stretch",
+        "advanced_pip": "Video Window Separation",
+        "ai_summary": "YouTube AI Video Summary",
+        "record": "Video Recording",
+        "ab_loop": "A-B Loop",
+        "vr": "VR Mode"
+      },
+      "audio": {
+        "title": "Audio Features",
+        "volume_boost": "Volume Boost",
+        "pitch": "Pitch Adjustment",
+        "audio_delay": "Audio Delay",
+        "audio_stereo": "Audio Stereo",
+        "3d_surround": "3D Surround Sound"
+      },
+      "other": {
+        "title": "Other Features",
+        "ad_accelerator": "YouTube Ad Accelerator",
+        "platform_support": "Multi-Platform Support",
+        "disable": "One-Click Disable",
+        "cache_list": "Cache Websites",
+        "disable_list": "Disable Websites",
+        "custom_shortcuts": "Custom Shortcuts",
+        "custom_layout": "Custom Interface Layout"
+      }
+    },
+    "whyChoose": {
+      "title": "Why Choose VideoRoll?",
+      "feature1": "Completely free core features",
+      "feature2": "No mandatory registration",
+      "feature3": "Privacy and security protection"
+    }
+  },
   "footer": {
     "links": {
       "privacy": "Privacy Policy",
@@ -143,6 +217,38 @@
     "features": "Features",
     "pricing": "Pricing",
     "faq": "FAQ",
-    "documentation": "Documentation"
+    "documentation": "Documentation",
+    "language": "Language"
+  },
+  "welcome": {
+    "congratulations": "Congratulations on successfully installing",
+    "appName": "Video Roll",
+    "subtitle": "Start your video enhancement journey~",
+    "exploreButton": "Explore More on Official Website →"
+  },
+  "auth": {
+    "signinTitle": "Sign in to Video Roll",
+    "signupTitle": "Sign up for Video Roll",
+    "email": "Email",
+    "password": "Password",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "emailInvalid": "Please enter a valid email",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "signinWithGoogle": "Sign in with Google",
+    "signinWithGithub": "Sign in with Github",
+    "signupWithGoogle": "Sign up with Google",
+    "signupWithGithub": "Sign up with Github",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signupLink": "Sign up",
+    "signinLink": "Sign in",
+    "captchaError": "Can't verify captcha",
+    "captchaErrorDesc": "Please try again later.",
+    "error": "Error",
+    "oauthError": "Login credentials or grant type not recognized",
+    "oauthFailed": "OAuth authentication failed",
+    "unexpectedError": "An unexpected error occurred"
   }
 }

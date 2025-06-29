@@ -1,10 +1,18 @@
+/*
+ * @Author: gomi gxy880520@qq.com
+ * @Date: 2024-10-16 10:34:26
+ * @LastEditors: gomi gxy880520@qq.com
+ * @LastEditTime: 2025-06-28 18:26:42
+ * @FilePath: \website-next\packages\website\components\ui\Auth.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 "use client";
 
 import React, { useCallback, useRef, useState } from "react";
-import Google from "@/components/icons/Google";
-import Github from "@/components/icons/Github";
+import Google from "../icons/Google";
+import Github from "../icons/Github";
 
-import { Link } from "@/i18n/navigation";
+import { Link } from "../../i18n/navigation";
 // import { Turnstile } from "@marsidev/react-turnstile";
 import Turnstile, { useTurnstile } from "react-turnstile";
 import debounce from 'lodash-es/debounce'
@@ -20,16 +28,15 @@ import {
 import {
   showGlobalLoading,
   hideGlobalLoading,
-} from "@/components/ui/GlobalLoading";
-import { useLocale } from "next-intl";
+} from "./GlobalLoading";
+import { useLocale, useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 
 type Props = {
   type: "signin" | "signup";
-  submitText: string;
   onSubmit: (data: FormData) => Promise<any>;
-  onGoogleSignin: (data: string) => void;
-  onGithubSignin: (data: string) => void;
+  onGoogleSignin: (data: string) => Promise<any> | void;
+  onGithubSignin: (data: string) => Promise<any> | void;
 };
 
 export const EyeSlashFilledIcon = (props) => {
@@ -93,8 +100,9 @@ export const EyeFilledIcon = (props) => {
 };
 
 export default function Auth(props: Props) {
-  const { submitText, type, onSubmit, onGoogleSignin, onGithubSignin } = props;
+  const { type, onSubmit, onGoogleSignin, onGithubSignin } = props;
   const locale = useLocale();
+  const t = useTranslations('auth');
   const [errors, setErrors] = React.useState({});
   const turnstile = useTurnstile();
   // const [visible, handlers] = useDisclosure(false);
@@ -119,8 +127,8 @@ export default function Auth(props: Props) {
       console.log("Captcha error", error, errorTimes.current);
       if (errorTimes.current >= 3) {
         addToast({
-          title: "Can't verify captcha",
-          description: "Please try again later.",
+          title: t('captchaError'),
+          description: t('captchaErrorDesc'),
           color: "danger",
         });
         return;
@@ -128,20 +136,59 @@ export default function Auth(props: Props) {
       errorTimes.current += 1;
       turnstile.reset();
     },
-    [errorTimes, turnstile]
+    [errorTimes, turnstile, t]
   );
 
-  const handleOAuthSignin = (callback: (data: string) => Promise<any>) => {
+  const handleOAuthSignin = (callback: (data: string) => Promise<any> | void) => {
     showGlobalLoading();
-    callback(window.location.origin).catch((error: any) => {
+    
+    try {
+      const result = callback(window.location.origin);
+      // 如果返回Promise，处理它；如果不返回，直接处理
+      if (result && typeof result.catch === 'function') {
+        result.catch((error: any) => {
+          hideGlobalLoading();
+          
+          // 检查是否是 Next.js 重定向错误
+          if (error?.message?.includes('NEXT_REDIRECT') || error?.digest?.includes('NEXT_REDIRECT')) {
+            // 这是正常的重定向，不显示错误
+            return;
+          }
+          
+          const errorMessage = typeof error === 'string' ? error : 
+                              error?.message || 
+                              error?.toString() || 
+                              t('oauthFailed');
+          
+          addToast({
+            title: t('oauthError'),
+            description: errorMessage,
+            color: "danger",
+          });
+          console.log('OAuth error details:', error);
+        });
+      }
+    } catch (error: any) {
       hideGlobalLoading();
+      
+      // 检查是否是 Next.js 重定向错误
+      if (error?.message?.includes('NEXT_REDIRECT') || error?.digest?.includes('NEXT_REDIRECT')) {
+        // 这是正常的重定向，不显示错误
+        return;
+      }
+      
+      const errorMessage = typeof error === 'string' ? error : 
+                          error?.message || 
+                          error?.toString() || 
+                          t('oauthFailed');
+      
       addToast({
-        title: "Login credentials or grant type not recognized",
-        description: error,
+        title: t('oauthError'), 
+        description: errorMessage,
         color: "danger",
       });
-      console.log(error);
-    });
+      console.log('OAuth error details:', error);
+    }
   };
 
   const handleSubmit = useCallback(
@@ -157,17 +204,30 @@ export default function Auth(props: Props) {
       onSubmit(formData)
         .catch((error) => {
           hideGlobalLoading();
+          
+          // 检查是否是 Next.js 重定向错误
+          if (error?.message?.includes('NEXT_REDIRECT') || error?.digest?.includes('NEXT_REDIRECT')) {
+            // 这是正常的重定向，不显示错误
+            return;
+          }
+          
+          // 确保 error 是字符串，而不是对象
+          const errorMessage = typeof error === 'string' ? error : 
+                              error?.message || 
+                              error?.toString() || 
+                              t('unexpectedError');
+          
           addToast({
-            title: "Error",
-            description: error,
+            title: t('error'),
+            description: errorMessage,
             color: "danger",
           });
           turnstile.reset();
-          console.log(error);
+          console.log('Error details:', error);
         })
         .finally(() => hideGlobalLoading());
     },
-    [turnstile, captchaToken, onSubmit]
+    [turnstile, captchaToken, onSubmit, t]
   );
 
   return (
@@ -180,14 +240,14 @@ export default function Auth(props: Props) {
         value={email}
         type="email"
         name="email"
-        label="Email"
+        label={t('email')}
         id="email"
         variant="bordered"
         isInvalid={isInvalid}
         labelPlacement="outside"
-        placeholder="Enter your email"
+        placeholder={t('enterEmail')}
         color={isInvalid ? "danger" : "default"}
-        errorMessage={isInvalid && "Please enter a valid email"}
+        errorMessage={isInvalid && t('emailInvalid')}
         onValueChange={setEmail}
         className="w-full"
       />
@@ -195,11 +255,11 @@ export default function Auth(props: Props) {
         type={isVisible ? "text" : "password"}
         id="password"
         name="password"
-        label="Password"
+        label={t('password')}
         variant="bordered"
         defaultValue=""
         labelPlacement="outside"
-        placeholder="Enter your password"
+        placeholder={t('enterPassword')}
         isInvalid={false}
         errorMessage={false}
         className="w-full"
@@ -243,7 +303,7 @@ export default function Auth(props: Props) {
         type="submit"
         color="primary"
       >
-        {submitText}
+        {type === "signin" ? t('signin') : t('signup')}
       </Button>
       <Divider className="my-4" />
       <Button
@@ -251,22 +311,22 @@ export default function Auth(props: Props) {
         startContent={<Google></Google>}
         onPress={() => handleOAuthSignin(onGoogleSignin)}
       >
-        Sign in with Google
+        {type === "signin" ? t('signinWithGoogle') : t('signupWithGoogle')}
       </Button>
       <Button
         fullWidth
         startContent={<Github></Github>}
         onPress={() => handleOAuthSignin(onGithubSignin)}
       >
-        Sign in with Github
+        {type === "signin" ? t('signinWithGithub') : t('signupWithGithub')}
       </Button>
       {type === "signin" ? (
         <p>
-          Don&apos;t have an account? <Link href="/signup" className="text-sky-800">Sign up</Link>
+          {t('noAccount')} <Link href="/signup" className="text-sky-800">{t('signupLink')}</Link>
         </p>
       ) : (
         <p>
-          Already have an account? <Link href="/signin" className="text-sky-800">Sign in</Link>
+          {t('hasAccount')} <Link href="/signin" className="text-sky-800">{t('signinLink')}</Link>
         </p>
       )}
     </Form>

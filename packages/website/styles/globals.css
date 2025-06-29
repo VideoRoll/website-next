@@ -17,7 +17,12 @@
 
 html, body {
   height: 100%;
+  /* 移动端触摸优化 */
+  touch-action: manipulation;
 }
+
+/* 移动端点击响应优化 */
+
 
 .border-marquee {
   --marquee-color: #6366f1;
