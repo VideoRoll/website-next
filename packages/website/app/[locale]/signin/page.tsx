@@ -1,12 +1,15 @@
 import React from "react";
-import { login, loginWithGoogle, loginWithGithub } from "./actions";
+import { login, loginWithGoogle, loginWithGithub, signinRedirect } from "./actions";
 // import { loginWithGoogle, loginWithGithub } from "@/utils/supabase/login";
 import Auth from "@/components/ui/Auth";
 import SignLayout from "@/components/ui/SignLayout";
 import { getTranslations } from 'next-intl/server';
+import { sign } from "crypto";
 
-export default async function SigninPage({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale, namespace: 'auth' });
+export default async function SigninPage({ params }: { params: { locale: string } }) {
+  const paramsData = await params;
+  
+  const t = await getTranslations({ locale: paramsData.locale, namespace: 'auth' });
   
   return (
     <SignLayout>
@@ -15,6 +18,7 @@ export default async function SigninPage({ params: { locale } }: { params: { loc
         <Auth
           type="signin"
           onSubmit={login}
+          redirectCallback={signinRedirect}
           onGoogleSignin={loginWithGoogle}
           onGithubSignin={loginWithGithub}
         ></Auth>

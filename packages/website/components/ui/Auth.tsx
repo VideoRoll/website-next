@@ -7,7 +7,7 @@ import Github from "@/components/icons/Github";
 import { Link } from "@/i18n/navigation";
 // import { Turnstile } from "@marsidev/react-turnstile";
 import Turnstile, { useTurnstile } from "react-turnstile";
-import debounce from 'lodash-es/debounce'
+import debounce from "lodash-es/debounce";
 
 import {
   Form,
@@ -26,7 +26,8 @@ import { redirect } from "next/navigation";
 
 type Props = {
   type: "signin" | "signup";
-  onSubmit: (data: FormData) => Promise<any>;
+  onSubmit: (data: FormData, locale: string) => Promise<any>;
+  redirectCallback?: (locale: string) => void;
   onGoogleSignin: (data: string) => void;
   onGithubSignin: (data: string) => void;
 };
@@ -92,9 +93,9 @@ export const EyeFilledIcon = (props) => {
 };
 
 export default function Auth(props: Props) {
-  const { type, onSubmit, onGoogleSignin, onGithubSignin } = props;
+  const { type, onSubmit, onGoogleSignin, onGithubSignin, redirectCallback } = props;
   const locale = useLocale();
-  const t = useTranslations('auth');
+  const t = useTranslations("auth");
   const [errors, setErrors] = React.useState({});
   const turnstile = useTurnstile();
   // const [visible, handlers] = useDisclosure(false);
@@ -119,8 +120,8 @@ export default function Auth(props: Props) {
       console.log("Captcha error", error, errorTimes.current);
       if (errorTimes.current >= 3) {
         addToast({
-          title: t('captchaError'),
-          description: t('captchaErrorDesc'),
+          title: t("captchaError"),
+          description: t("captchaErrorDesc"),
           color: "danger",
         });
         return;
@@ -131,14 +132,17 @@ export default function Auth(props: Props) {
     [errorTimes, turnstile, t]
   );
 
-  const handleOAuthSignin = (callback: (data: string) => Promise<any> | void) => {
+  const handleOAuthSignin = (
+    callback: (data: string) => Promise<any> | void
+  ) => {
     showGlobalLoading();
     const result = callback(window.location.origin);
-    if (result && typeof result.catch === 'function') {
+
+    if (result && typeof result.catch === "function") {
       result.catch((error: any) => {
         hideGlobalLoading();
         addToast({
-          title: t('oauthError'),
+          title: t("oauthError"),
           description: error,
           color: "danger",
         });
@@ -148,7 +152,7 @@ export default function Auth(props: Props) {
   };
 
   const handleSubmit = useCallback(
-    (e: any) => {
+    async (e: any) => {
       e.preventDefault();
 
       const form = document.querySelector("form") as HTMLFormElement;
@@ -157,18 +161,21 @@ export default function Auth(props: Props) {
       formData.append("captchaToken", captchaToken);
 
       showGlobalLoading();
-      onSubmit(formData)
-        .catch((error) => {
-          hideGlobalLoading();
-          addToast({
-            title: t('error'),
-            description: error,
-            color: "danger",
-          });
-          turnstile.reset();
-          console.log(error);
-        })
-        .finally(() => hideGlobalLoading());
+      const result = await onSubmit(formData, locale);
+      hideGlobalLoading();
+      // Check if result contains an error
+      if (result && result.error) {
+        addToast({
+          title: t("error"),
+          description: result.error,
+          color: "danger",
+        });
+        turnstile.reset();
+        console.log(result.error);
+        return;
+      }
+      
+      redirectCallback?.(locale);
     },
     [turnstile, captchaToken, onSubmit, t]
   );
@@ -183,14 +190,14 @@ export default function Auth(props: Props) {
         value={email}
         type="email"
         name="email"
-        label={t('email')}
+        label={t("email")}
         id="email"
         variant="bordered"
         isInvalid={isInvalid}
         labelPlacement="outside"
-        placeholder={t('enterEmail')}
+        placeholder={t("enterEmail")}
         color={isInvalid ? "danger" : "default"}
-        errorMessage={isInvalid && t('emailInvalid')}
+        errorMessage={isInvalid && t("emailInvalid")}
         onValueChange={setEmail}
         className="w-full"
       />
@@ -198,11 +205,11 @@ export default function Auth(props: Props) {
         type={isVisible ? "text" : "password"}
         id="password"
         name="password"
-        label={t('password')}
+        label={t("password")}
         variant="bordered"
         defaultValue=""
         labelPlacement="outside"
-        placeholder={t('enterPassword')}
+        placeholder={t("enterPassword")}
         isInvalid={false}
         errorMessage={false}
         className="w-full"
@@ -223,7 +230,7 @@ export default function Auth(props: Props) {
       />
       {!loaded && (
         <Skeleton className="w-full rounded-lg">
-          <div className="h-[65px] rounded-lg bg-default-300" ></div>
+          <div className="h-[65px] rounded-lg bg-default-300"></div>
         </Skeleton>
       )}
       <Turnstile
@@ -246,7 +253,7 @@ export default function Auth(props: Props) {
         type="submit"
         color="primary"
       >
-        {type === "signin" ? t('signin') : t('signup')}
+        {type === "signin" ? t("signin") : t("signup")}
       </Button>
       <Divider className="my-4" />
       <Button
@@ -254,29 +261,54 @@ export default function Auth(props: Props) {
         startContent={<Google></Google>}
         onPress={() => handleOAuthSignin(onGoogleSignin)}
       >
-        {type === "signin" ? t('signinWithGoogle') : t('signupWithGoogle')}
+        {type === "signin" ? t("signinWithGoogle") : t("signupWithGoogle")}
       </Button>
       <Button
         fullWidth
         startContent={<Github></Github>}
         onPress={() => handleOAuthSignin(onGithubSignin)}
       >
-        {type === "signin" ? t('signinWithGithub') : t('signupWithGithub')}
+        {type === "signin" ? t("signinWithGithub") : t("signupWithGithub")}
       </Button>
       {type === "signin" ? (
         <p>
-          {t('noAccount')} <Link href="/signup" className="text-blue-600">{t('signupLink')}</Link>
+          {t("noAccount")}{" "}
+          <Link href="/signup" className="text-blue-600">
+            {t("signupLink")}
+          </Link>
         </p>
       ) : (
         <p>
-          {t('hasAccount')} <Link href="/signin" className="text-blue-600">{t('signinLink')}</Link>
+          {t("hasAccount")}{" "}
+          <Link href="/signin" className="text-blue-600">
+            {t("signinLink")}
+          </Link>
         </p>
       )}
       <p className="text-xs text-gray-200 mt-2 text-center">
-        {t('agreementText')}
-        <a href={`https://docs.videoroll.app/${locale === 'zh' ? 'cn' : 'en'}/docs/terms`} target="_blank" rel="noopener noreferrer" className="underline mx-1 text-blue-600">{t('termsOfService')}</a>
-        {t('and')}
-        <a href={`https://docs.videoroll.app/${locale === 'zh' ? 'cn' : 'en'}/docs/privacy`} target="_blank" rel="noopener noreferrer" className="underline mx-1 text-blue-600">{t('privacyPolicy')}</a>{locale === 'zh' ? '。' : '.'}
+        {t("agreementText")}
+        <a
+          href={`https://docs.videoroll.app/${
+            locale === "zh" ? "cn" : "en"
+          }/docs/terms`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline mx-1 text-blue-600"
+        >
+          {t("termsOfService")}
+        </a>
+        {t("and")}
+        <a
+          href={`https://docs.videoroll.app/${
+            locale === "zh" ? "cn" : "en"
+          }/docs/privacy`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline mx-1 text-blue-600"
+        >
+          {t("privacyPolicy")}
+        </a>
+        {locale === "zh" ? "。" : "."}
       </p>
     </Form>
   );

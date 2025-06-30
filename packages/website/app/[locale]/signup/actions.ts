@@ -21,11 +21,14 @@ export async function signup(formData: FormData, locale: string = 'en') {
     const { error } = await supabase.auth.signUp(data);
 
     if (error) {
-        // return JSON.stringify(error)
-        return Promise.reject(error.message || "An error occurred during signup.");
+        // Return error object instead of Promise.reject
+        return { error: error.message || "An error occurred during signup." };
     }
 
-    // 成功时直接重定向，不要包装在 Promise 中
+    return;
+}
+
+export async function signupRedirect(locale: string = 'en') {
     revalidatePath(`/${locale}/confirm-email`, "layout");
     redirect(`/${locale}/confirm-email`);
 }
