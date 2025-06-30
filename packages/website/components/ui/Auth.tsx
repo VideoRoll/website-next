@@ -26,7 +26,6 @@ import { redirect } from "next/navigation";
 
 type Props = {
   type: "signin" | "signup";
-  submitText: string;
   onSubmit: (data: FormData) => Promise<any>;
   onGoogleSignin: (data: string) => void;
   onGithubSignin: (data: string) => void;

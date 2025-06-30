@@ -1,38 +1,48 @@
+/*
+ * @Author: gomi gxy880520@qq.com
+ * @Date: 2024-10-16 10:34:26
+ * @LastEditors: gomi gxy880520@qq.com
+ * @LastEditTime: 2025-06-30 09:37:08
+ * @FilePath: \website-next\packages\website\app\[locale]\signin\actions.ts
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 "use server";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/utils/supabase/server";
-import { loginWithGoogle as google, loginWithGithub as github } from '@/utils/supabase/login';
+import {
+  loginWithGoogle as google,
+  loginWithGithub as github,
+} from "@/utils/supabase/login";
 
 export async function login(formData: FormData) {
-    const supabase = await createClient();
-    // const formData = JSON.parse(value);
+  const supabase = createClient();
+  // const formData = JSON.parse(value);
 
-    // type-casting here for convenience
-    // in practice, you should validate your inputs
-    const data = {
-        email: formData.get('email') as string,
-        password: formData.get('password') as string,
-        options: { captchaToken: formData.get('captchaToken') as string },
-    };
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+    options: { captchaToken: formData.get("captchaToken") as string },
+  };
 
-    const { error } = await supabase.auth.signInWithPassword(data);
+  const { error } = await supabase.auth.signInWithPassword(data);
 
-    if (error) {
-        // return JSON.stringify(error)
-        return Promise.reject(error.message || "An error occurred during signin.");
-    }
+  if (error) {
+    // return JSON.stringify(error)
+    return Promise.reject(error.message || "An error occurred during signin");
+  }
 
-    // 成功时直接重定向，不要包装在 Promise 中
-    revalidatePath("/", "layout");
-    redirect("/");
+  revalidatePath("/dashboard", "layout");
+  redirect("/dashboard");
 }
 
 export async function loginWithGoogle(origin: string) {
-    return google(origin);
+  return google(origin);
 }
 
 export async function loginWithGithub(origin: string) {
-    return github(origin);
+  return github(origin);
 }
