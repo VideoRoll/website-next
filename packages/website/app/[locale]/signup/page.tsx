@@ -1,12 +1,14 @@
 import React from "react";
-import { signup, loginWithGoogle, loginWithGithub } from "./actions";
+import { signup, loginWithGoogle, loginWithGithub, signupRedirect } from "./actions";
 import Auth from "../../../components/ui/Auth";
 import SignLayout from "../../../components/ui/SignLayout";
 import { getTranslations } from 'next-intl/server';
 
-export default async function SignupPage({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale, namespace: 'auth' });
-  
+export default async function SignupPage({ params }: { params: { locale: string } }) {
+  const paramsData = await params;
+
+  const t = await getTranslations({ locale: paramsData.locale, namespace: 'auth' });
+
   return (
     <SignLayout>
       <div className="flex flex-col items-center justify-center h-screen">
@@ -14,6 +16,7 @@ export default async function SignupPage({ params: { locale } }: { params: { loc
         <Auth
           type="signup"
           onSubmit={signup}
+          redirectCallback={signupRedirect}
           onGoogleSignin={loginWithGoogle}
           onGithubSignin={loginWithGithub}
         ></Auth>
