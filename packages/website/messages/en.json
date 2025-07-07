@@ -254,5 +254,154 @@
     "termsOfService": "Terms of Service",
     "and": "and",
     "privacyPolicy": "Privacy Policy"
+  },
+  "cookie": {
+    "title": "Cookie Notice",
+    "subtitle": "We respect your privacy",
+    "description": "We use cookies to enhance your experience, provide essential functionality, and analyze site performance. You can customize your preferences below.",
+    "important_notice": "Important Notice",
+    "login_restriction": "Rejecting functional cookies will disable login and registration features.",
+    "accept_all": "Accept All",
+    "reject_all": "Reject All",
+    "customize": "Customize Settings",
+    "privacy_policy": "Privacy Policy",
+    "back": "Back",
+    "close": "Close",
+    "cookie_settings": "Cookie Settings",
+    "save_preferences": "Save Preferences",
+    "cancel": "Cancel",
+    "necessary_cookies": "Necessary Cookies",
+    "necessary_description": "These cookies are essential for basic website functionality, including authentication, security, and core features. They cannot be disabled.",
+    "functional_cookies": "Functional Cookies",
+    "functional_description": "These cookies enable enhanced features like user preferences, settings, and improved functionality. Required for login/registration.",
+    "analytics_cookies": "Analytics Cookies", 
+    "analytics_description": "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.",
+    "marketing_cookies": "Marketing Cookies",
+    "marketing_description": "These cookies track visitors across websites to display relevant and personalized advertisements.",
+    "always_active": "Always Active",
+    "active": "Active",
+    "required": "Required",
+    "not_allowed": "Not Allowed",
+    "preferences_title": "Cookie Preferences",
+    "preferences_description": "Manage your cookie preferences and understand how we use cookies on our website.",
+    "current_status": "Current Status",
+    "consent_status": "Consent Status",
+    "auth_access": "Login/Registration Access",
+    "granted": "Granted",
+    "not_granted": "Not Granted",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "enabled_features": "Enabled Features",
+    "essential": "Essential",
+    "functional": "Functional",
+    "analytics": "Analytics",
+    "marketing": "Marketing",
+    "cookie_categories": "Cookie Categories",
+    "examples": "Examples",
+    "necessary_examples": "Authentication tokens, security, session management",
+    "functional_examples": "User preferences, language settings, enhanced features",
+    "analytics_examples": "Google Analytics, visitor statistics, performance metrics",
+    "marketing_examples": "Social media tracking, advertising, personalization",
+    "saving": "Saving...",
+    "reset_to_default": "Reset to Default",
+    "clear_all_cookies": "Clear All Cookies",
+    "confirm_clear_all": "Are you sure you want to clear all cookie preferences? This will reset all settings to default.",
+    "need_help": "Need Help?",
+    "help_item_1": "Necessary cookies are always enabled for basic functionality",
+    "help_item_2": "Functional cookies are required for login and registration features",
+    "help_item_3": "You can change your preferences at any time from this page",
+    "read_privacy_policy": "Read our Privacy Policy",
+    "access_restricted": "Access Restricted",
+    "cookie_consent_required": "To use login and registration features, you need to accept functional cookies. These cookies are necessary for authentication and security.",
+    "cookie_explanation": "Functional cookies enable secure login, session management, and enhanced user experience. Without them, authentication features cannot work properly.",
+    "refresh_page": "Refresh Page",
+    "learn_more": "Learn More"
+  },
+  "downloadVideo": {
+    "title": "Video Download Tools",
+    "description": "Discover the best video download tools and services to help you save videos from your favorite platforms.",
+    "categories": {
+      "general": "General Tools",
+      "social": "Social Media",
+      "professional": "Professional Tools"
+    },
+    "supportedSites": "Supported Sites",
+    "features": "Features",
+    "visitWebsite": "Visit Website",
+    "footerNote": "These tools are provided for informational purposes. Please respect copyright and terms of service of video platforms.",
+    "footerDisclaimer": "Always ensure you have permission to download content and comply with applicable laws and regulations.",
+    "sites": {
+      "snapany": {
+        "description": "Fast and convenient online video download tool supporting multiple video formats",
+        "features": ["Online Download", "High Speed", "Multi-format Support", "No Registration"]
+      },
+      "cobalt": {
+        "description": "Open-source social media download tool with privacy protection focus",
+        "features": ["Open Source & Free", "Privacy Protection", "Watermark-free Download", "Fast Response"]
+      },
+      "yt-dlp": {
+        "description": "Most powerful video download tool supporting 1000+ websites",
+        "features": ["Command Line Tool", "Open Source & Free", "Subtitle Download", "Batch Download"]
+      },
+      "y2mate": {
+        "description": "Online video downloader, simple and easy to use without installation",
+        "features": ["Online Download", "Multiple Formats", "Free to Use", "No Registration"]
+      },
+      "savefrom": {
+        "description": "Quickly download videos from major platforms with HD quality support",
+        "features": ["HD Download", "Fast Processing", "Browser Extension", "Mobile Support"]
+      },
+      "snaptube": {
+        "description": "Professional mobile video download application",
+        "features": ["Mobile App", "Background Download", "Audio Extraction", "Playlist Download"]
+      },
+      "clipgrab": {
+        "description": "Desktop video download software with format conversion support",
+        "features": ["Desktop Software", "Format Conversion", "Free & Open Source", "Cross-platform"]
+      },
+      "4k-downloader": {
+        "description": "Professional video download tool with 4K HD support",
+        "features": ["4K Quality", "Smart Mode", "Channel Subscription", "Subtitle Download"]
+      },
+      "online-video-converter": {
+        "description": "Online video conversion and download platform",
+        "features": ["Online Conversion", "Multiple Formats", "Batch Processing", "Cloud Service"]
+      },
+      "tubemate": {
+        "description": "Popular video download app for Android platform",
+        "features": ["Android App", "Background Download", "Multi-thread Download", "Built-in Player"]
+      },
+      "videoproc": {
+        "description": "All-in-one video processing software with download features",
+        "features": ["Video Processing", "GPU Acceleration", "Screen Recording", "Video Editing"]
+      }
+    }
+  },
+  "rateFeedback": {
+    "title": "Help Us Improve VideoRoll",
+    "subtitle": "Your feedback is valuable to us and helps us make VideoRoll better",
+    "question1": "Which features of VideoRoll are you not satisfied with? (Multiple choice)",
+    "question2": "What features do you most want to use but VideoRoll doesn't have yet? (Multiple choice)",
+    "options1": {
+      "video": "Video",
+      "audio": "Audio",
+      "performance": "Performance",
+      "ui": "UI Interface",
+      "interaction": "Interaction Methods"
+    },
+    "options2": {
+      "favorites": "Video Favorites",
+      "subtitles": "Manual Video Subtitles",
+      "recording": "Screen Recording",
+      "sharing": "Video Sharing",
+      "other": "Other"
+    },
+    "otherPlaceholder": "Please describe the features you want...",
+    "submitButton": "Submit Feedback",
+    "submitting": "Submitting...",
+    "successMessage": "Thank you for your feedback! We will continue to improve VideoRoll.",
+    "errorMessage": "Failed to submit feedback. Please try again later.",
+    "required": "This field is required",
+    "minSelection": "Please select at least one option"
   }
 }

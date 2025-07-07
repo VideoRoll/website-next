@@ -222,5 +222,154 @@
     "termsOfService": "用户服务条款",
     "and": "和",
     "privacyPolicy": "隐私政策"
+  },
+  "cookie": {
+    "title": "Cookie 使用通知",
+    "subtitle": "我们尊重您的隐私",
+    "description": "我们使用Cookie来改善您的体验、提供基本功能并分析网站性能。您可以在下方自定义您的偏好设置。",
+    "important_notice": "重要提示",
+    "login_restriction": "拒绝功能Cookie将无法使用登录和注册功能。",
+    "accept_all": "接受全部",
+    "reject_all": "拒绝全部",
+    "customize": "自定义设置",
+    "privacy_policy": "隐私政策",
+    "back": "返回",
+    "close": "关闭",
+    "cookie_settings": "Cookie 设置",
+    "save_preferences": "保存偏好",
+    "cancel": "取消",
+    "necessary_cookies": "必要 Cookie",
+    "necessary_description": "这些Cookie对于网站的基本功能是必需的，包括身份验证、安全性和核心功能。它们无法被禁用。",
+    "functional_cookies": "功能 Cookie",
+    "functional_description": "这些Cookie启用增强功能，如用户偏好、设置和改进的功能。登录/注册功能需要此类Cookie。",
+    "analytics_cookies": "分析 Cookie",
+    "analytics_description": "这些Cookie通过匿名收集和报告信息来帮助我们了解访问者如何与我们的网站互动。",
+    "marketing_cookies": "营销 Cookie",
+    "marketing_description": "这些Cookie跨网站跟踪访问者，以显示相关的个性化广告。",
+    "always_active": "始终启用",
+    "active": "已启用",
+    "required": "必需",
+    "not_allowed": "未允许",
+    "preferences_title": "Cookie 偏好设置",
+    "preferences_description": "管理您的Cookie偏好并了解我们如何在网站上使用Cookie。",
+    "current_status": "当前状态",
+    "consent_status": "同意状态",
+    "auth_access": "登录/注册访问权限",
+    "granted": "已授予",
+    "not_granted": "未授予",
+    "enabled": "已启用",
+    "disabled": "已禁用",
+    "enabled_features": "已启用功能",
+    "essential": "必要",
+    "functional": "功能",
+    "analytics": "分析",
+    "marketing": "营销",
+    "cookie_categories": "Cookie 类别",
+    "examples": "示例",
+    "necessary_examples": "身份验证令牌、安全性、会话管理",
+    "functional_examples": "用户偏好、语言设置、增强功能",
+    "analytics_examples": "Google Analytics、访问者统计、性能指标",
+    "marketing_examples": "社交媒体跟踪、广告、个性化",
+    "saving": "保存中...",
+    "reset_to_default": "重置为默认",
+    "clear_all_cookies": "清除所有Cookie",
+    "confirm_clear_all": "您确定要清除所有Cookie偏好吗？这将把所有设置重置为默认值。",
+    "need_help": "需要帮助？",
+    "help_item_1": "必要Cookie始终启用以确保基本功能",
+    "help_item_2": "功能Cookie是登录和注册功能所必需的",
+    "help_item_3": "您可以随时从此页面更改您的偏好",
+    "read_privacy_policy": "阅读我们的隐私政策",
+    "access_restricted": "访问受限",
+    "cookie_consent_required": "要使用登录和注册功能，您需要接受功能Cookie。这些Cookie对于身份验证和安全是必需的。",
+    "cookie_explanation": "功能Cookie可实现安全登录、会话管理和增强用户体验。没有它们，身份验证功能无法正常工作。",
+    "refresh_page": "刷新页面",
+    "learn_more": "了解更多"
+  },
+  "downloadVideo": {
+    "title": "视频下载工具",
+    "description": "发现最佳的视频下载工具和服务，帮助您从喜爱的平台保存视频。",
+    "categories": {
+      "general": "通用工具",
+      "social": "社交媒体",
+      "professional": "专业工具"
+    },
+    "supportedSites": "支持的网站",
+    "features": "功能特性",
+    "visitWebsite": "访问网站",
+    "footerNote": "这些工具仅供参考。请尊重视频平台的版权和服务条款。",
+    "footerDisclaimer": "请确保您有权下载内容并遵守适用的法律法规。",
+    "sites": {
+      "snapany": {
+        "description": "快速便捷的在线视频下载工具，支持多种视频格式",
+        "features": ["在线下载", "高速处理", "多格式支持", "无需注册"]
+      },
+      "cobalt": {
+        "description": "开源的社交媒体下载工具，注重隐私保护",
+        "features": ["开源免费", "隐私保护", "无水印下载", "快速响应"]
+      },
+      "yt-dlp": {
+        "description": "功能最强大的视频下载工具，支持1000+网站",
+        "features": ["命令行工具", "开源免费", "支持字幕下载", "批量下载"]
+      },
+      "y2mate": {
+        "description": "在线视频下载器，简单易用无需安装",
+        "features": ["在线下载", "多种格式", "免费使用", "无需注册"]
+      },
+      "savefrom": {
+        "description": "快速下载各大平台视频，支持高清画质",
+        "features": ["高清下载", "快速处理", "浏览器扩展", "移动端支持"]
+      },
+      "snaptube": {
+        "description": "专业的移动端视频下载应用",
+        "features": ["移动应用", "后台下载", "音频提取", "播放列表下载"]
+      },
+      "clipgrab": {
+        "description": "桌面视频下载软件，支持格式转换",
+        "features": ["桌面软件", "格式转换", "免费开源", "跨平台"]
+      },
+      "4k-downloader": {
+        "description": "专业级视频下载工具，支持4K高清",
+        "features": ["4K画质", "智能模式", "频道订阅", "字幕下载"]
+      },
+      "online-video-converter": {
+        "description": "在线视频转换和下载平台",
+        "features": ["在线转换", "多种格式", "批量处理", "云端服务"]
+      },
+      "tubemate": {
+        "description": "Android平台热门视频下载应用",
+        "features": ["Android应用", "后台下载", "多线程下载", "内置播放器"]
+      },
+      "videoproc": {
+        "description": "一体化视频处理软件，包含下载功能",
+        "features": ["视频处理", "GPU加速", "屏幕录制", "视频编辑"]
+      }
+    }
+  },
+  "rateFeedback": {
+    "title": "帮助我们改进VideoRoll",
+    "subtitle": "您的反馈对我们很宝贵，帮助我们让VideoRoll变得更好",
+    "question1": "请问您对VideoRoll的哪些功能还不满意？（多选）",
+    "question2": "请问您最希望使用的功能但VideoRoll还没有的是（多选）？",
+    "options1": {
+      "video": "视频",
+      "audio": "音频", 
+      "performance": "性能",
+      "ui": "UI界面",
+      "interaction": "交互方式"
+    },
+    "options2": {
+      "favorites": "视频收藏夹",
+      "subtitles": "手动添加视频字幕",
+      "recording": "屏幕录制",
+      "sharing": "视频共享",
+      "other": "其他"
+    },
+    "otherPlaceholder": "请描述您想要的功能...",
+    "submitButton": "提交反馈",
+    "submitting": "提交中...",
+    "successMessage": "感谢您的反馈！我们将持续改进VideoRoll。",
+    "errorMessage": "提交反馈失败，请稍后重试。",
+    "required": "此项为必填项",
+    "minSelection": "请至少选择一个选项"
   }
 }

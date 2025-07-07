@@ -106,6 +106,11 @@ export default function NavBar(props: Props) {
           return;
         }
 
+        if (window.location.pathname.includes("/dashboard")) {
+          window.location.href = "https://videoroll.app";
+          return;
+        }
+
         window.location.reload();
       })
       .catch(() => {})

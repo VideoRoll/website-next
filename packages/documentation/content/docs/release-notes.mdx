@@ -3,7 +3,27 @@ title: Release Notes
 description: All versions release notes
 ---
 
-# v2.0.0
+# v2.0.2 2025-07-08
+### New Features
+ - Video download tab now shows video count
+ - Added plugin rating popup
+ - Added redirect to feedback page on uninstall
+
+### Improvements
+ - Video download now limits display to 50 videos maximum, clearing old videos when exceeded
+ - Optimized plugin event cleanup mechanism to prevent memory leaks
+ - Optimized memory usage during video download detection to prevent memory leaks
+ - Updated user login icon
+
+### Bug Fixes
+ - Fixed issue where plugin event listeners were not completely destroyed in some scenarios
+ - Fixed issue where playback speed was not restored after YouTube ad acceleration
+
+# v2.0.1 2025-07-07
+### Bug Fixes
+  - Fixed audio functionality causing duplicate communication during initialization that could lead to browser crashes
+
+# v2.0.0 2025-06-29
 ### New Features
  - Add Record feature
  - Add Video Player

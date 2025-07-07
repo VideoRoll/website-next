@@ -5,9 +5,10 @@ export default function WelcomePage() {
   return <Welcome />
 }
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale, namespace: 'welcome' })
-  
+export async function generateMetadata({ params }: { params: { locale: string } }) {
+  const paramsData = await params;
+  const t = await getTranslations({ locale: paramsData.locale, namespace: 'welcome' })
+
   return {
     title: `${t('congratulations')} ${t('appName')}`,
     description: t('subtitle'),
