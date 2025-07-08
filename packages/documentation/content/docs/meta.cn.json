@@ -18,6 +18,8 @@
     "feature-screenshot",
     "feature-flip",
     "feature-filter",
+    "feature-vr",
+    "feature-ai-summary",
     "---音频---",
     "feature-mute",
     "feature-pitch",
