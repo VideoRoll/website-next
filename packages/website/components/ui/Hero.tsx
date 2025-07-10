@@ -3,7 +3,8 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+// import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Banner from "@/components/icons/Banner";
 
 import {
   IconArrowRight,
@@ -282,7 +283,7 @@ export default function Hero() {
         </div>
 
         <div className="w-1/3 absolute right-0 hidden md:block">
-          <DotLottieReact
+          {/* <DotLottieReact
             src="https://lottie.host/483db3d9-6961-472c-b9b0-1e4c8cdb3807/9QCmQrjS8E.lottie"
             loop
             autoplay
@@ -291,7 +292,8 @@ export default function Hero() {
               autoResize: true,
             }}
             // dotLottieRefCallback={dotLottieRefCallback}
-          />
+          /> */}
+          <Banner className="scale-75"></Banner>
         </div>
       </section>{" "}
       {/* 2. 介绍视频独立模块 */}

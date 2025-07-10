@@ -24,7 +24,7 @@ export function baseOptions(locale: string): BaseLayoutProps {
     // sidebar: {
     //   tabs: false
     // },
-    githubUrl: "https://github.com",
+    githubUrl: "https://github.com/VideoRoll/VideoRoll",
     links: [
       // {
       //   type: 'main',

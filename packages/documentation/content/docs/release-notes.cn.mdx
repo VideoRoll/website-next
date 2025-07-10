@@ -3,7 +3,42 @@ title: 发布日志
 description: 所有版本的发布日志
 ---
 
-# v2.0.2 2025-07-08
+import Google from "../../assets/image/Google";
+import Edge from "../../assets/image/Edge";
+import Firefox from "../../assets/image/Firefox";
+
+## 各平台版本发布情况
+<div className="flex flex-col space-y-4 md:space-y-6">
+  <div className="flex items-center gap-3">
+    <Google className="w-6 h-6" />
+    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.3（审核中，通过后自动发布）</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Edge className="w-6 h-6" />
+    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.3（审核中，通过后自动发布）</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Firefox className="w-6 h-6" />
+    <div><strong>Firefox 附加组件</strong>：<a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
+  </div>
+</div>
+
+
+## v2.0.3（2025-07-11）
+### 优化
+ - 视频录制取消倒计时，点击录制后调整为从头播放视频，并直接开始录制。
+ - 网页中增加录制按钮和时间提示。
+ - 优化Popup页面打开速度，解决打开时会卡一下的问题
+ - 用户登录后，不显示Pro版提示
+
+### 错误修复
+ - 修复倍速无法调整到0.5倍以下的问题
+ - 修复A-B循环在开启状态后，再调整数值无法实时更新的问题
+ - 修复拉伸功能X轴调整后无法还原的问题
+
+## v2.0.2（2025-07-08）
 ### 新功能
  - 视频下载Tab增加视频数量显示
  - 新增插件评分弹窗
@@ -19,11 +54,11 @@ description: 所有版本的发布日志
  - 修复在一些场景下插件未完全销毁事件监听的问题
  - 修复YouTube广告加速后，倍速未还原的问题
 
-# v2.0.1 2025-07-07
+## v2.0.1（2025-07-07）
 ### Bug 修复
   - 修复音频功能在初始化时可能触发重复通信，导致浏览器崩溃的问题
 
-# v2.0.0 2025-06-29
+## v2.0.0（2025-06-29）
 ### 新功能
  - 添加录制功能
  - 添加视频播放器

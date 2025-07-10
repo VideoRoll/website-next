@@ -1,0 +1,28 @@
+---
+title: UI界面操作说明
+description: UI界面功能简介
+---
+import Image from "next/image";
+import Ui1 from "../../assets/image/d-ui-1.png";
+import Ui2 from "../../assets/image/d-ui-2.png";
+import Ui3 from "../../assets/image/d-ui-3.png";
+
+
+## UI模块划分
+Video Roll的Popup UI分为四个模块
+- 顶部操作栏（依次为官网地址、无视频提示、github仓库地址、使用文档地址、插件商城地址、禁用插件、设置、用户登录）
+- Tab切换区（视频、音频、下载、更多设置）
+- Tab内容功能区（视频、音频、下载、更多设置）
+- 底部状态栏（当前正在播放的视频进度和时间展示）
+<Image src={Ui1} width={300} alt="UI界面功能截图" />
+
+## 功能状态
+对于非一次性功能，当功能处于启用状态时，功能图标会呈现高亮状态。
+<Image src={Ui2} width={300} alt="UI界面功能截图" />
+
+## 无视频提示及iframe检测
+当当前页面没有检测到视频时，UI会显示无视频提示。
+同时，UI会检测当前页面存在iframe嵌套页面，如果是，点击提示后会列出所有iframe地址，点击后可跳转
+<Image src={Ui3} width={300} alt="UI界面功能截图" />
+
+{/* ![Replace with a screenshot of the rotate feature](../../assets/image/video.png) */}

@@ -1,0 +1,24 @@
+---
+title: 视频录制
+description: 详细介绍 VideoRoll 的视频录制功能
+---
+import Image from "next/image";
+import Record1 from "../../assets/image/d-record-1.png";
+import Record2 from "../../assets/image/d-record-2.png";
+import Record3 from "../../assets/image/d-record-3.png";
+import Record4 from "../../assets/image/d-record-4.png";
+
+## 一键开启录制/结束当前视频录制并下载
+- 点击录制功能后，视频会从头开始播放，并立即开始录制
+- 会实时显示录制时间，点击按钮会停止录制并自动下载视频（MP4格式）
+<Image src={Record1} width={300} alt="视频录制功能截图" />
+
+## 网页录制按钮
+- 开始录制后在网页中会显示录制按钮和录制时间
+- 点击按钮会停止录制并自动下载视频（MP4格式）
+<Image src={Record2} width={1200} alt="视频录制功能截图" />
+<Image src={Record3} width={1200} alt="视频录制功能截图" />
+
+## 未检测到视频或视频状态不支持录制
+当未检测到视频或视频状态不支持录制时，会弹出提示
+<Image src={Record4} width={300} alt="视频录制功能截图" />

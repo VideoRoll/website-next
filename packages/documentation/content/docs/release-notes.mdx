@@ -3,7 +3,42 @@ title: Release Notes
 description: All versions release notes
 ---
 
-# v2.0.2 2025-07-08
+import Google from "../../assets/image/Google";
+import Edge from "../../assets/image/Edge";
+import Firefox from "../../assets/image/Firefox";
+
+## Platform Release Status
+<div className="flex flex-col space-y-4 md:space-y-6">
+  <div className="flex items-center gap-3">
+    <Google className="w-6 h-6" />
+    <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.3 (Under review, will be published automatically after approval)</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Edge className="w-6 h-6" />
+    <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.3 (Under review, will be published automatically after approval)</a></div>
+  </div>
+  
+  <div className="flex items-center gap-3">
+    <Firefox className="w-6 h-6" />
+    <div><strong>Firefox Add-ons</strong>: <a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
+  </div>
+</div>
+
+
+## v2.0.3 (2025-07-11)
+### Improvements
+ - Video recording removed countdown, now starts playback from beginning and begins recording immediately after clicking record.
+ - Added recording button and time indicator in web pages.
+ - Optimized popup page loading speed, fixed the freeze issue when opening.
+ - Pro version prompts are no longer shown after user login.
+
+### Bug Fixes
+ - Fixed issue where playback speed could not be adjusted below 0.5x.
+ - Fixed issue where A-B loop values could not be updated in real-time after enabling the feature.
+ - Fixed issue where X-axis stretch adjustments could not be reset.
+
+## v2.0.2 (2025-07-08)
 ### New Features
  - Video download tab now shows video count
  - Added plugin rating popup
@@ -19,11 +54,11 @@ description: All versions release notes
  - Fixed issue where plugin event listeners were not completely destroyed in some scenarios
  - Fixed issue where playback speed was not restored after YouTube ad acceleration
 
-# v2.0.1 2025-07-07
+## v2.0.1 (2025-07-07)
 ### Bug Fixes
   - Fixed audio functionality causing duplicate communication during initialization that could lead to browser crashes
 
-# v2.0.0 2025-06-29
+## v2.0.0 (2025-06-29)
 ### New Features
  - Add Record feature
  - Add Video Player
@@ -39,6 +74,3 @@ description: All versions release notes
 
 ### Bug Fixes
  - Fix shortcuts can't reset
-
- 
- 

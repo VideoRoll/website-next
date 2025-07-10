@@ -1,4 +1,4 @@
-export default function Banner() {
+export default function Banner(props) {
   return (
     <svg
       width="542"
@@ -6,6 +6,7 @@ export default function Banner() {
       xmlns="http://www.w3.org/2000/svg"
       xmlSpace="preserve"
       overflow="hidden"
+      {...props}
     >
       <defs>
         <clipPath id="clip0">

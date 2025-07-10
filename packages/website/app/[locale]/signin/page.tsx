@@ -4,7 +4,6 @@ import { login, loginWithGoogle, loginWithGithub, signinRedirect } from "./actio
 import Auth from "@/components/ui/Auth";
 import SignLayout from "@/components/ui/SignLayout";
 import { getTranslations } from 'next-intl/server';
-import { sign } from "crypto";
 
 export default async function SigninPage({ params }: { params: { locale: string } }) {
   const paramsData = await params;
