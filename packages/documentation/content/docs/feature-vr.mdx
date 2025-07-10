@@ -3,7 +3,29 @@ title: VR Mode
 description: Detailed introduction to the VR mode feature of VideoRoll
 ---
 
-- Supports one-click entry into VR mode.
-- Provides an immersive viewing experience.
+import Image from "next/image";
+import VR1 from "../../assets/image/d-vr-1.png";
+import VR2 from "../../assets/image/d-vr-2.png";
+import VR3 from "../../assets/image/d-vr-3.png";
+import VR4 from "../../assets/image/d-vr-4.png";
 
-![Replace with a screenshot of the VR feature](../../assets/image/video.png)
+## For Videos
+Generally for VR videos on web pages that consist of two screens, and when the web player does not support VR mode, VideoRoll provides VR mode functionality.
+<Image src={VR1} width={1200} alt="Video recording feature screenshot" />
+
+## One-click Enable/Disable VR Mode
+After clicking VR mode, the video will immediately enter VR mode
+<Image src={VR2} width={300} alt="Video recording feature screenshot" />
+
+
+## Screen Operations
+- Drag the screen to adjust the angle
+- Drag the progress bar to adjust video progress
+- Click reset to reset the perspective
+- Click exit to exit VR mode
+- Click pause/play to pause/play the video
+
+<Image src={VR3} width={1200} alt="Video recording feature screenshot" />
+<Image src={VR4} width={1200} alt="Video recording feature screenshot" />
+
+>Note: When the video is in pause mode, clicking VR mode will result in a black screen. Please click the play button first, then click VR mode.

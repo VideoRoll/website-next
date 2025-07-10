@@ -1,0 +1,28 @@
+---
+title: UI Interface Operation Guide
+description: UI interface feature introduction
+---
+import Image from "next/image";
+import Ui1 from "../../assets/image/d-ui-1.png";
+import Ui2 from "../../assets/image/d-ui-2.png";
+import Ui3 from "../../assets/image/d-ui-3.png";
+
+
+## UI Module Division
+VideoRoll's Popup UI is divided into four modules:
+- Top action bar (in order: website URL, no video notification, GitHub repository URL, documentation URL, extension store URL, disable plugin, settings, user login)
+- Tab switching area (Video, Audio, Download, More Settings)
+- Tab content function area (Video, Audio, Download, More Settings)
+- Bottom status bar (progress and time display of the currently playing video)
+<Image src={Ui1} width={300} alt="UI interface feature screenshot" />
+
+## Function Status
+For non-one-time functions, when the function is in an enabled state, the function icon will be highlighted.
+<Image src={Ui2} width={300} alt="UI interface feature screenshot" />
+
+## No Video Notification and iframe Detection
+When no video is detected on the current page, the UI will display a no video notification.
+At the same time, the UI will detect if there are nested iframe pages on the current page. If so, clicking the notification will list all iframe addresses, and you can jump to them by clicking.
+<Image src={Ui3} width={300} alt="UI interface feature screenshot" />
+
+{/* ![Replace with a screenshot of the rotate feature](../../assets/image/video.png) */}

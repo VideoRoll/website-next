@@ -3,7 +3,29 @@ title: VR 模式
 description: 详细介绍 VideoRoll 的 VR 模式功能
 ---
 
-- 支持一键进入 VR 模式。
-- 提供沉浸式观看体验。
+import Image from "next/image";
+import VR1 from "../../assets/image/d-vr-1.png";
+import VR2 from "../../assets/image/d-vr-2.png";
+import VR3 from "../../assets/image/d-vr-3.png";
+import VR4 from "../../assets/image/d-vr-4.png";
 
-![Replace with a screenshot of the VR feature](../../assets/image/video.png)
+## 针对视频
+一般针对网页中由两个画面组成的VR视频，且网页播放器不支持VR模式的情况，Video Roll提供了VR模式功能。
+<Image src={VR1} width={1200} alt="视频录制功能截图" />
+
+## 一键开启/关闭VR模式
+点击VR模式后，视频会立即进入VR模式
+<Image src={VR2} width={300} alt="视频录制功能截图" />
+
+
+## 画面操作
+- 拖拽画面即可调整角度
+- 可拖拽进度条调整视频进度
+- 点击reset重置视角
+- 点击exit退出VR模式
+- 点击pause/Play暂停/播放视频
+
+<Image src={VR3} width={1200} alt="视频录制功能截图" />
+<Image src={VR4} width={1200} alt="视频录制功能截图" />
+
+>注意：当视频处于暂停模式时，点击VR模式会出现黑屏，请先点击播放按钮再点击VR模式。
