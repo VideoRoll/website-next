@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import {
   Card,
   CardHeader,
@@ -20,6 +21,7 @@ interface FeedbackData {
   desiredFeatures: string[];
   otherFeatures?: string;
   reason?: number;
+  version?: string;
 }
 
 interface RateFeedbackProps {
@@ -28,6 +30,7 @@ interface RateFeedbackProps {
 
 export default function RateFeedback({ reason }: RateFeedbackProps) {
   const t = useTranslations("rateFeedback");
+  const searchParams = useSearchParams();
   const [dissatisfiedFeatures, setDissatisfiedFeatures] = useState<string[]>(
     []
   );
@@ -37,6 +40,9 @@ export default function RateFeedback({ reason }: RateFeedbackProps) {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+
+  // 从URL参数中获取version
+  const version = searchParams.get("version") || undefined;
 
   const dissatisfiedOptions = [
     { value: "video", label: t("options1.video") },
@@ -72,6 +78,7 @@ export default function RateFeedback({ reason }: RateFeedbackProps) {
           ? otherFeatures
           : '',
         reason,
+        version,
       };
 
       // Default API call
