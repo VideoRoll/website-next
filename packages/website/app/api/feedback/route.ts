@@ -6,6 +6,7 @@ interface FeedbackData {
   desiredFeatures: string[];
   otherFeatures?: string;
   reason?: number; // Optional field for the reason
+  version?: string; // Optional field for the version
 }
 
 export async function POST(request: NextRequest) {
@@ -33,7 +34,7 @@ export async function POST(request: NextRequest) {
 
     // Create Supabase client
     const supabase = await createClient();
-    console.log(feedbackData);
+
     const { data, error } = await supabase
       .from("RATE_FEEDBACK")
       .insert([
@@ -43,6 +44,7 @@ export async function POST(request: NextRequest) {
             feedbackData.otherFeatures ?? ""
           }`,
           reason: Number(feedbackData.reason),
+          version: feedbackData.version || null,
           ip
         },
       ])
