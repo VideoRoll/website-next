@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
             feedbackData.otherFeatures ?? ""
           }`,
           reason: Number(feedbackData.reason),
-          version: feedbackData.version || null,
+          version: String(feedbackData.version) || null,
           ip
         },
       ])
