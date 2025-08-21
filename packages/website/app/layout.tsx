@@ -4,6 +4,7 @@
 import "../styles/globals.css";
 import React from "react";
 import { routing } from "@/i18n/routing";
+// import { GoogleAnalytics } from "@next/third-parties/google";
 import {
   getMessages,
   getTranslations,
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
       <body>
         <NextTopLoader color="#6563e0"></NextTopLoader>
         {children}
+        {/* <GoogleAnalytics gaId="G-3K6JBNVR8X" /> */}
       </body>
     </html>
   );
