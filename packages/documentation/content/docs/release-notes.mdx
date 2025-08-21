@@ -11,12 +11,12 @@ import Firefox from "../../assets/image/Firefox";
 <div className="flex flex-col space-y-4 md:space-y-6">
   <div className="flex items-center gap-3">
     <Google className="w-6 h-6" />
-    <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.4 (Under review, will be published automatically after approval)</a></div>
+    <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.5 (Under review, will be published automatically after approval)</a></div>
   </div>
   
   <div className="flex items-center gap-3">
     <Edge className="w-6 h-6" />
-    <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.4 (Under review, will be published automatically after approval)</a></div>
+    <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.5 (Under review, will be published automatically after approval)</a></div>
   </div>
   
   <div className="flex items-center gap-3">
@@ -24,6 +24,19 @@ import Firefox from "../../assets/image/Firefox";
     <div><strong>Firefox Add-ons</strong>: <a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
   </div>
 </div>
+
+## v2.0.5 (2025-08-21)
+### New Features
+ - HLS video download page now supports video preview
+
+### Improvements
+ - Optimized HLS video download retry mechanism, automatically retries when segment requests fail
+ - Optimized HLS video download progress display, changed from updating on download start to updating after download completion
+ - Automatically detects MP4 format when downloading HLS video segments and switches download format accordingly
+ - Changed MP4 video download from programmatic download to opening in new tab, handled by browser
+
+### Bug Fixes
+ - Fixed video download issues on bilibili.com and x.com websites
 
 ## v2.0.4 (2025-08-06)
 ### New Features

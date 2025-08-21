@@ -11,12 +11,12 @@ import Firefox from "../../assets/image/Firefox";
 <div className="flex flex-col space-y-4 md:space-y-6">
   <div className="flex items-center gap-3">
     <Google className="w-6 h-6" />
-    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.4（审核通过后自动发布）</a></div>
+    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.5（审核通过后自动发布）</a></div>
   </div>
   
   <div className="flex items-center gap-3">
     <Edge className="w-6 h-6" />
-    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.4（审核通过后自动发布）</a></div>
+    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.5（审核通过后自动发布）</a></div>
   </div>
   
   <div className="flex items-center gap-3">
@@ -24,6 +24,19 @@ import Firefox from "../../assets/image/Firefox";
     <div><strong>Firefox 附加组件</strong>：<a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
   </div>
 </div>
+
+## v2.0.5（2025-08-21）
+### 新功能
+ - HLS格式视频下载页面现在支持预览视频
+
+### 优化
+ - 优化HLS视频下载重试机制，片段请求失败后自动重试
+ - 优化HLS视频下载进度展示，从开始下载修改为下载完成后才更新进度
+ - HLS视频下载ts片段时自动识别是否存在mp4格式，自动切换下载格式
+ - MP4格式视频下载由程序下载修改为打开新的Tab，由浏览器处理
+
+### 错误修复
+ - 修复bilibili.com, x.com网站视频无法下载的问题
 
 ## v2.0.4（2025-08-06）
 ### 新功能
