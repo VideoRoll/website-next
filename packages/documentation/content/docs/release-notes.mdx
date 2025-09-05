@@ -11,12 +11,12 @@ import Firefox from "../../assets/image/Firefox";
 <div className="flex flex-col space-y-4 md:space-y-6">
   <div className="flex items-center gap-3">
     <Google className="w-6 h-6" />
-    <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.5 (Under review, will be published automatically after approval)</a></div>
+  <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.6 (Under review, will be published automatically after approval)</a></div>
   </div>
   
   <div className="flex items-center gap-3">
     <Edge className="w-6 h-6" />
-    <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.5 (Under review, will be published automatically after approval)</a></div>
+  <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.6 (Under review, will be published automatically after approval)</a></div>
   </div>
   
   <div className="flex items-center gap-3">
@@ -24,6 +24,22 @@ import Firefox from "../../assets/image/Firefox";
     <div><strong>Firefox Add-ons</strong>: <a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
   </div>
 </div>
+
+## v2.0.6 (2025-09-05)
+### New Features
+ - Screenshot feature now supports multiple formats: png, jpg, and webp
+ - Video download now detects and downloads videos with content type `binary/octet-stream` (e.g. platforms like PikPak)
+ - HLS video downloads now show progress in the tab title
+
+### Improvements
+ - Added fallback mechanism for audio feature: if the stream-based approach fails, it falls back to the legacy method to prevent audio from failing (only applies when a video element exists on the page)
+ - Optimized play button behavior in the video download list so clicking starts playback immediately
+ - Improved user login security
+ - Improved screenshot feature: replaced passing base64 in URL with local storage to prevent failures caused by overly long URLs
+ - Optimized local storage usage for video downloads to prevent browser lag due to excessive stored data
+
+### Bug Fixes
+ - Fixed issue where after separating video components the original state could not be restored
 
 ## v2.0.5 (2025-08-21)
 ### New Features
