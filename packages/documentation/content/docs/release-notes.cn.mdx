@@ -11,12 +11,12 @@ import Firefox from "../../assets/image/Firefox";
 <div className="flex flex-col space-y-4 md:space-y-6">
   <div className="flex items-center gap-3">
     <Google className="w-6 h-6" />
-    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.5（审核通过后自动发布）</a></div>
+    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.6（审核通过后自动发布）</a></div>
   </div>
   
   <div className="flex items-center gap-3">
     <Edge className="w-6 h-6" />
-    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.5（审核通过后自动发布）</a></div>
+    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.6（审核通过后自动发布）</a></div>
   </div>
   
   <div className="flex items-center gap-3">
@@ -24,6 +24,22 @@ import Firefox from "../../assets/image/Firefox";
     <div><strong>Firefox 附加组件</strong>：<a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
   </div>
 </div>
+
+## v2.0.6（2025-09-05）
+### 新功能
+ - 截图支持保存不同格式，支持png、jpg、webp三种格式
+ - 视频下载功能现支持探测和下载`binary/octet-stream`格式的视频，如pikpak等平台
+ - HLS视频下载时，现可在页签标题看到进度展示
+
+### 优化
+ - 音频功能增加回退机制，若使用stream方式失败则使用老版本方案，避免音频失效的问题（此方式只有页面中存在视频时才会生效）
+ - 视频下载列表中的播放按钮，现优化为点击自动播放
+ - 优化用户登录安全性
+ - 优化截图功能，将url中传递base64修改为本地存储，避免url过长导致截图失败的问题
+ - 优化视频下载本地存储，避免存储过多数据导致浏览器卡顿
+
+### 错误修复
+ - 修复视频分离功能分离后无法还原的问题
 
 ## v2.0.5（2025-08-21）
 ### 新功能
@@ -51,8 +67,8 @@ import Firefox from "../../assets/image/Firefox";
 
 ## v2.0.3（2025-07-11）
 ### 优化
- - 视频录制取消倒计时，点击录制后调整为从头播放视频，并直接开始录制。
- - 网页中增加录制按钮和时间提示。
+ - 视频录制取消倒计时，点击录制后调整为从头播放视频，并直接开始录制
+ - 网页中增加录制按钮和时间提示
  - 优化Popup页面打开速度，解决打开时会卡一下的问题
  - 用户登录后，不显示Pro版提示
 
