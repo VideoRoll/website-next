@@ -7,16 +7,20 @@ import Google from "../../assets/image/Google";
 import Edge from "../../assets/image/Edge";
 import Firefox from "../../assets/image/Firefox";
 
+import Image from "next/image";
+import AudioCaptureType from "../../assets/image/audio-capture-type.png";
+import VrInside from "../../assets/image/vr-inside.png";
+
 ## 各平台版本发布情况
 <div className="flex flex-col space-y-4 md:space-y-6">
   <div className="flex items-center gap-3">
     <Google className="w-6 h-6" />
-    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.6（审核通过后自动发布）</a></div>
+    <div><strong>Chrome 网上应用商店</strong>：<a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.7（审核通过后自动发布）</a></div>
   </div>
   
   <div className="flex items-center gap-3">
     <Edge className="w-6 h-6" />
-    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.6（审核通过后自动发布）</a></div>
+    <div><strong>Microsoft Edge 插件商店</strong>：<a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.7（审核通过后自动发布）</a></div>
   </div>
   
   <div className="flex items-center gap-3">
@@ -24,6 +28,26 @@ import Firefox from "../../assets/image/Firefox";
     <div><strong>Firefox 附加组件</strong>：<a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
   </div>
 </div>
+
+## v2.0.7（2025-10-14）
+### 新功能
+ - 支持选择音频捕获方式 `整个网页`、`视频元素`（默认为捕获整个网页音频）。可解决某些网页音频捕获失败的问题，可通过切换捕获方式后刷新页面生效。
+ <Image src={AudioCaptureType} width={400} alt="音频捕获方式" />
+
+ - VR模式支持非全屏模式，默认覆盖在原视频元素上。VR全屏现需手动点击全屏按钮进入。
+ <Image src={VrInside} width={400} alt="VR模式" />
+
+### 优化
+ - 提升VR模式画质，保持原有视频分辨率和画质。
+ - HLS视频探测取消m3u8后缀限制，支持无后缀m3u8视频探测
+
+### 错误修复
+ - 修复YouTube广告加速后，开启音频或其他操作导致的倍速未还原问题
+ - 通过新增音频捕获方式选项解决音频自动开启且声音异常的问题
+
+### 开发环境优化
+ - 项目从Node.js迁移到Bun开发环境，提升开发体验和构建速度
+ - 发布[bun-tasks](https://www.npmjs.com/package/bun-tasks)库，用于并发任务执行，插件构建速度大幅提升
 
 ## v2.0.6（2025-09-05）
 ### 新功能

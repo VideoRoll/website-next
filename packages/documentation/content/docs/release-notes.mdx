@@ -6,17 +6,20 @@ description: All versions release notes
 import Google from "../../assets/image/Google";
 import Edge from "../../assets/image/Edge";
 import Firefox from "../../assets/image/Firefox";
+import Image from "next/image";
+import AudioCaptureType from "../../assets/image/audio-capture-type.png";
+import VrInside from "../../assets/image/vr-inside.png";
 
 ## Platform Release Status
 <div className="flex flex-col space-y-4 md:space-y-6">
   <div className="flex items-center gap-3">
     <Google className="w-6 h-6" />
-  <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.6 (Under review, will be published automatically after approval)</a></div>
+  <div><strong>Chrome Web Store</strong>: <a href="https://chrome.google.com/webstore/detail/video-roll-all-in-one-vid/cokngoholafkeghnhhdlmiadlojpindm?hl=en" target="_blank" rel="noopener noreferrer">v2.0.7 (Publishes automatically once approved)</a></div>
   </div>
   
   <div className="flex items-center gap-3">
     <Edge className="w-6 h-6" />
-  <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.6 (Under review, will be published automatically after approval)</a></div>
+  <div><strong>Microsoft Edge Add-ons</strong>: <a href="https://microsoftedge.microsoft.com/addons/detail/video-roll/indeeigndpaahbcegcanpmbenmkbkmmn" target="_blank" rel="noopener noreferrer">v2.0.7 (Publishes automatically once approved)</a></div>
   </div>
   
   <div className="flex items-center gap-3">
@@ -24,6 +27,26 @@ import Firefox from "../../assets/image/Firefox";
     <div><strong>Firefox Add-ons</strong>: <a href="https://addons.mozilla.org/firefox/addon/videoroll/" target="_blank" rel="noopener noreferrer">v1.1.8</a></div>
   </div>
 </div>
+
+## v2.0.7 (2025-10-14)
+### New Features
+ - Added audio capture mode selector with options `Entire page` and `Video elements` (defaults to capturing the entire page audio). Helps resolve cases where audio capture fails; switch the mode and refresh the page to apply.
+ <Image src={AudioCaptureType} width={400} alt="Audio capture modes" />
+
+ - VR mode now supports non-fullscreen mode and overlays on top of the original video element by default. Enter fullscreen VR manually via the fullscreen button.
+ <Image src={VrInside} width={400} alt="VR mode overlay" />
+
+### Improvements
+ - Improved VR mode visual quality by preserving the original video resolution.
+ - HLS video detection no longer relies on the `.m3u8` suffix, enabling detection for sources without an extension.
+
+### Bug Fixes
+ - Fixed playback speed failing to reset after skipping YouTube ads when audio features or other actions were triggered.
+ - Resolved audio auto-enabling with abnormal sound by introducing the new audio capture mode options.
+
+### Developer Experience
+ - Migrated the project development environment from Node.js to Bun for faster builds and a smoother workflow.
+ - Released the [bun-tasks](https://www.npmjs.com/package/bun-tasks) package to orchestrate concurrent tasks, significantly speeding up extension builds.
 
 ## v2.0.6 (2025-09-05)
 ### New Features
