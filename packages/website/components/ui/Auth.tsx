@@ -177,7 +177,7 @@ export default function Auth(props: Props) {
       
       redirectCallback?.(locale);
     },
-    [turnstile, captchaToken, onSubmit, t]
+    [turnstile, captchaToken, onSubmit, t, locale, redirectCallback]
   );
 
   return (
