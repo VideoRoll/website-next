@@ -1,7 +1,7 @@
 import React from "react";
 import { signup, loginWithGoogle, loginWithGithub, signupRedirect } from "./actions";
-import Auth from "../../../components/ui/Auth";
-import SignLayout from "../../../components/ui/SignLayout";
+import Auth from "@/components/ui/client/Auth";
+import SignLayout from "@/components/ui/server/SignLayout";
 import { getTranslations } from 'next-intl/server';
 
 export default async function SignupPage({ params }: { params: { locale: string } }) {
