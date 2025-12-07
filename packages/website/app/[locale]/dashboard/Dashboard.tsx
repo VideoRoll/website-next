@@ -12,7 +12,7 @@ import {
   User,
 } from "@heroui/react";
 import { useTranslations } from "next-intl";
-import CanvasStar from "@/components/ui/CanvasStar";
+import CanvasStar from "@/components/ui/client/CanvasStar";
 // 临时使用文字图标，如果需要 Heroicons，请运行: npm install @heroicons/react
 const UserIcon = () => <span>👤</span>;
 const ShieldCheckIcon = () => <span>🛡️</span>;

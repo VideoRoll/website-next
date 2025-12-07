@@ -3,7 +3,7 @@
 import { IconExternalLink, IconDownload, IconWorld, IconChevronRight } from '@tabler/icons-react'
 import { Button } from '@heroui/react'
 import { useTranslations, useLocale } from 'next-intl'
-import CanvasStar from './CanvasStar'
+import CanvasStar from '@/components/ui/client/CanvasStar'
 
 interface VideoDownloadSite {
   id: string

@@ -4,7 +4,7 @@
 // adjust the path if necessary
 import React from "react";
 import Banner from "@/components/icons/Banner";
-import BackButton from "@/components/ui/BackButton";
+import BackButton from "@/components/ui/client/BackButton";
 
 export default function SigninLayout({
   children,

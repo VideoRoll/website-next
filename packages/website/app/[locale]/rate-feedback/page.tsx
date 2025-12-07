@@ -1,4 +1,4 @@
-import RateFeedback from "@/components/ui/RateFeedback";
+import RateFeedback from "@/components/ui/client/RateFeedback";
 import { setRequestLocale } from "next-intl/server";
 import { Locale } from "next-intl";
 

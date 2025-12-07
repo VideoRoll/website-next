@@ -44,7 +44,7 @@ export async function generateMetadata({
 }
 
 const GlobalLoadingPortal = dynamic(
-  () => import("@/components/ui/GlobalLoading").then(m => m.default),
+  () => import("@/components/ui/client/GlobalLoading").then(m => m.default),
   { ssr: true }
 );
 
