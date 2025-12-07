@@ -1,4 +1,4 @@
-import Welcome from '@/components/ui/Welcome'
+import Welcome from '@/components/ui/client/Welcome'
 import { getTranslations } from 'next-intl/server'
 
 export default function WelcomePage() {

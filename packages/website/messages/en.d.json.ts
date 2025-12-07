@@ -5,15 +5,17 @@ declare const messages: {
   "hero": {
     "title": "All-in-One Video Enhancements",
     "subtitle": "30+ features in one, the ultimate video experience enhancement browser extension with multi-platform support, helping you easily master your video experience.",
-    "chrome": "Chrome",
-    "edge": "Edge",
-    "firefox": "Firefox",
+    "chrome": "Add to Chrome it's Free",
+    "edge": "Add to Edge",
+    "firefox": "Add to Firefox",
     "featuresTitle": "Everything You Need for Video",
     "advantagesTitle": "Why Choose Us?",
     "reviewsTitle": "User Reviews",
     "interfaceTitle": "Friendly User Interface",
     "rating": "5.0",
-    "usersTrust": "Trusted by 20,000+ users around the world",    "animation": {
+    "usersTrust": "Trusted by 30,000+ users around the world",
+    "featured": "Featured on Chrome Web Store / Edge Addons",
+    "animation": {
       "prefix": "Your exclusive Video",
       "0": { "text": "Rotator." },
       "1": { "text": "Downloader." },
@@ -28,7 +30,8 @@ declare const messages: {
       "10": { "text": "Filter." },
       "11": { "text": "Speeder." },
       "12": { "text": "Ad Accelerator." }
-    },    "features": [
+    },
+    "features": [
       {
         "title": "Absolute Privacy Protection",
         "desc": "The extension does not collect any user information and we use Chrome's built-in API to ensure user privacy and security."
@@ -221,7 +224,8 @@ declare const messages: {
     "pricing": "Pricing",
     "faq": "FAQ",
     "documentation": "Documentation",
-    "language": "Language"
+    "language": "Language",
+    "login": "Login"
   },
   "welcome": {
     "congratulations": "Congratulations on successfully installing",
@@ -277,7 +281,7 @@ declare const messages: {
     "necessary_description": "These cookies are essential for basic website functionality, including authentication, security, and core features. They cannot be disabled.",
     "functional_cookies": "Functional Cookies",
     "functional_description": "These cookies enable enhanced features like user preferences, settings, and improved functionality. Required for login/registration.",
-    "analytics_cookies": "Analytics Cookies", 
+    "analytics_cookies": "Analytics Cookies",
     "analytics_description": "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.",
     "marketing_cookies": "Marketing Cookies",
     "marketing_description": "These cookies track visitors across websites to display relevant and personalized advertisements.",
@@ -336,47 +340,102 @@ declare const messages: {
     "sites": {
       "snapany": {
         "description": "Fast and convenient online video download tool supporting multiple video formats",
-        "features": ["Online Download", "High Speed", "Multi-format Support", "No Registration"]
+        "features": [
+          "Online Download",
+          "High Speed",
+          "Multi-format Support",
+          "No Registration"
+        ]
       },
       "cobalt": {
         "description": "Open-source social media download tool with privacy protection focus",
-        "features": ["Open Source & Free", "Privacy Protection", "Watermark-free Download", "Fast Response"]
+        "features": [
+          "Open Source & Free",
+          "Privacy Protection",
+          "Watermark-free Download",
+          "Fast Response"
+        ]
       },
       "yt-dlp": {
         "description": "Most powerful video download tool supporting 1000+ websites",
-        "features": ["Command Line Tool", "Open Source & Free", "Subtitle Download", "Batch Download"]
+        "features": [
+          "Command Line Tool",
+          "Open Source & Free",
+          "Subtitle Download",
+          "Batch Download"
+        ]
       },
       "y2mate": {
         "description": "Online video downloader, simple and easy to use without installation",
-        "features": ["Online Download", "Multiple Formats", "Free to Use", "No Registration"]
+        "features": [
+          "Online Download",
+          "Multiple Formats",
+          "Free to Use",
+          "No Registration"
+        ]
       },
       "savefrom": {
         "description": "Quickly download videos from major platforms with HD quality support",
-        "features": ["HD Download", "Fast Processing", "Browser Extension", "Mobile Support"]
+        "features": [
+          "HD Download",
+          "Fast Processing",
+          "Browser Extension",
+          "Mobile Support"
+        ]
       },
       "snaptube": {
         "description": "Professional mobile video download application",
-        "features": ["Mobile App", "Background Download", "Audio Extraction", "Playlist Download"]
+        "features": [
+          "Mobile App",
+          "Background Download",
+          "Audio Extraction",
+          "Playlist Download"
+        ]
       },
       "clipgrab": {
         "description": "Desktop video download software with format conversion support",
-        "features": ["Desktop Software", "Format Conversion", "Free & Open Source", "Cross-platform"]
+        "features": [
+          "Desktop Software",
+          "Format Conversion",
+          "Free & Open Source",
+          "Cross-platform"
+        ]
       },
       "4k-downloader": {
         "description": "Professional video download tool with 4K HD support",
-        "features": ["4K Quality", "Smart Mode", "Channel Subscription", "Subtitle Download"]
+        "features": [
+          "4K Quality",
+          "Smart Mode",
+          "Channel Subscription",
+          "Subtitle Download"
+        ]
       },
       "online-video-converter": {
         "description": "Online video conversion and download platform",
-        "features": ["Online Conversion", "Multiple Formats", "Batch Processing", "Cloud Service"]
+        "features": [
+          "Online Conversion",
+          "Multiple Formats",
+          "Batch Processing",
+          "Cloud Service"
+        ]
       },
       "tubemate": {
         "description": "Popular video download app for Android platform",
-        "features": ["Android App", "Background Download", "Multi-thread Download", "Built-in Player"]
+        "features": [
+          "Android App",
+          "Background Download",
+          "Multi-thread Download",
+          "Built-in Player"
+        ]
       },
       "videoproc": {
         "description": "All-in-one video processing software with download features",
-        "features": ["Video Processing", "GPU Acceleration", "Screen Recording", "Video Editing"]
+        "features": [
+          "Video Processing",
+          "GPU Acceleration",
+          "Screen Recording",
+          "Video Editing"
+        ]
       }
     }
   },

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Link } from '@heroui/react';
 import { useTranslations } from 'next-intl';
@@ -10,7 +12,7 @@ interface FooterProps {
 
 export default function Footer({ 
   className = '', 
-  logoText = 'VideoRoll Pro',
+  logoText = 'VideoRoll',
   logoHref = '/'
 }: FooterProps) {
   const t = useTranslations('footer');
@@ -34,7 +36,7 @@ export default function Footer({
     },
     {
       label: t('links.bugReport'),
-      href: '/feedback',
+      href: 'https://github.com/VideoRoll/VideoRoll/issues',
     },
   ];
   return (

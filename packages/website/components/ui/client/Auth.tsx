@@ -20,7 +20,7 @@ import {
 import {
   showGlobalLoading,
   hideGlobalLoading,
-} from "@/components/ui/GlobalLoading";
+} from "@/components/ui/client/GlobalLoading";
 import { useLocale, useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 
@@ -271,21 +271,21 @@ export default function Auth(props: Props) {
         {type === "signin" ? t("signinWithGithub") : t("signupWithGithub")}
       </Button>
       {type === "signin" ? (
-        <p>
+        <p className="text-left mt-2">
           {t("noAccount")}{" "}
-          <Link href="/signup" className="text-blue-600">
+          <Link href="/signup" className="text-primary-600">
             {t("signupLink")}
           </Link>
         </p>
       ) : (
-        <p>
+        <p className="text-left mt-2">
           {t("hasAccount")}{" "}
-          <Link href="/signin" className="text-blue-600">
+          <Link href="/signin" className="text-primary-600">
             {t("signinLink")}
           </Link>
         </p>
       )}
-      <p className="text-xs text-gray-200 mt-2 text-center">
+      <p className="text-xs text-gray-200 mt-2 text-left">
         {t("agreementText")}
         <a
           href={`https://docs.videoroll.app/${
@@ -293,7 +293,7 @@ export default function Auth(props: Props) {
           }/docs/terms`}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline mx-1 text-blue-600"
+          className="underline mx-1 text-primary-600"
         >
           {t("termsOfService")}
         </a>
@@ -304,7 +304,7 @@ export default function Auth(props: Props) {
           }/docs/privacy`}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline mx-1 text-blue-600"
+          className="underline mx-1 text-primary-600"
         >
           {t("privacyPolicy")}
         </a>

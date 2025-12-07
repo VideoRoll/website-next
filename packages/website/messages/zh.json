@@ -2,7 +2,7 @@
   "hero": {
     "title": "多合一的网页视频百宝箱",
     "subtitle": "30+ 功能集一身，超强的视频体验增强浏览器扩展，支持多平台，助你轻松掌控视频体验。",
-    "chrome": "Chrome",
+    "chrome": "Chrome 免费安装",
     "edge": "Edge",
     "firefox": "Firefox",
     "featuresTitle": "任何你想要的",
@@ -10,7 +10,8 @@
     "reviewsTitle": "用户评价",
     "interfaceTitle": "友好的用户界面",
     "rating": "5.0",
-    "usersTrust": "全球超过 20,000+ 用户信赖",
+    "usersTrust": "全球超过 30,000+ 用户信赖",
+    "featured": "Chrome Web Store / Edge Addons 精选插件",
     "animation": {
       "prefix": "你的专属视频",
       "0": { "text": "旋转器。" },
@@ -186,7 +187,8 @@
     "pricing": "定价",
     "faq": "常见问题",
     "documentation": "文档",
-    "language": "语言"
+    "language": "语言",
+    "login": "登录"
   },
   "welcome": {
     "congratulations": "恭喜你成功安装",

@@ -9,7 +9,7 @@ import {
   IconChevronDown,
   IconBrightnessUp,
   IconUser,
-  IconLanguage
+  IconLanguage,
 } from "@tabler/icons-react";
 import { createClient } from "@/utils/supabase/client";
 import React, { useCallback, useEffect, useMemo } from "react";
@@ -146,20 +146,20 @@ export default function NavBar(props: Props) {
   }, [currentUser]);
 
   return (
-    <Navbar 
-      className="z-[9999] mx-auto max-w-screen-2xl px-[5vw] touch-manipulation" 
-      maxWidth="full" 
+    <Navbar
+      className="z-[99] top-0 mx-auto max-w-screen-2xl px-[5vw] touch-manipulation py-[6px]"
+      maxWidth="full"
       isMenuOpen={isMenuOpen}
       shouldHideOnScroll={false}
       position="sticky"
       classNames={{
         menu: "bg-background/95 backdrop-blur-md mt-4 touch-manipulation",
         menuItem: "py-2 touch-manipulation",
-        toggle: "touch-manipulation select-none cursor-pointer"
+        toggle: "touch-manipulation select-none cursor-pointer",
       }}
     >
       <NavbarContent>
-        <div 
+        <div
           className="sm:hidden cursor-pointer touch-manipulation select-none p-2 -m-2 active:scale-95 transition-transform"
           onClick={toggleMenu}
           onTouchStart={handleTouchStart}
@@ -181,7 +181,7 @@ export default function NavBar(props: Props) {
             height={30}
             className="mr-2"
           ></Image>
-          Video Roll
+          <span className="text-xl font-bold text-stone-300">Video Roll</span>
         </NavbarBrand>
       </NavbarContent>
 
@@ -197,7 +197,13 @@ export default function NavBar(props: Props) {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <RegularLink className="font-bold" color="foreground" showAnchorIcon target="_blank" href="https://docs.videoroll.app">
+          <RegularLink
+            className="font-bold"
+            color="foreground"
+            showAnchorIcon
+            target="_blank"
+            href="https://docs.videoroll.app"
+          >
             {t("documentation")}
           </RegularLink>
         </NavbarItem>
@@ -221,7 +227,14 @@ export default function NavBar(props: Props) {
               >
                 <DropdownSection aria-label="Profile & Actions">
                   <DropdownItem key="profile">
-                    <User avatarProps={{size: 'sm', src:currentUser.user_metadata?.avatar_url}} name={currentUser.user_metadata?.name} description={currentUser.email}></User>
+                    <User
+                      avatarProps={{
+                        size: "sm",
+                        src: currentUser.user_metadata?.avatar_url,
+                      }}
+                      name={currentUser.user_metadata?.name}
+                      description={currentUser.email}
+                    ></User>
                   </DropdownItem>
                 </DropdownSection>
                 <DropdownSection showDivider aria-label="Profile & Actions">
@@ -237,15 +250,17 @@ export default function NavBar(props: Props) {
               </DropdownMenu>
             </Dropdown>
           ) : (
-            <Button as={Link} color="primary" href="/signin" variant="flat">
-              Login
+            <Button as={Link} color="primary" href="/signin" variant="solid">
+              {t("login")}
             </Button>
           )}
         </NavbarItem>
         <NavbarItem>
-          <Dropdown>
+          <Dropdown placement="bottom" trigger="press">
             <DropdownTrigger>
-              <Button variant="bordered" startContent={<IconLanguage />}>{selectedValue === "en" ? "English" : "简体中文"}</Button>
+              <Button variant="bordered" startContent={<IconLanguage />} endContent={<IconChevronDown size={18} />}>
+                {selectedValue === "en" ? "English" : "简体中文"}
+              </Button>
             </DropdownTrigger>
             <DropdownMenu
               disallowEmptySelection
@@ -330,13 +345,14 @@ export default function NavBar(props: Props) {
           <>
             <NavbarMenuItem key="user-info">
               <div className="flex items-center gap-3 py-2">
-                <Avatar
-                  size="sm"
-                  src={currentUser.user_metadata?.avatar_url}
-                />
+                <Avatar size="sm" src={currentUser.user_metadata?.avatar_url} />
                 <div className="flex flex-col">
-                  <p className="text-sm font-medium">{currentUser.user_metadata?.name}</p>
-                  <p className="text-xs text-default-500">{currentUser.email}</p>
+                  <p className="text-sm font-medium">
+                    {currentUser.user_metadata?.name}
+                  </p>
+                  <p className="text-xs text-default-500">
+                    {currentUser.email}
+                  </p>
                 </div>
               </div>
             </NavbarMenuItem>
@@ -373,11 +389,11 @@ export default function NavBar(props: Props) {
               className="w-full"
               color="primary"
               href="/signin"
-              variant="flat"
+              variant="solid"
               size="lg"
               onClick={() => setIsMenuOpen(false)}
             >
-              Login
+              {t("login")}
             </Button>
           </NavbarMenuItem>
         )}
@@ -390,25 +406,31 @@ export default function NavBar(props: Props) {
         {/* 语言切换 */}
         <NavbarMenuItem key="language">
           <div className="w-full">
-            <p className="text-sm text-default-500 mb-2">{t("language") || "Language"}</p>
+            <p className="text-sm text-default-500 mb-2">
+              {t("language") || "Language"}
+            </p>
             <div className="grid grid-cols-2 gap-2">
               <Button
-                className={`justify-start ${locale === 'en' ? 'bg-primary text-primary-foreground' : ''}`}
-                variant={locale === 'en' ? 'solid' : 'flat'}
+                className={`justify-start ${
+                  locale === "en" ? "bg-primary text-primary-foreground" : ""
+                }`}
+                variant={locale === "en" ? "solid" : "flat"}
                 size="sm"
                 onClick={() => {
-                  select(new Set(['en']));
+                  select(new Set(["en"]));
                   setIsMenuOpen(false);
                 }}
               >
                 English
               </Button>
               <Button
-                className={`justify-start ${locale === 'zh' ? 'bg-primary text-primary-foreground' : ''}`}
-                variant={locale === 'zh' ? 'solid' : 'flat'}
+                className={`justify-start ${
+                  locale === "zh" ? "bg-primary text-primary-foreground" : ""
+                }`}
+                variant={locale === "zh" ? "solid" : "flat"}
                 size="sm"
                 onClick={() => {
-                  select(new Set(['zh']));
+                  select(new Set(["zh"]));
                   setIsMenuOpen(false);
                 }}
               >

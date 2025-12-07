@@ -1,10 +1,10 @@
 import React from "react";
 // import { motion } from "framer-motion";
-import Navbar from "@/components/ui/NavBar";
+import Navbar from "@/components/ui/client/NavBar";
 import { getUserServerSideProps } from "@/utils/auth-helpers/props";
 import { setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
-import DownloadVideo from "@/components/ui/DownloadVideo";
+import DownloadVideo from "@/components/ui/client/DownloadVideo";
 
 type Props = {
   params: { locale: Locale };

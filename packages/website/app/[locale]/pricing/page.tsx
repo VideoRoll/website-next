@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "@/components/ui/NavBar";
+import Navbar from "@/components/ui/client/NavBar";
 import { getUserServerSideProps } from "@/utils/auth-helpers/props";
 import { setRequestLocale } from 'next-intl/server';
 import { Locale } from 'next-intl';
-import Footer from "@/components/ui/Footer";
-import Pricing from "@/components/ui/Pricing";
+import Footer from "@/components/ui/client/Footer";
+import Pricing from "@/components/ui/client/Pricing";
 
 type Props = {
   params: { locale: Locale };

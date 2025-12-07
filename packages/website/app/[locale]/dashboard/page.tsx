@@ -1,6 +1,6 @@
 import React from "react";
 // import { motion } from "framer-motion";
-import Navbar from "@/components/ui/NavBar";
+import Navbar from "@/components/ui/client/NavBar";
 import { getUserServerSideProps } from "@/utils/auth-helpers/props";
 import Dashboard from "./Dashboard";
 import { setRequestLocale } from 'next-intl/server';
