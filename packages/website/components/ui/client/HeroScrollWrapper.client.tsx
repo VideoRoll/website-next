@@ -3,6 +3,7 @@
 import React from "react";
 import { useScroll, useTransform } from "framer-motion";
 import HeroTitleSection from "@/components/ui/client/HeroTitleSection.client";
+import CanvasStar from "./CanvasStar";
 
 interface HeroScrollWrapperProps {
   title: string;
@@ -12,6 +13,7 @@ interface HeroScrollWrapperProps {
   chromeText: string;
   edgeText: string;
   firefoxText: string;
+  quarkText: string;
   animationPrefix: string;
   texts: { text: string; color: string }[];
 }
@@ -24,6 +26,7 @@ export default function HeroScrollWrapper({
   chromeText,
   edgeText,
   firefoxText,
+  quarkText,
   animationPrefix,
   texts,
 }: HeroScrollWrapperProps) {
@@ -31,19 +34,22 @@ export default function HeroScrollWrapper({
   const iconTranstion3 = useTransform(scrollY, [0, 100], [0, -40]);
 
   return (
-    <HeroTitleSection
-      scrollY={scrollY}
-      iconTranstion3={iconTranstion3}
-      title={title}
-      subtitle={subtitle}
-      usersTrust={usersTrust}
-      featured={featured}
-      chromeText={chromeText}
-      edgeText={edgeText}
-      firefoxText={firefoxText}
-      animationPrefix={animationPrefix}
-      texts={texts}
-    />
+    <>
+      {/* <CanvasStar></CanvasStar> */}
+      <HeroTitleSection
+        scrollY={scrollY}
+        iconTranstion3={iconTranstion3}
+        title={title}
+        subtitle={subtitle}
+        usersTrust={usersTrust}
+        featured={featured}
+        chromeText={chromeText}
+        edgeText={edgeText}
+        firefoxText={firefoxText}
+        quarkText={quarkText}
+        animationPrefix={animationPrefix}
+        texts={texts}
+      />
+    </>
   );
 }
-

@@ -1,10 +1,11 @@
 {
   "hero": {
     "title": "多合一的网页视频百宝箱",
-    "subtitle": "30+ 功能集一身，超强的视频体验增强浏览器扩展，支持多平台，助你轻松掌控视频体验。",
+    "subtitle": "满足你能想象到的视频/音频功能",
     "chrome": "Chrome 免费安装",
     "edge": "Edge",
     "firefox": "Firefox",
+    "quark": "夸克",
     "featuresTitle": "任何你想要的",
     "advantagesTitle": "为什么选择我们？",
     "reviewsTitle": "用户评价",

@@ -12,7 +12,7 @@ import {
   IconLanguage,
 } from "@tabler/icons-react";
 import { createClient } from "@/utils/supabase/client";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -38,6 +38,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import { useLocale } from "next-intl";
 import { useTopLoader } from "nextjs-toploader";
+import ShinyText from "./ShinyText";
 
 type Props = {
   currentUser: any;
@@ -50,6 +51,9 @@ export default function NavBar(props: Props) {
   const t = useTranslations("nav");
   const { currentUser } = props;
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isBlurred, setIsBlurred] = useState(false);
+  const rafIdRef = useRef<number | null>(null);
+  const lastScrollYRef = useRef<number>(0);
 
   // 手动切换菜单的函数（用于调试）
   const toggleMenu = (e?: React.MouseEvent | React.TouchEvent) => {
@@ -145,14 +149,56 @@ export default function NavBar(props: Props) {
     }
   }, [currentUser]);
 
+  // 高性能滚动监听 - 使用 requestAnimationFrame 优化
+  useEffect(() => {
+    const handleScroll = () => {
+      if (rafIdRef.current !== null) {
+        return; // 如果已经有待处理的帧，跳过
+      }
+
+      rafIdRef.current = requestAnimationFrame(() => {
+        const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+        
+        // 只在状态需要改变时才更新，避免不必要的重渲染
+        setIsBlurred((prevIsBlurred) => {
+          const shouldBlur = scrollY > 80;
+          if (shouldBlur !== prevIsBlurred) {
+            return shouldBlur;
+          }
+          return prevIsBlurred;
+        });
+
+        lastScrollYRef.current = scrollY;
+        rafIdRef.current = null;
+      });
+    };
+
+    // 初始检查
+    const initialScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    setIsBlurred(initialScrollY > 500);
+    lastScrollYRef.current = initialScrollY;
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+    };
+  }, []); // 空依赖数组，只在组件挂载时绑定一次
+
   return (
     <Navbar
-      className="z-[99] top-0 mx-auto max-w-screen-2xl px-[5vw] touch-manipulation py-[6px]"
-      maxWidth="full"
+      className="z-[99] top-0 mx-auto touch-manipulation py-[6px]"
       isMenuOpen={isMenuOpen}
       shouldHideOnScroll={false}
       position="sticky"
+      isBlurred={isBlurred}
       classNames={{
+        base: "bg-transparent",
+        wrapper: "max-w-7xl",
         menu: "bg-background/95 backdrop-blur-md mt-4 touch-manipulation",
         menuItem: "py-2 touch-manipulation",
         toggle: "touch-manipulation select-none cursor-pointer",
@@ -181,7 +227,8 @@ export default function NavBar(props: Props) {
             height={30}
             className="mr-2"
           ></Image>
-          <span className="text-xl font-bold text-stone-300">Video Roll</span>
+          <ShinyText text="Video Roll" className="text-xl font-bold " speed={2} />
+          {/* <span className="text-xl font-bold text-stone-300">Video Roll</span> */}
         </NavbarBrand>
       </NavbarContent>
 

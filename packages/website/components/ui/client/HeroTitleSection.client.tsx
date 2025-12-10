@@ -6,6 +6,7 @@ import { Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@
 import Chrome from "@/components/icons/Chrome";
 import Edge from "@/components/icons/Edge";
 import Firefox from "@/components/icons/Firefox";
+import Quark from "@/components/icons/Quark";
 import AnimationText from "@/components/ui/client/AnimationText";
 import { IconChevronDown, IconAward } from "@tabler/icons-react";
 import { useLocale } from "next-intl";
@@ -20,6 +21,7 @@ interface HeroTitleSectionProps {
   chromeText: string;
   edgeText: string;
   firefoxText: string;
+  quarkText: string;
   animationPrefix: string;
   texts: { text: string; color: string }[];
 }
@@ -34,6 +36,7 @@ export default function HeroTitleSection({
   chromeText,
   edgeText,
   firefoxText,
+  quarkText,
   animationPrefix,
   texts,
 }: HeroTitleSectionProps) {
@@ -62,7 +65,7 @@ export default function HeroTitleSection({
         initial={{ opacity: 0, x: -40 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
-        className={`text-base md:text-lg text-gray-400 dark:text-gray-300 max-w-xl mb-6 mx-auto ${isChinese ? "tracking-wide" : ""}`}
+        className={`text-base md:text-xl text-gray-400 dark:text-gray-300 max-w-xl mb-6 mx-auto ${isChinese ? "tracking-wide" : ""}`}
       >
         {subtitle}
       </motion.p>
@@ -101,7 +104,7 @@ export default function HeroTitleSection({
             className="text-blue-500 dark:text-blue-400 flex-shrink-0"
           />
           {/* 渐变色文案 */}
-          <span className="text-sm font-medium bg-gradient-to-r from-primary-500 via-[#eab308] to-primary-500 bg-clip-text text-transparent bg-[length:200%_100%] animate-gradient whitespace-nowrap">
+          <span className="text-sm font-medium bg-gradient-to-r from-[#40ffaa] via-[#4079ff] to-[#40ffaa] bg-clip-text text-transparent bg-[length:200%_100%] animate-gradient whitespace-nowrap">
             {featured}
           </span>
         </div>
@@ -160,6 +163,19 @@ export default function HeroTitleSection({
               }
             >
               {firefoxText}
+            </DropdownItem>
+
+            <DropdownItem
+              key="quark"
+              startContent={<Quark size={20} />}
+              onPress={() =>
+                window.open(
+                  "https://extensions.quark.cn/?utm_source=ext_extensions_menu&entry=ext_panel&category_id=5#/details/cokngoholafkeghnhhdlmiadlojpindm",
+                  "_blank"
+                )
+              }
+            >
+              {quarkText}
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>

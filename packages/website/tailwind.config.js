@@ -17,9 +17,14 @@ module.exports = {
           "0%": { backgroundPosition: "0% 50%" },
           "100%": { backgroundPosition: "200% 50%" },
         },
+        shine: {
+          '0%': { 'background-position': '100%' },
+          '100%': { 'background-position': '-100%' },
+        },
       },
       animation: {
         gradient: "gradient 4s linear infinite",
+        shine: "shine 5s linear infinite",
       },
     },
   },

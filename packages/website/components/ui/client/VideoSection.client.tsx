@@ -23,16 +23,16 @@ export default function VideoSection() {
           animation: gradient-flow 3s ease infinite;
         }
       `}</style>
-      <section className="max-w-screen-2xl px-[5vw] mx-auto relative flex justify-center z-20">
+      <section className="max-w-7xl mx-auto relative flex justify-center z-20 px-6">
         <div className="w-full p-4">
           {/* 视频容器 */}
           <div className="relative mx-auto w-full rounded-2xl p-[4px] overflow-hidden">
             {/* 流动渐变边框 */}
             <div className="absolute inset-0 rounded-2xl gradient-border"></div>
             {/* 内层背景 */}
-            <div className="relative w-full h-full rounded-xl bg-background">
+            <div className="relative w-full h-full rounded-2xl bg-background">
               {/* 实际视频 */}
-              <div className="relative aspect-video bg-gray-900 rounded-lg overflow-hidden">
+              <div className="relative aspect-video bg-gray-900 rounded-2xl overflow-hidden">
                 <iframe
                   src="//player.bilibili.com/player.html?isOutside=true&aid=114728089157681&bvid=BV1tAKpz3EP5&cid=30644634279&p=1&loop=1"
                   scrolling="no"
