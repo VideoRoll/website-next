@@ -108,202 +108,207 @@ export default async function Hero() {
   ];
 
   return (
-    <div className="w-full">
-      {/* Canvas星点动效层 */}
-      <CanvasStar></CanvasStar>
-      {/* 1. Hero 标题+平台图标 */}
-      <section className="max-w-screen-2xl px-[5vw] mx-auto mb-10 relative flex md:flex-row items-center justify-between min-h-[60vh] pt-12 md:pt-24 overflow-hidden">
-        <HeroScrollWrapper
-          title={t("title")}
-          subtitle={t("subtitle")}
-          usersTrust={t("usersTrust")}
-          featured={t("featured")}
-          chromeText={t("chrome")}
-          edgeText={t("edge")}
-          firefoxText={t("firefox")}
-          animationPrefix={t("animation.prefix")}
-          texts={texts}
-        />
-        <div className="w-1/3 absolute right-0 hidden md:block">
-          {/* <Banner className="scale-75"></Banner> */}
-        </div>
-      </section>
-      {/* 2. 介绍视频独立模块 */}
-      <VideoScrollWrapper />
-      {/* 3. 功能网格 - 高级卡片式 */}
-      <section className="relative z-30 py-20">
-        <div className="max-w-screen-2xl px-[5vw] mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold text-center mt-4 mb-4">
-            {t("featuresTitle")}
+    <>
+      <div className="w-full h-[600px] absolute top-[-64px]">
+        <CanvasStar speed={1.8}></CanvasStar>
+      </div>
+      <div className="w-full">
+        {/* Canvas星点动效层 */}
+        {/* 1. Hero 标题+平台图标 */}
+        <section className="w-full mx-auto mb-10 relative flex md:flex-row items-center justify-between min-h-[60vh] pt-12 md:pt-24 overflow-hidden">
+          <HeroScrollWrapper
+            title={t("title")}
+            subtitle={t("subtitle")}
+            usersTrust={t("usersTrust")}
+            featured={t("featured")}
+            chromeText={t("chrome")}
+            edgeText={t("edge")}
+            firefoxText={t("firefox")}
+            quarkText={t("quark")}
+            animationPrefix={t("animation.prefix")}
+            texts={texts}
+          />
+          <div className="w-1/3 absolute right-0 hidden md:block">
+            {/* <Banner className="scale-75"></Banner> */}
+          </div>
+        </section>
+        {/* 2. 介绍视频独立模块 */}
+        <VideoScrollWrapper />
+        {/* 3. 功能网格 - 高级卡片式 */}
+        <section className="relative z-30 py-20">
+          <div className="max-w-7xl px-6 mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-center mt-4 mb-4">
+              {t("featuresTitle")}
+            </h2>
+            <div className="mb-16 flex justify-center">
+              <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
+            </div>
+
+            {/* 交叉布局卡片容器 */}
+            <div className="w-full mx-auto space-y-8">
+              {/* 第一行：左1/3 右2/3 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <FeatureCard
+                  title={features[0]?.title}
+                  desc={features[0]?.desc}
+                  delay={0.1}
+                  colSpan={1}
+                />
+                <FeatureCard
+                  title={features[1]?.title}
+                  desc={features[1]?.desc}
+                  delay={0.2}
+                  colSpan={2}
+                  showPlatforms={true}
+                />
+              </div>
+
+              {/* 第二行：左2/3 右1/3 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <FeatureCard
+                  title={features[2]?.title}
+                  desc={features[2]?.desc}
+                  delay={0.3}
+                  colSpan={2}
+                />
+                <FeatureCard
+                  title={features[3]?.title}
+                  desc={features[3]?.desc}
+                  delay={0.4}
+                  colSpan={1}
+                />
+              </div>
+
+              {/* 第三行：左1/3 右2/3 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <FeatureCard
+                  title={features[4]?.title}
+                  desc={features[4]?.desc}
+                  delay={0.5}
+                  colSpan={1}
+                />
+                <FeatureCard
+                  title={features[5]?.title}
+                  desc={features[5]?.desc}
+                  delay={0.6}
+                  colSpan={2}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* 4. 图片展示区块 */}
+        <section className="max-w-7xl px-6 mx-auto py-20">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
+            {t("interfaceTitle")}
+          </h2>
+          <div className="mb-16 flex justify-center">
+            <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
+          </div>
+          <div className="flex items-center justify-center gap-0 max-w-4xl mx-auto">
+            {/* 左边图片 - 逆时针旋转15度 */}
+            <ImageCard
+              src={Item1}
+              alt="Item 1"
+              delay={0.1}
+              rotation={-15}
+              transformOrigin="right bottom"
+              className="w-48 md:w-64"
+            />
+
+            {/* 中间图片 - 不旋转 */}
+            <ImageCard
+              src={Item2}
+              alt="Item 2"
+              delay={0.2}
+              rotation={0}
+              transformOrigin="center"
+              className="w-56 md:w-72"
+              isCenter={true}
+            />
+
+            {/* 右边图片 - 顺时针旋转15度 */}
+            <ImageCard
+              src={Item3}
+              alt="Item 3"
+              delay={0.3}
+              rotation={15}
+              transformOrigin="left bottom"
+              className="w-48 md:w-64"
+            />
+          </div>
+        </section>
+        {/* 5. 用户评价瀑布流 */}
+        <section className="relative py-20 max-w-7xl px-6 mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
+            {t("reviewsTitle")}
           </h2>
           <div className="mb-16 flex justify-center">
             <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
           </div>
 
-          {/* 交叉布局卡片容器 */}
-          <div className="w-full mx-auto space-y-8">
-            {/* 第一行：左1/3 右2/3 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FeatureCard
-                title={features[0]?.title}
-                desc={features[0]?.desc}
-                delay={0.1}
-                colSpan={1}
-              />
-              <FeatureCard
-                title={features[1]?.title}
-                desc={features[1]?.desc}
-                delay={0.2}
-                colSpan={2}
-                showPlatforms={true}
-              />
+          {/* 瀑布流容器 */}
+          <div className="relative">
+            {/* 三列瀑布流布局 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+              {/* 第一列 */}
+              <div className="space-y-6">
+                {[0, 3, 6, 9, 12].map((reviewIndex) => {
+                  const review = waterfallReviews[reviewIndex];
+                  if (!review) return null;
+                  return (
+                    <ReviewCard
+                      key={`col1-${reviewIndex}`}
+                      user={review.user}
+                      comment={review.comment}
+                      stars={review.stars}
+                      avatar={review.avatar}
+                      delay={reviewIndex * 0.1}
+                    />
+                  );
+                })}
+              </div>
+              {/* 第二列 */}
+              <div className="space-y-6">
+                {[1, 4, 7, 10].map((reviewIndex) => {
+                  const review = waterfallReviews[reviewIndex];
+                  if (!review) return null;
+                  return (
+                    <ReviewCard
+                      key={`col2-${reviewIndex}`}
+                      user={review.user}
+                      comment={review.comment}
+                      stars={review.stars}
+                      avatar={review.avatar}
+                      delay={reviewIndex * 0.1}
+                    />
+                  );
+                })}
+              </div>
+              {/* 第三列 */}
+              <div className="space-y-6">
+                {[2, 5, 8, 11].map((reviewIndex) => {
+                  const review = waterfallReviews[reviewIndex];
+                  if (!review) return null;
+                  return (
+                    <ReviewCard
+                      key={`col3-${reviewIndex}`}
+                      user={review.user}
+                      comment={review.comment}
+                      stars={review.stars}
+                      avatar={review.avatar}
+                      delay={reviewIndex * 0.1}
+                    />
+                  );
+                })}
+              </div>
             </div>
 
-            {/* 第二行：左2/3 右1/3 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FeatureCard
-                title={features[2]?.title}
-                desc={features[2]?.desc}
-                delay={0.3}
-                colSpan={2}
-              />
-              <FeatureCard
-                title={features[3]?.title}
-                desc={features[3]?.desc}
-                delay={0.4}
-                colSpan={1}
-              />
-            </div>
-
-            {/* 第三行：左1/3 右2/3 */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FeatureCard
-                title={features[4]?.title}
-                desc={features[4]?.desc}
-                delay={0.5}
-                colSpan={1}
-              />
-              <FeatureCard
-                title={features[5]?.title}
-                desc={features[5]?.desc}
-                delay={0.6}
-                colSpan={2}
-              />
-            </div>
+            {/* 底部渐变遮罩 */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
           </div>
-        </div>
-      </section>
-      {/* 4. 图片展示区块 */}
-      <section className="max-w-screen-2xl px-[5vw] mx-auto py-20">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
-          {t("interfaceTitle")}
-        </h2>
-        <div className="mb-16 flex justify-center">
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
-        </div>
-        <div className="flex items-center justify-center gap-0 max-w-4xl mx-auto">
-          {/* 左边图片 - 逆时针旋转15度 */}
-          <ImageCard
-            src={Item1}
-            alt="Item 1"
-            delay={0.1}
-            rotation={-15}
-            transformOrigin="right bottom"
-            className="w-48 md:w-64"
-          />
-
-          {/* 中间图片 - 不旋转 */}
-          <ImageCard
-            src={Item2}
-            alt="Item 2"
-            delay={0.2}
-            rotation={0}
-            transformOrigin="center"
-            className="w-56 md:w-72"
-            isCenter={true}
-          />
-
-          {/* 右边图片 - 顺时针旋转15度 */}
-          <ImageCard
-            src={Item3}
-            alt="Item 3"
-            delay={0.3}
-            rotation={15}
-            transformOrigin="left bottom"
-            className="w-48 md:w-64"
-          />
-        </div>
-      </section>
-      {/* 5. 用户评价瀑布流 */}
-      <section className="relative py-20 max-w-screen-2xl px-[5vw] mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4">
-          {t("reviewsTitle")}
-        </h2>
-        <div className="mb-16 flex justify-center">
-          <div className="w-24 h-px bg-gradient-to-r from-transparent via-purple-400/50 to-transparent" />
-        </div>
-
-        {/* 瀑布流容器 */}
-        <div className="relative">
-          {/* 三列瀑布流布局 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {/* 第一列 */}
-            <div className="space-y-6">
-              {[0, 3, 6, 9, 12].map((reviewIndex) => {
-                const review = waterfallReviews[reviewIndex];
-                if (!review) return null;
-                return (
-                  <ReviewCard
-                    key={`col1-${reviewIndex}`}
-                    user={review.user}
-                    comment={review.comment}
-                    stars={review.stars}
-                    avatar={review.avatar}
-                    delay={reviewIndex * 0.1}
-                  />
-                );
-              })}
-            </div>
-            {/* 第二列 */}
-            <div className="space-y-6">
-              {[1, 4, 7, 10].map((reviewIndex) => {
-                const review = waterfallReviews[reviewIndex];
-                if (!review) return null;
-                return (
-                  <ReviewCard
-                    key={`col2-${reviewIndex}`}
-                    user={review.user}
-                    comment={review.comment}
-                    stars={review.stars}
-                    avatar={review.avatar}
-                    delay={reviewIndex * 0.1}
-                  />
-                );
-              })}
-            </div>
-            {/* 第三列 */}
-            <div className="space-y-6">
-              {[2, 5, 8, 11].map((reviewIndex) => {
-                const review = waterfallReviews[reviewIndex];
-                if (!review) return null;
-                return (
-                  <ReviewCard
-                    key={`col3-${reviewIndex}`}
-                    user={review.user}
-                    comment={review.comment}
-                    stars={review.stars}
-                    avatar={review.avatar}
-                    delay={reviewIndex * 0.1}
-                  />
-                );
-              })}
-            </div>
-          </div>
-
-          {/* 底部渐变遮罩 */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/60 to-transparent pointer-events-none" />
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 }
