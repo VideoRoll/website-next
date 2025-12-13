@@ -93,34 +93,34 @@ export default function Welcome() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if (version) {
-      try {
-        const installData = {
-          version
-        };
+  // useEffect(() => {
+  //   if (version) {
+  //     try {
+  //       const installData = {
+  //         version
+  //       };
 
-        // Default API call
-        fetch("/api/install", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(installData),
-        }).then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to install info");
-          }
-        }).catch((error) => {
-          console.error("Error submitting install info:", error);
-        })
-        // Reset form after successful submission
-      } catch (error) {
-        console.error("Error submitting install info:", error);
-      } finally {
-      }
-    }
-  }, [version]);
+  //       // Default API call
+  //       fetch("/api/install", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(installData),
+  //       }).then((response) => {
+  //         if (!response.ok) {
+  //           throw new Error("Failed to install info");
+  //         }
+  //       }).catch((error) => {
+  //         console.error("Error submitting install info:", error);
+  //       })
+  //       // Reset form after successful submission
+  //     } catch (error) {
+  //       console.error("Error submitting install info:", error);
+  //     } finally {
+  //     }
+  //   }
+  // }, [version]);
 
   const handleGoToWebsite = () => {
     window.open("https://videoroll.app", "_blank");
