@@ -109,7 +109,7 @@ export default async function Hero() {
 
   return (
     <>
-      <div className="w-full h-[600px] absolute top-[-64px]">
+      <div className="w-full h-[600px] absolute top-[-64px] overflow-hidden">
         <CanvasStar speed={1.8}></CanvasStar>
       </div>
       <div className="w-full">
