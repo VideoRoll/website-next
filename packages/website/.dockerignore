@@ -1,0 +1,60 @@
+# 依赖
+**/node_modules
+**/.pnpm-store
+
+# Next.js
+**/.next
+**/out
+
+# 测试
+**/__tests__
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+**/coverage
+
+# Git
+.git
+.gitignore
+**/.github
+
+# 编辑器
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# 日志
+**/*.log
+**/logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# 环境变量（不要打包进镜像）
+**/.env*.local
+**/.env.development
+**/.env.test
+
+# 构建产物
+**/dist
+**/build
+
+# 文档
+README.md
+**/README.md
+**/*.md
+!packages/website/app/**/README.md
+
+# Docker 相关
+**/Dockerfile
+**/docker-compose.yml
+**/.dockerignore
+
+# 其他
+.DS_Store
+**/.DS_Store
+Thumbs.db
