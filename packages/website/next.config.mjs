@@ -8,6 +8,8 @@ const withNextIntl = createNextIntlPlugin({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // 启用 standalone 输出模式,优化 Docker 部署
+  output: "standalone",
   typescript: {
     // !! WARN !!
     // Dangerously allow production builds to successfully complete even if
