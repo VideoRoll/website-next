@@ -36,15 +36,10 @@ COPY --from=deps /app/packages/website/node_modules ./packages/website/node_modu
 COPY . .
 
 # 设置环境变量
-ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
 # 使用构建密钥注入环境变量并构建
-RUN --mount=type=secret,id=supabase_url \
-    --mount=type=secret,id=supabase_anon_key \
-    export NEXT_PUBLIC_SUPABASE_URL=$(cat /run/secrets/supabase_url) && \
-    export NEXT_PUBLIC_SUPABASE_ANON_KEY=$(cat /run/secrets/supabase_anon_key) && \
-    pnpm -F @website-next/website build
+RUN pnpm -F @website-next/website build
 
 # 阶段 3: 运行时
 FROM node:20-alpine AS runner
