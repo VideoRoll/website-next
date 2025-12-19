@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from '@heroui/react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface FooterProps {
   className?: string;
@@ -16,23 +16,20 @@ export default function Footer({
   logoHref = '/'
 }: FooterProps) {
   const t = useTranslations('footer');
+  const locale = useLocale();
 
   const FOOTER_LINKS = [
     {
       label: t('links.privacy'),
-      href: '/privacy',
+      href: `https://docs.videoroll.app/${locale === 'zh' ? 'cn' : locale}/docs/privacy`,
     },
     {
       label: t('links.about'),
-      href: '/about',
+      href: `https://docs.videoroll.app/${locale === 'zh' ? 'cn' : locale}/docs`,
     },
     {
       label: t('links.contact'),
-      href: '/contact',
-    },
-    {
-      label: t('links.friendlyLinks'),
-      href: '/links',
+      href: `https://docs.videoroll.app/${locale === 'zh' ? 'cn' : locale}/docs/help`,
     },
     {
       label: t('links.bugReport'),
@@ -59,6 +56,7 @@ export default function Footer({
               <Link
                 key={index}
                 href={link.href}
+                target="_blank"
                 className="text-gray-300 hover:text-white transition-colors text-sm"
               >
                 {link.label}
