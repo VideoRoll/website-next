@@ -58,7 +58,8 @@
       "profile": "个人信息",
       "privacy": "数据和隐私声明",
       "subscription": "订阅信息",
-      "about": "关于"
+      "about": "关于",
+      "account": "账号"
     },
     "profile": {
       "googleAccount": "Google 账号",
@@ -69,7 +70,9 @@
       "loginMethod": "登录方式",
       "googleOAuth": "Google OAuth",
       "githubOAuth": "GitHub OAuth",
-      "emailPassword": "邮箱密码"
+      "emailPassword": "邮箱密码",
+      "createdAt": "注册时间",
+      "lastSignInAt": "上次登录"
     },    "privacy": {
       "title": "数据和隐私声明",
       "intro": "我们非常重视您的数据安全和隐私保护。本插件承诺：",
@@ -102,6 +105,23 @@
       "contact": "联系方式",
       "email": "邮箱：",
       "website": "官网："
+    },
+    "account": {
+      "title": "删除账号",
+      "warning": "删除账号后，您的所有数据都将被删除且无法恢复。",
+      "deleteButton": "删除您的账号",
+      "confirmTitle": "确认删除账号",
+      "confirmDescription": "此操作不可逆。请输入您的邮箱地址以确认。",
+      "enterEmail": "您的账号邮箱：",
+      "emailLabel": "确认邮箱",
+      "emailPlaceholder": "输入您的邮箱以确认",
+      "copy": "复制",
+      "copied": "已复制！",
+      "cancel": "取消",
+      "confirm": "删除账号",
+      "deleteSuccess": "账号删除成功",
+      "deleteError": "删除失败",
+      "deleteFailed": "删除账号失败，请稍后重试。"
     }
   },
   "pricing": {
@@ -189,7 +209,9 @@
     "faq": "常见问题",
     "documentation": "文档",
     "language": "语言",
-    "login": "登录"
+    "login": "登录",
+    "dashboard": "控制台",
+    "logout": "退出登录"
   },
   "welcome": {
     "congratulations": "恭喜你成功安装",

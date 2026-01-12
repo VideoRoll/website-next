@@ -38,4 +38,4 @@ secrets:
   supabase_url:
     environment: NEXT_PUBLIC_SUPABASE_URL
   supabase_anon_key:
-    environment: NEXT_PUBLIC_SUPABASE_ANON_KEY
+    environment: NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY

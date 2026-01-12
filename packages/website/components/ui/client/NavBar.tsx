@@ -9,7 +9,7 @@ import {
   IconChevronDown,
   IconBrightnessUp,
   IconUser,
-  IconLanguage,
+  IconLanguage
 } from "@tabler/icons-react";
 import { createClient } from "@/utils/supabase/client";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -265,6 +265,7 @@ export default function NavBar(props: Props) {
                   as="button"
                   className="transition-transform"
                   src={currentUser.user_metadata?.avatar_url}
+                  fallback={<IconUser size={24} stroke={1.5} />}
                 />
               </DropdownTrigger>
               <DropdownMenu
@@ -286,12 +287,12 @@ export default function NavBar(props: Props) {
                 </DropdownSection>
                 <DropdownSection showDivider aria-label="Profile & Actions">
                   <DropdownItem key="dashboard" as={Link} href="/dashboard">
-                    Dashboard
+                    {t("dashboard")}
                   </DropdownItem>
                 </DropdownSection>
                 <DropdownSection aria-label="Profile & Actions">
-                  <DropdownItem key="logout" onClick={signout}>
-                    Log out
+                  <DropdownItem key="logout" onClick={signout} className="text-red-500">
+                    {t("logout")}
                   </DropdownItem>
                 </DropdownSection>
               </DropdownMenu>
@@ -392,7 +393,11 @@ export default function NavBar(props: Props) {
           <>
             <NavbarMenuItem key="user-info">
               <div className="flex items-center gap-3 py-2">
-                <Avatar size="sm" src={currentUser.user_metadata?.avatar_url} />
+                <Avatar
+                  size="sm"
+                  src={currentUser.user_metadata?.avatar_url}
+                  fallback={<IconUser size={20} stroke={1.5} />}
+                />
                 <div className="flex flex-col">
                   <p className="text-sm font-medium">
                     {currentUser.user_metadata?.name}
@@ -411,7 +416,7 @@ export default function NavBar(props: Props) {
                 size="lg"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Dashboard
+                {t("dashboard")}
               </Link>
             </NavbarMenuItem>
             <NavbarMenuItem key="logout">
@@ -425,7 +430,7 @@ export default function NavBar(props: Props) {
                   signout();
                 }}
               >
-                Log out
+                {t("logout")}
               </Button>
             </NavbarMenuItem>
           </>

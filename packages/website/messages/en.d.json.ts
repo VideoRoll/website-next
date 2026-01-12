@@ -94,7 +94,8 @@ declare const messages: {
       "profile": "Profile",
       "privacy": "Data & Privacy",
       "subscription": "Subscription",
-      "about": "About"
+      "about": "About",
+      "account": "Account"
     },
     "profile": {
       "googleAccount": "Google Account",
@@ -105,7 +106,9 @@ declare const messages: {
       "loginMethod": "Login Method",
       "googleOAuth": "Google OAuth",
       "githubOAuth": "GitHub OAuth",
-      "emailPassword": "Email & Password"
+      "emailPassword": "Email & Password",
+      "createdAt": "Registered At",
+      "lastSignInAt": "Last Sign In"
     },
     "privacy": {
       "title": "Data and Privacy Statement",
@@ -139,6 +142,23 @@ declare const messages: {
       "contact": "Contact Information",
       "email": "Email:",
       "website": "Website:"
+    },
+    "account": {
+      "title": "Delete Account",
+      "warning": "Once you delete your account, all of your data will be permanently removed and cannot be recovered.",
+      "deleteButton": "Delete your account",
+      "confirmTitle": "Confirm Account Deletion",
+      "confirmDescription": "This action is irreversible. Please enter your email address to confirm.",
+      "enterEmail": "Your account email:",
+      "emailLabel": "Confirm Email",
+      "emailPlaceholder": "Enter your email to confirm",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "cancel": "Cancel",
+      "confirm": "Delete Account",
+      "deleteSuccess": "Account deleted successfully",
+      "deleteError": "Delete Failed",
+      "deleteFailed": "Failed to delete account. Please try again later."
     }
   },
   "pricing": {
@@ -226,7 +246,9 @@ declare const messages: {
     "faq": "FAQ",
     "documentation": "Documentation",
     "language": "Language",
-    "login": "Login"
+    "login": "Login",
+    "dashboard": "Dashboard",
+    "logout": "Log out"
   },
   "welcome": {
     "congratulations": "Congratulations on successfully installing",
