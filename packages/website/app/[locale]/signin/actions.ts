@@ -23,7 +23,7 @@ export async function login(formData: FormData, locale: string = 'en', callback?
 
   if (error) {
     // Return error object instead of Promise.reject
-    return { error: error.message || "An error occurred during signin" };
+    return { error: 'Invalid email or password' };
   }
 
   return;
