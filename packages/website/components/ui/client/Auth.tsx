@@ -14,7 +14,6 @@ import {
   Input,
   Button,
   addToast,
-  Divider,
   Skeleton,
 } from "@heroui/react";
 import {
@@ -104,6 +103,7 @@ export default function Auth(props: Props) {
   const errorTimes = useRef(0);
 
   const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [isVisible, setIsVisible] = React.useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -186,6 +186,25 @@ export default function Auth(props: Props) {
       validationErrors={errors}
       onSubmit={handleSubmit}
     >
+      <Button
+        fullWidth
+        startContent={<Google></Google>}
+        onPress={() => handleOAuthSignin(onGoogleSignin)}
+      >
+        {type === "signin" ? t("signinWithGoogle") : t("signupWithGoogle")}
+      </Button>
+      <Button
+        fullWidth
+        startContent={<Github></Github>}
+        onPress={() => handleOAuthSignin(onGithubSignin)}
+      >
+        {type === "signin" ? t("signinWithGithub") : t("signupWithGithub")}
+      </Button>
+      <div className="flex items-center gap-3 my-4 w-full">
+        <div className="flex-1 h-px bg-default-200"></div>
+        <span className="text-sm text-gray-500">{t("or")}</span>
+        <div className="flex-1 h-px bg-default-200"></div>
+      </div>
       <Input
         value={email}
         type="email"
@@ -195,7 +214,7 @@ export default function Auth(props: Props) {
         variant="bordered"
         isInvalid={isInvalid}
         labelPlacement="outside"
-        placeholder={t("enterEmail")}
+        placeholder="you@example.com"
         color={isInvalid ? "danger" : "default"}
         errorMessage={isInvalid && t("emailInvalid")}
         onValueChange={setEmail}
@@ -207,9 +226,10 @@ export default function Auth(props: Props) {
         name="password"
         label={t("password")}
         variant="bordered"
-        defaultValue=""
+        value={password}
+        onValueChange={setPassword}
         labelPlacement="outside"
-        placeholder={t("enterPassword")}
+        placeholder="••••••••"
         isInvalid={false}
         errorMessage={false}
         className="w-full"
@@ -248,44 +268,33 @@ export default function Auth(props: Props) {
       ></Turnstile>
 
       <Button
-        isDisabled={captchaToken === ""}
+        isDisabled={captchaToken === "" || email === "" || password === "" || isInvalid}
         fullWidth
         type="submit"
         color="primary"
       >
         {type === "signin" ? t("signin") : t("signup")}
       </Button>
-      <Divider className="my-4" />
-      <Button
-        fullWidth
-        startContent={<Google></Google>}
-        onPress={() => handleOAuthSignin(onGoogleSignin)}
-      >
-        {type === "signin" ? t("signinWithGoogle") : t("signupWithGoogle")}
-      </Button>
-      <Button
-        fullWidth
-        startContent={<Github></Github>}
-        onPress={() => handleOAuthSignin(onGithubSignin)}
-      >
-        {type === "signin" ? t("signinWithGithub") : t("signupWithGithub")}
-      </Button>
       {type === "signin" ? (
-        <p className="text-left mt-2">
-          {t("noAccount")}{" "}
-          <Link href="/signup" className="text-primary-600">
+        <p className="w-full text-center mt-2 text-sm">
+          <span className="text-gray-300">
+            {t("noAccount")}{" "}
+          </span>
+          <Link href="/signup" className="text-white-500 underline">
             {t("signupLink")}
           </Link>
         </p>
       ) : (
-        <p className="text-left mt-2">
-          {t("hasAccount")}{" "}
-          <Link href="/signin" className="text-primary-600">
+        <p className="w-full text-center mt-2">
+          <span className="text-gray-300">
+            {t("hasAccount")}{" "}
+          </span>
+          <Link href="/signin" className="text-white-500 underline">
             {t("signinLink")}
           </Link>
         </p>
       )}
-      <p className="text-xs text-gray-200 mt-2 text-left">
+      <p className="w-full text-xs text-gray-300 mt-2 text-center">
         {t("agreementText")}
         <a
           href={`https://docs.videoroll.app/${
@@ -293,7 +302,7 @@ export default function Auth(props: Props) {
           }/docs/terms`}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline mx-1 text-primary-600"
+          className="underline mx-1 text-white-500"
         >
           {t("termsOfService")}
         </a>
@@ -304,7 +313,7 @@ export default function Auth(props: Props) {
           }/docs/privacy`}
           target="_blank"
           rel="noopener noreferrer"
-          className="underline mx-1 text-primary-600"
+          className="underline mx-1 text-white-500"
         >
           {t("privacyPolicy")}
         </a>

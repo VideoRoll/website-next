@@ -280,7 +280,8 @@
     "agreementText": "By registering/signing in, you agree to our",
     "termsOfService": "Terms of Service",
     "and": "and",
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "or": "or"
   },
   "cookie": {
     "title": "Cookie Notice",
@@ -485,5 +486,13 @@
     "errorMessage": "Failed to submit feedback. Please try again later.",
     "required": "This field is required",
     "minSelection": "Please select at least one option"
+  },
+  "confirmEmail": {
+    "title": "Confirm your email",
+    "description": "We've sent a confirmation link to your email address. Please check your inbox and click the link to verify your account.",
+    "tip": "Don't see the email? Check your spam folder or wait a few minutes for it to arrive.",
+    "returnHome": "Return to Home",
+    "backToSignIn": "Back to Sign In",
+    "needHelp": "Need help? Contact our support team"
   }
 }
