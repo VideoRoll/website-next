@@ -1,6 +1,9 @@
 import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
 
-export default function ConfirmEmailPage() {
+export default async function ConfirmEmailPage() {
+    const t = await getTranslations("confirmEmail");
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800 px-4">
             <div className="max-w-md w-full bg-gray-800 rounded-2xl shadow-xl p-8 text-center border border-gray-700">
@@ -25,19 +28,18 @@ export default function ConfirmEmailPage() {
 
                 {/* 标题 */}
                 <h1 className="text-2xl font-bold text-white mb-4">
-                    Confirm your email
+                    {t("title")}
                 </h1>
                 
                 {/* 描述文本 */}
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                    We've sent a confirmation link to your email address. 
-                    Please check your inbox and click the link to verify your account.
+                    {t("description")}
                 </p>
 
                 {/* 提示信息 */}
                 <div className="bg-purple-900/20 border border-purple-800 rounded-lg p-4 mb-6">
                     <p className="text-sm text-purple-200">
-                        💡 Don't see the email? Check your spam folder or wait a few minutes for it to arrive.
+                        💡 {t("tip")}
                     </p>
                 </div>
 
@@ -47,20 +49,20 @@ export default function ConfirmEmailPage() {
                         href="/"
                         className="block w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
                     >
-                        Return to Home
+                        {t("returnHome")}
                     </Link>
                     
                     <Link 
                         href="/signin"
                         className="block w-full border border-gray-600 hover:bg-gray-700 text-gray-300 font-medium py-3 px-4 rounded-lg transition-colors duration-200"
                     >
-                        Back to Sign In
+                        {t("backToSignIn")}
                     </Link>
                 </div>
 
                 {/* 底部提示 */}
                 <p className="text-xs text-gray-400 mt-6">
-                    Need help? Contact our support team
+                    {t("needHelp")}
                 </p>
             </div>
         </div>
