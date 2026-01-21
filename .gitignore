@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.turbo
 
 
 # testing
@@ -15,10 +16,17 @@ packages/**/.next/
 packages/**/node_modules/
 packages/**/out/
 packages/**/_pagefind/
+apps/**/.next/
+apps/**/node_modules/
+apps/**/out/
+apps/**/_pagefind/
 /out/
 
 # production
-/build
+/build  
+
+apps/**/build
+apps/**/dist
 
 # misc
 .DS_Store

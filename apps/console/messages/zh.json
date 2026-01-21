@@ -1,0 +1,128 @@
+{
+  "dashboard": {
+    "title": "控制面板",
+    "welcome": "欢迎回来",
+    "navigation": {
+      "home": "首页",
+      "analytics": "数据分析",
+      "users": "用户管理",
+      "settings": "设置",
+      "profile": "个人资料",
+      "subscription": "订阅管理",
+      "privacy": "数据与隐私",
+      "about": "关于",
+      "account": "账户",
+      "logout": "退出登录"
+    },
+    "overview": {
+      "title": "概览",
+      "totalUsers": "总用户数",
+      "activeUsers": "活跃用户",
+      "revenue": "收入",
+      "growth": "增长"
+    },
+    "recentActivity": {
+      "title": "最近活动",
+      "noActivity": "暂无最近活动"
+    },
+    "stats": {
+      "title": "统计数据",
+      "views": "页面浏览量",
+      "sessions": "会话数",
+      "bounceRate": "跳出率",
+      "avgDuration": "平均时长"
+    },
+    "profile": {
+      "googleAccount": "Google 账户",
+      "githubAccount": "GitHub 账户",
+      "emailAccount": "邮箱账户",
+      "accountInfo": "账户信息",
+      "loginEmail": "登录邮箱",
+      "loginMethod": "登录方式",
+      "googleOAuth": "Google OAuth",
+      "githubOAuth": "GitHub OAuth",
+      "emailPassword": "邮箱密码",
+      "createdAt": "注册时间",
+      "lastSignInAt": "最后登录"
+    },
+    "privacy": {
+      "title": "数据与隐私声明",
+      "intro": "我们非常重视您的数据安全和隐私保护。本插件承诺：",
+      "policies": {
+        "0": "您的个人信息仅用于账户登录和基本服务功能",
+        "1": "我们不会将您的数据用于任何商业推广目的",
+        "2": "您的数据不会被泄露或出售给任何第三方",
+        "3": "所有数据传输均经过加密",
+        "4": "您可以随时删除您的账户及相关数据"
+      },
+      "footer": "更多详情，请查看我们的完整隐私政策。如有任何疑问，请随时联系我们。"
+    },
+    "subscription": {
+      "title": "订阅信息",
+      "freePlan": "免费计划",
+      "freePlanDesc": "您正在使用免费计划，享受所有基本功能",
+      "features": {
+        "0": "基本视频下载功能",
+        "1": "多格式支持",
+        "2": "基本技术支持"
+      },
+      "upgrade": "升级计划（即将推出）"
+    },
+    "about": {
+      "title": "关于 VideoRoll Pro",
+      "description": "VideoRoll Pro 是一个强大的视频下载浏览器扩展，支持多种视频格式和网站。",
+      "pluginInfo": "插件信息",
+      "version": "版本：",
+      "developer": "开发者：",
+      "contact": "联系信息",
+      "email": "邮箱：",
+      "website": "网站："
+    },
+    "account": {
+      "title": "删除账户",
+      "warning": "一旦删除您的账户，您的所有数据将被永久删除且无法恢复。",
+      "deleteButton": "删除您的账户",
+      "confirmTitle": "确认删除账户",
+      "confirmDescription": "此操作不可逆。请输入您的邮箱地址以确认。",
+      "enterEmail": "您的账户邮箱：",
+      "emailLabel": "确认邮箱",
+      "emailPlaceholder": "输入您的邮箱以确认",
+      "copy": "复制",
+      "copied": "已复制！",
+      "cancel": "取消",
+      "confirm": "删除账户",
+      "deleteSuccess": "账户删除成功",
+      "deleteError": "删除失败",
+      "deleteFailed": "删除账户失败，请稍后重试。"
+    }
+  },
+  "tools": {
+    "title": "工具",
+    "description": "各种实用的视频和音频处理工具",
+    "navigation": {
+      "title": "工具"
+    },
+    "convert": {
+      "title": "格式转换",
+      "description": "转换视频和音频文件格式"
+    }
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "retry": "重试",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "search": "搜索",
+    "noResults": "未找到结果",
+    "modules": {
+      "dashboard": "仪表板",
+      "tools": "工具"
+    },
+    "loginRequired": "需要登录",
+    "loginDescription": "请登录以访问控制面板",
+    "loginButton": "登录"
+  }
+}
