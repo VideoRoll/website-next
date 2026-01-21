@@ -11,6 +11,8 @@ WORKDIR /app
 
 # 复制 workspace 配置文件（从 monorepo 根目录）
 COPY pnpm-workspace.yaml package.json pnpm-lock.yaml .npmrc ./
+# 复制 turbo.json 以支持 Turbo 构建
+COPY turbo.json ./
 
 # 复制所有 package.json 文件以利用缓存
 COPY apps/console/package.json ./apps/console/package.json
@@ -40,8 +42,8 @@ COPY . .
 # 设置环境变量
 ENV NODE_ENV=production
 
-# 使用构建密钥注入环境变量并构建
-RUN pnpm -F @website-next/console build
+# 使用 Turbo 构建，自动处理依赖关系（会先构建 @website-next/auth）
+RUN turbo run build --filter=@website-next/console
 
 # 阶段 3: 运行时
 FROM node:20-alpine AS runner
