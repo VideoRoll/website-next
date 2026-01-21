@@ -15,7 +15,7 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     serverActions: {
-      allowedOrigins: ["videoroll.app", "*.videoroll.app", "localhost:3002"],
+      allowedOrigins: ["videoroll.app", "*.videoroll.app", "localhost:3002", "localhost:3134"],
     },
   },
   images: {

@@ -23,7 +23,7 @@ const tools: Tool[] = [
     name: '格式转换',
     description: '转换视频和音频文件格式，支持 MP4、WebM、MKV、MOV、MP3、WAV、FLAC 等格式',
     category: 'video',
-    route: '/tools/convert',
+    route: '/console/tools/convert',
     icon: <Video className="h-6 w-6" />,
   },
 ];

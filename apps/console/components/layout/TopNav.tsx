@@ -31,11 +31,11 @@ import { createClient } from "@website-next/auth/supabase/client";
 import { getAuthConfig } from "@/lib/auth-init";
 
 function isDashboardRoute(pathname: string): boolean {
-  return !pathname.startsWith("/tools") && pathname !== "/";
+  return !pathname.startsWith("/console/tools") && pathname !== "/";
 }
 
 function isToolsRoute(pathname: string): boolean {
-  return pathname.startsWith("/tools");
+  return pathname.startsWith("/console/tools");
 }
 
 export function TopNav() {
@@ -51,11 +51,11 @@ export function TopNav() {
   const isTools = isToolsRoute(pathname);
 
   const handleDashboardClick = () => {
-    router.push("/profile");
+    router.push("/console/profile");
   };
 
   const handleToolsClick = () => {
-    router.push("/tools");
+    router.push("/console/tools");
   };
 
   const userEmail = currentUser?.email || "user@example.com";

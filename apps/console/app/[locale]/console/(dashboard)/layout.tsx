@@ -76,7 +76,7 @@ export default function DashboardLayout({
   const activePanel = extractPanelFromPath(pathname);
 
   const handleItemChange = (id: string) => {
-    router.push(`/${id}`);
+    router.push(`/console/${id}`);
   };
 
   if (!currentUser) {

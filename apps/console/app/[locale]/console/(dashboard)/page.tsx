@@ -14,5 +14,5 @@ export default async function Page({ params }: Props) {
   // 设置当前请求的 locale
   setRequestLocale(paramsData.locale);
 
-  return redirect(`/${paramsData.locale}/profile`);
+  return redirect(`/${paramsData.locale}/console/profile`);
 }
