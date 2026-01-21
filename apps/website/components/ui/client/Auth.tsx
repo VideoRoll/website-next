@@ -183,7 +183,7 @@ export default function Auth(props: Props) {
         
         if (isDevelopment && isSigninRedirect) {
           // 开发环境，登录成功后跳转到 console 应用的 profile 页面
-          window.location.href = `http://localhost:3134/${locale}/profile`;
+          window.location.href = `http://localhost:3134/${locale}/console/profile`;
         } else {
           redirectCallback(locale);
         }
