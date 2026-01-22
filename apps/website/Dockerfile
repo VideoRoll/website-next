@@ -42,10 +42,6 @@ COPY . .
 # 设置环境变量
 ENV NODE_ENV=production
 
-# 复制必要的文件
-COPY --from=builder /app/apps/website/next.config.mjs ./apps/website/
-COPY --from=builder /app/apps/website/package.json ./apps/website/
-
 # 使用 Turbo 构建，自动处理依赖关系（会先构建 @website-next/auth）
 RUN pnpm turbo run build --filter=@website-next/website
 
@@ -63,6 +59,10 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV PORT=3001
 ENV HOSTNAME=0.0.0.0
+
+# 复制必要的文件
+COPY --from=builder /app/apps/website/next.config.mjs ./apps/website/
+COPY --from=builder /app/apps/website/package.json ./apps/website/
 
 # 复制构建产物
 COPY --from=builder --chown=nextjs:nodejs /app/apps/website/.next/standalone ./

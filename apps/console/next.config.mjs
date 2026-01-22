@@ -26,7 +26,8 @@ const nextConfig = {
       },
     ],
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/console' : '',
+  basePath: '',
+  assetPrefix: '/console',
 };
 
 export default withNextIntl(nextConfig);
