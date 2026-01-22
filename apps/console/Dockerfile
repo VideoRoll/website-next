@@ -39,6 +39,8 @@ COPY --from=deps /app/packages/auth/node_modules ./packages/auth/node_modules
 # 复制源代码
 COPY . .
 
+RUN rm -rf .next
+
 # 设置环境变量
 ENV NODE_ENV=production
 

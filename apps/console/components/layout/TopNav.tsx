@@ -111,7 +111,6 @@ export function TopNav() {
         >
           <LayoutDashboard className="h-4 w-4 mr-2" />
           {moduleT("dashboard")}
-          123123123123
         </Link>
         <Link
           href="/tools"
