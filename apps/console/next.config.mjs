@@ -15,7 +15,7 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     serverActions: {
-      allowedOrigins: ["videoroll.app", "*.videoroll.app", "localhost:3002", "localhost:3134"],
+      allowedOrigins: ["videoroll.app", "*.videoroll.app", "localhost:3002", "localhost:3134", "console.videoroll.app"],
     },
   },
   images: {
@@ -27,7 +27,7 @@ const nextConfig = {
     ],
   },
   basePath: '/console',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/console' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://console.videoroll.app' : '',
 };
 
 export default withNextIntl(nextConfig);
