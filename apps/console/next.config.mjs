@@ -28,7 +28,7 @@ const nextConfig = {
   },
   basePath: '/console',
   // 关键配置，用于不同子域名下可以指向正确的资源
-  // assetPrefix: '/console',
+  assetPrefix: '/console',
 };
 
 export default withNextIntl(nextConfig);
