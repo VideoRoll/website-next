@@ -26,8 +26,7 @@ const nextConfig = {
       },
     ],
   },
-  basePath: '/console',
-  assetPrefix: process.env.NODE_ENV === 'production' ? 'https://console.videoroll.app' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/console' : '',
 };
 
 export default withNextIntl(nextConfig);
