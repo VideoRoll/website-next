@@ -39,13 +39,13 @@ COPY --from=deps /app/packages/auth/node_modules ./packages/auth/node_modules
 # 复制源代码
 COPY . .
 
-RUN rm -rf .next
+RUN rm -rf apps/website/.next
 
 # 设置环境变量
 ENV NODE_ENV=production
 
 # 使用 Turbo 构建，自动处理依赖关系（会先构建 @website-next/auth）
-RUN pnpm turbo run build --filter=@website-next/website
+RUN pnpm turbo run build --filter=@website-next/website --force
 
 # 阶段 3: 运行时
 FROM node:20-alpine AS runner

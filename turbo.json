@@ -12,7 +12,8 @@
         "SUPABASE_SERVICE_ROLE_KEY",
         "STRIPE_SECRET_KEY",
         "STRIPE_SECRET_KEY_LIVE"
-      ]
+      ],
+      "cache": false
     },
     "check-types": {},
     "dev": {
