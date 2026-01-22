@@ -116,7 +116,7 @@ export default function DashboardPage(props: Props) {
                       <button
                         key={item.key}
                         onClick={() => setActiveTab(item.key)}
-                        className={`flex-shrink-0 flex flex-col items-center justify-center px-4 py-3 min-w-[80px] text-center transition-colors rounded-lg ${
+                        className={`shrink-0 flex flex-col items-center justify-center px-4 py-3 min-w-[80px] text-center transition-colors rounded-lg ${
                           activeTab === item.key
                             ? "bg-primary-100 text-primary-600"
                             : "text-gray-600 hover:bg-gray-100"

@@ -112,7 +112,7 @@ export default function HeroTitleSection({
           {/* 徽标图标 */}
           <IconAward
             size={20}
-            className="text-blue-500 dark:text-blue-400 flex-shrink-0"
+            className="text-blue-500 dark:text-blue-400 shrink-0"
           />
           {/* 渐变色文案 */}
           <span className="text-sm font-medium bg-gradient-to-r from-[#40ffaa] via-[#4079ff] to-[#40ffaa] bg-clip-text text-transparent bg-[length:200%_100%] animate-gradient whitespace-nowrap">

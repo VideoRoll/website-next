@@ -85,7 +85,7 @@ export default function FeatureCard({
               .map((platform, index) => (
                 <div
                   key={platform.name}
-                  className="flex-shrink-0 w-12 h-12 flex items-center justify-center text-gray-400 group-hover:text-purple-300 transition-colors duration-300"
+                  className="shrink-0 w-12 h-12 flex items-center justify-center text-gray-400 group-hover:text-purple-300 transition-colors duration-300"
                 >
                   {platform.icon}
                 </div>

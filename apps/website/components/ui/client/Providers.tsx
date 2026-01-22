@@ -27,8 +27,8 @@ export default function Providers({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <HeroUIProvider>
         <NextThemesProvider forcedTheme="dark">
-          <ToastProvider placement="top-center" toastOffset={60} />
           {children}
+          <ToastProvider placement="top-center" toastOffset={60} />
           <GlobalLoadingPortal />
         </NextThemesProvider>
       </HeroUIProvider>

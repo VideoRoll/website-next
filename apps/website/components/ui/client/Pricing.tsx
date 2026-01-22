@@ -155,7 +155,7 @@ export default function Pricing() {
               <CardHeader className="pb-4 h-[160px] flex flex-col items-start justify-start">
                 {/* 标题行 - 固定高度，左对齐 */}
                 <div className="flex items-center justify-start gap-3 h-12 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center shrink-0">
                     <IconGift size={24} className="text-white" />
                   </div>
                   <div className="flex-1">
@@ -197,12 +197,12 @@ export default function Pricing() {
                             {freeFeatures[feature.key] ? (
                               <IconCheck
                                 size={20}
-                                className="text-green-500 flex-shrink-0"
+                                className="text-green-500 shrink-0"
                               />
                             ) : (
                               <IconX
                                 size={20}
-                                className="text-red-500 flex-shrink-0"
+                                className="text-red-500 shrink-0"
                               />
                             )}
                             <span
@@ -250,7 +250,7 @@ export default function Pricing() {
                 {/* 标题行 - 固定高度，左对齐，推荐标识在右侧 */}
                 <div className="flex items-center justify-start gap-3 h-12 mb-4">
                   <div className="flex items-center gap-3 flex-1">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary to-secondary flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-primary to-secondary flex items-center justify-center shrink-0">
                       <IconCrown size={24} className="text-white" />
                     </div>
                     <div className="flex-1">
@@ -260,7 +260,7 @@ export default function Pricing() {
                     </div>
                   </div>
                   {/* 推荐标识 - 与标题同行 */}
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <div className="bg-gradient-to-r from-primary to-secondary px-3 py-1 rounded-full">
                       <span className="text-white text-xs font-semibold flex items-center gap-1">
                         <IconStarFilled size={14} />
@@ -302,7 +302,7 @@ export default function Pricing() {
                           >
                             <IconCheck
                               size={20}
-                              className="text-green-500 flex-shrink-0"
+                              className="text-green-500 shrink-0"
                             />
                             <span className="text-lg text-foreground">
                               {feature.label}

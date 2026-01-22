@@ -184,7 +184,7 @@ const CookieNotice: React.FC<CookieNoticeProps> = ({
             {/* 重要提示 */}
             <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3">
               <div className="flex items-start gap-2">
-                <IconShield className="w-4 h-4 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0" />
+                <IconShield className="w-4 h-4 text-red-600 dark:text-red-400 mt-0.5 shrink-0" />
                 <div>
                   <p className="text-xs font-medium text-red-800 dark:text-red-300 mb-1">
                     {t('important_notice')}

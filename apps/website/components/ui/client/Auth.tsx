@@ -141,9 +141,17 @@ export default function Auth(props: Props) {
     if (result && typeof result.catch === "function") {
       result.catch((error: any) => {
         hideGlobalLoading();
+
+        // 1. 检查是否是 Next.js 的重定向错误，如果是，我们什么都不做，让框架自行处理跳转
+        if (error?.message === 'NEXT_REDIRECT' || error?.digest?.includes('NEXT_REDIRECT')) {
+          return; 
+        }
+
+        // 2. 只有真正的错误才弹出 Toast
         addToast({
           title: t("oauthError"),
-          description: error,
+          // 确保这里传入的是 string 而不是 object
+          description: error instanceof Error ? error.message : String(error), 
           color: "danger",
         });
         console.log(error);
@@ -167,7 +175,7 @@ export default function Auth(props: Props) {
       if (result && result.error) {
         addToast({
           title: t("error"),
-          description: result.error,
+          description: '123',
           color: "danger",
         });
         turnstile.reset();

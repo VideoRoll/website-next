@@ -3,9 +3,7 @@
 
 import React from "react";
 
-import { HeroUIProvider, ToastProvider } from "@heroui/react";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
 import {
   getMessages,

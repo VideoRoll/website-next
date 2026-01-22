@@ -1,6 +1,6 @@
 // app/layout.tsx
 
-// globals.css includes @tailwind directives
+// globals.css includes Tailwind CSS v4 @import syntax
 // adjust the path if necessary
 import React from "react";
 import Banner from "@/components/icons/Banner";

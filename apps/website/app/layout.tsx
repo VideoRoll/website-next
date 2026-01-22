@@ -57,7 +57,7 @@ export default async function LocaleLayout({
     <html
       suppressHydrationWarning
       lang={locale}
-      className="bg-background dark:bg-background-dark"
+      className="dark bg-background dark:bg-background-dark"
     >
       <head>
         <script
