@@ -1,0 +1,35 @@
+{
+  "name": "@website-next/auth",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    "./config": "./config.ts",
+    "./types": "./types.ts",
+    "./supabase/client": "./supabase/client.ts",
+    "./supabase/server": "./supabase/server.ts",
+    "./supabase/middleware": "./supabase/middleware.ts",
+    "./supabase/admin": "./supabase/admin.ts",
+    "./supabase/login": "./supabase/login.ts",
+    "./supabase/queries": "./supabase/queries.ts",
+    "./auth-helpers/client": "./auth-helpers/client.ts",
+    "./auth-helpers/server": "./auth-helpers/server.ts",
+    "./auth-helpers/props": "./auth-helpers/props.ts",
+    "./auth-helpers/settings": "./auth-helpers/settings.ts",
+    "./utils/helpers": "./utils/helpers.ts",
+    "./utils/crypto": "./utils/crypto.ts",
+    "./utils/stripe": "./utils/stripe.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.90.1",
+    "crypto-js": "^4.2.0",
+    "next": "^15.3.6",
+    "react": "^18",
+    "stripe": "^17.0.0"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^20",
+    "typescript": "^5"
+  }
+}
