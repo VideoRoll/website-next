@@ -75,10 +75,6 @@ export default function DashboardLayout({
   const { currentUser } = useUser();
   const activePanel = extractPanelFromPath(pathname);
 
-  const handleItemChange = (id: string) => {
-    router.push(`/console/${id}`);
-  };
-
   if (!currentUser) {
     return renderLoginPrompt(router, commonT, locale);
   }
@@ -86,8 +82,7 @@ export default function DashboardLayout({
   return (
     <div className="flex h-full overflow-hidden p-6 gap-6">
       <Sidebar 
-        activeItem={activePanel} 
-        onItemChange={handleItemChange}
+        activeItem={activePanel}
       />
       <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-card/60 backdrop-blur-md border border-border/60 shadow-xl shadow-black/5 dark:shadow-black/20">
         <Header title={getHeaderTitle(activePanel, navT)} />

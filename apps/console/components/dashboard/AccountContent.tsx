@@ -13,12 +13,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@/contexts/UserContext";
-import { useRouter } from "@/i18n/navigation";
 
 export function AccountContent() {
   const t = useTranslations("dashboard.account");
   const { currentUser } = useUser();
-  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [confirmEmail, setConfirmEmail] = useState("");
   const [copied, setCopied] = useState(false);

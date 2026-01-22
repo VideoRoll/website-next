@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { usePathname, Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,15 +31,14 @@ import { createClient } from "@website-next/auth/supabase/client";
 import { getAuthConfig } from "@/lib/auth-init";
 
 function isDashboardRoute(pathname: string): boolean {
-  return !pathname.startsWith("/console/tools") && pathname !== "/";
+  return !pathname.startsWith("/tools") && pathname !== "/";
 }
 
 function isToolsRoute(pathname: string): boolean {
-  return pathname.startsWith("/console/tools");
+  return pathname.startsWith("/tools");
 }
 
 export function TopNav() {
-  const router = useRouter();
   const pathname = usePathname();
   const moduleT = useTranslations("common.modules");
   const navT = useTranslations("dashboard.navigation");
@@ -49,14 +48,6 @@ export function TopNav() {
 
   const isDashboard = isDashboardRoute(pathname);
   const isTools = isToolsRoute(pathname);
-
-  const handleDashboardClick = () => {
-    router.push("/console/profile");
-  };
-
-  const handleToolsClick = () => {
-    router.push("/console/tools");
-  };
 
   const userEmail = currentUser?.email || "user@example.com";
   const userName =
@@ -108,28 +99,32 @@ export function TopNav() {
       
       <header className="flex h-16 items-center justify-between border-b border-border/40 bg-card/40 backdrop-blur-sm px-6">
         <div className="flex items-center gap-2">
-        <Button
-          variant={isDashboard ? "secondary" : "ghost"}
+        <Link
+          href="/profile"
           className={cn(
+            buttonVariants({
+              variant: isDashboard ? "secondary" : "ghost",
+            }),
             "rounded-lg transition-all duration-200",
             isDashboard && "text-primary bg-secondary"
           )}
-          onClick={handleDashboardClick}
         >
           <LayoutDashboard className="h-4 w-4 mr-2" />
           {moduleT("dashboard")}
-        </Button>
-        <Button
-          variant={isTools ? "secondary" : "ghost"}
+        </Link>
+        <Link
+          href="/tools"
           className={cn(
+            buttonVariants({
+              variant: isTools ? "secondary" : "ghost",
+            }),
             "rounded-lg transition-all duration-200",
             isTools && "text-primary bg-secondary"
           )}
-          onClick={handleToolsClick}
         >
           <Wrench className="h-4 w-4 mr-2" />
           {moduleT("tools")}
-        </Button>
+        </Link>
       </div>
 
       <div className="flex items-center gap-2">

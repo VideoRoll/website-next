@@ -18,7 +18,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, Link } from "@/i18n/navigation";
+import { buttonVariants } from "@/components/ui/button";
 
 interface NavItem {
   id: string;
@@ -33,12 +34,15 @@ const dashboardNavItems: NavItem[] = [
   { id: "about", icon: Info, translationKey: "about" },
 ];
 
+const getNavPath = (id: string) => {
+  return `/${id}` as "/profile";
+};
+
 interface SidebarProps {
   activeItem: string;
-  onItemChange: (id: string) => void;
 }
 
-export function Sidebar({ activeItem, onItemChange }: SidebarProps) {
+export function Sidebar({ activeItem }: SidebarProps) {
   const t = useTranslations("dashboard.navigation");
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = React.useState(false);
@@ -81,7 +85,6 @@ export function Sidebar({ activeItem, onItemChange }: SidebarProps) {
               isActive={activeItem === item.id}
               isCollapsed={isCollapsed}
               label={t(item.translationKey)}
-              onClick={() => onItemChange(item.id)}
             />
           ))}
         </nav>
@@ -95,7 +98,6 @@ interface NavButtonProps {
   isActive: boolean;
   isCollapsed: boolean;
   label: string;
-  onClick: () => void;
 }
 
 function NavButton({
@@ -103,24 +105,25 @@ function NavButton({
   isActive,
   isCollapsed,
   label,
-  onClick,
 }: NavButtonProps) {
   const Icon = item.icon;
 
   const button = (
-    <Button
-      variant={isActive ? "secondary" : "ghost"}
+    <Link
+      href={getNavPath(item.id)}
       className={cn(
+        buttonVariants({
+          variant: isActive ? "secondary" : "ghost",
+        }),
         "w-full justify-start transition-all duration-200",
         isActive && "text-primary",
         !isActive && "text-muted-foreground hover:text-foreground",
         isCollapsed && "justify-center px-2"
       )}
-      onClick={onClick}
     >
       <Icon className={cn("h-4 w-4 transition-transform", !isCollapsed && "mr-2", isActive && "scale-110")} />
       {!isCollapsed && <span className="font-medium">{label}</span>}
-    </Button>
+    </Link>
   );
 
   if (isCollapsed) {

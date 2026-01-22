@@ -175,7 +175,7 @@ export default function Auth(props: Props) {
       if (result && result.error) {
         addToast({
           title: t("error"),
-          description: '123',
+          description: result.error instanceof Error ? result.error.message : String(result.error),
           color: "danger",
         });
         turnstile.reset();
@@ -191,7 +191,7 @@ export default function Auth(props: Props) {
         
         if (isDevelopment && isSigninRedirect) {
           // 开发环境，登录成功后跳转到 console 应用的 profile 页面
-          window.location.href = `http://localhost:3134/${locale}/console/profile`;
+          window.location.href = `http://localhost:3134/console/${locale}/profile`;
         } else {
           redirectCallback(locale);
         }

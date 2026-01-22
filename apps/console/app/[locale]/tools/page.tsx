@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter } from '@/i18n/navigation';
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Video, Music, ArrowRight } from 'lucide-react';
@@ -23,7 +23,7 @@ const tools: Tool[] = [
     name: '格式转换',
     description: '转换视频和音频文件格式，支持 MP4、WebM、MKV、MOV、MP3、WAV、FLAC 等格式',
     category: 'video',
-    route: '/console/tools/convert',
+    route: '/tools/convert',
     icon: <Video className="h-6 w-6" />,
   },
 ];
@@ -34,15 +34,10 @@ const categoryLabels: Record<ToolCategory, string> = {
 };
 
 export default function ToolsPage() {
-  const router = useRouter();
   const t = useTranslations('tools');
 
   const videoTools = tools.filter((tool) => tool.category === 'video');
   const audioTools = tools.filter((tool) => tool.category === 'audio');
-
-  const handleToolClick = (route: string) => {
-    router.push(route as "/tools" | "/tools/convert");
-  };
 
   return (
     <div className="space-y-8">
@@ -58,26 +53,24 @@ export default function ToolsPage() {
           <h2 className="text-xl font-semibold">{categoryLabels.video}</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {videoTools.map((tool) => (
-              <Card
-                key={tool.id}
-                className="cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02]"
-                onClick={() => handleToolClick(tool.route)}
-              >
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className="rounded-lg bg-primary/10 p-2 text-primary">
-                      {tool.icon}
+              <Link key={tool.id} href={tool.route as "/tools" | "/tools/convert"}>
+                <Card className="cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02]">
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-lg bg-primary/10 p-2 text-primary">
+                        {tool.icon}
+                      </div>
+                      <div className="flex-1">
+                        <CardTitle className="text-lg">{tool.name}</CardTitle>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-muted-foreground" />
                     </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-lg">{tool.name}</CardTitle>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{tool.description}</CardDescription>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription>{tool.description}</CardDescription>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
@@ -88,26 +81,24 @@ export default function ToolsPage() {
           <h2 className="text-xl font-semibold">{categoryLabels.audio}</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {audioTools.map((tool) => (
-              <Card
-                key={tool.id}
-                className="cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02]"
-                onClick={() => handleToolClick(tool.route)}
-              >
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className="rounded-lg bg-primary/10 p-2 text-primary">
-                      {tool.icon}
+              <Link key={tool.id} href={tool.route as "/tools" | "/tools/convert"}>
+                <Card className="cursor-pointer transition-all hover:shadow-lg hover:scale-[1.02]">
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      <div className="rounded-lg bg-primary/10 p-2 text-primary">
+                        {tool.icon}
+                      </div>
+                      <div className="flex-1">
+                        <CardTitle className="text-lg">{tool.name}</CardTitle>
+                      </div>
+                      <ArrowRight className="h-4 w-4 text-muted-foreground" />
                     </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-lg">{tool.name}</CardTitle>
-                    </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription>{tool.description}</CardDescription>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription>{tool.description}</CardDescription>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
