@@ -19,6 +19,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.7",
     "@types/mdx": "^2.0.13",
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.7",
+    "turbo": "^2.7.4"
   }
 }

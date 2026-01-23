@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
+    "turbo": "^2.7.4",
     "typescript": "^5"
   }
 }
