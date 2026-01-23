@@ -7,7 +7,8 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { useUser } from "@/contexts/UserContext";
 import { Button } from "@/components/ui/button";
-import { LogIn } from "lucide-react";
+import { LogIn, PanelLeftOpen, PanelLeftClose } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type PanelId =
   | "profile"
@@ -74,6 +75,7 @@ export default function DashboardLayout({
   const locale = useLocale();
   const { currentUser } = useUser();
   const activePanel = extractPanelFromPath(pathname);
+  const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   if (!currentUser) {
     return renderLoginPrompt(router, commonT, locale);
@@ -81,9 +83,24 @@ export default function DashboardLayout({
 
   return (
     <div className="flex h-full overflow-hidden p-6 gap-6">
-      <Sidebar 
-        activeItem={activePanel}
-      />
+      <div className="relative">
+        <Sidebar 
+          activeItem={activePanel}
+          isCollapsed={isCollapsed}
+        />
+        <button
+          type="button"
+          className="absolute -right-3 top-4 z-10 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          aria-label={isCollapsed ? "展开侧边栏" : "收起侧边栏"}
+        >
+          {isCollapsed ? (
+            <PanelLeftOpen className="h-6 w-6" />
+          ) : (
+            <PanelLeftClose className="h-6 w-6" />
+          )}
+        </button>
+      </div>
       <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-card/60 backdrop-blur-md border border-border/60 shadow-xl shadow-black/5 dark:shadow-black/20">
         <Header title={getHeaderTitle(activePanel, navT)} />
         <main className="flex-1 overflow-y-auto p-6 custom-scrollbar">

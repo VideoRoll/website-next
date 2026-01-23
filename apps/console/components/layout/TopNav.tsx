@@ -102,22 +102,16 @@ export function TopNav() {
         <div className="flex items-center gap-2">
         <LinkButton
           href="/profile"
-          variant={isDashboard ? "secondary" : "ghost"}
-          className={cn(
-            "rounded-lg transition-all duration-200",
-            isDashboard && "text-primary bg-secondary"
-          )}
+          variant={isDashboard ? "default" : "ghost"}
+          className="rounded-lg transition-all duration-200"
         >
           <LayoutDashboard className="h-4 w-4 mr-2" />
           {moduleT("dashboard")}
         </LinkButton>
         <LinkButton
           href="/tools"
-          variant={isTools ? "secondary" : "ghost"}
-          className={cn(
-            "rounded-lg transition-all duration-200",
-            isTools && "text-primary bg-secondary"
-          )}
+          variant={isTools ? "default" : "ghost"}
+          className="rounded-lg transition-all duration-200"
         >
           <Wrench className="h-4 w-4 mr-2" />
           {moduleT("tools")}
