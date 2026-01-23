@@ -18,8 +18,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import { usePathname, Link } from "@/i18n/navigation";
-import { buttonVariants } from "@/components/ui/button";
+import { usePathname } from "@/i18n/navigation";
+import { LinkButton } from "@/components/ui/link-button";
 
 interface NavItem {
   id: string;
@@ -109,12 +109,10 @@ function NavButton({
   const Icon = item.icon;
 
   const button = (
-    <Link
+    <LinkButton
       href={getNavPath(item.id)}
+      variant={isActive ? "secondary" : "ghost"}
       className={cn(
-        buttonVariants({
-          variant: isActive ? "secondary" : "ghost",
-        }),
         "w-full justify-start transition-all duration-200",
         isActive && "text-primary",
         !isActive && "text-muted-foreground hover:text-foreground",
@@ -123,7 +121,7 @@ function NavButton({
     >
       <Icon className={cn("h-4 w-4 transition-transform", !isCollapsed && "mr-2", isActive && "scale-110")} />
       {!isCollapsed && <span className="font-medium">{label}</span>}
-    </Link>
+    </LinkButton>
   );
 
   if (isCollapsed) {

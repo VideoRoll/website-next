@@ -2,9 +2,10 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { usePathname, Link } from "@/i18n/navigation";
+import { usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import { LinkButton } from "@/components/ui/link-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -99,32 +100,28 @@ export function TopNav() {
       
       <header className="flex h-16 items-center justify-between border-b border-border/40 bg-card/40 backdrop-blur-sm px-6">
         <div className="flex items-center gap-2">
-        <Link
+        <LinkButton
           href="/profile"
+          variant={isDashboard ? "secondary" : "ghost"}
           className={cn(
-            buttonVariants({
-              variant: isDashboard ? "secondary" : "ghost",
-            }),
             "rounded-lg transition-all duration-200",
             isDashboard && "text-primary bg-secondary"
           )}
         >
           <LayoutDashboard className="h-4 w-4 mr-2" />
           {moduleT("dashboard")}
-        </Link>
-        <Link
+        </LinkButton>
+        <LinkButton
           href="/tools"
+          variant={isTools ? "secondary" : "ghost"}
           className={cn(
-            buttonVariants({
-              variant: isTools ? "secondary" : "ghost",
-            }),
             "rounded-lg transition-all duration-200",
             isTools && "text-primary bg-secondary"
           )}
         >
           <Wrench className="h-4 w-4 mr-2" />
           {moduleT("tools")}
-        </Link>
+        </LinkButton>
       </div>
 
       <div className="flex items-center gap-2">

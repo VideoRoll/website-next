@@ -44,7 +44,7 @@ function renderLoginPrompt(
       window.location.href = `http://localhost:3001/${locale}/signin`;
     } else {
       // 生产环境：使用内部路由
-      router.push('/signin');
+      window.location.href = `${window.location.origin}/${locale}/signin`;
     }
   };
 
