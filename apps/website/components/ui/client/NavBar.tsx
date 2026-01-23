@@ -82,7 +82,7 @@ export default function NavBar(props: Props) {
 
   const locale = useLocale();
   const isDev = process.env.NODE_ENV === "development";
-  const consoleUrl = isDev ? `http://localhost:3134/console/${locale}` : `/console/${locale}`;
+  const consoleUrl = isDev ? `http://localhost:3134/console/${locale}` : `console/${locale}`;
 
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([locale]));
 
