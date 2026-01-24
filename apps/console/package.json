@@ -2,11 +2,12 @@
   "name": "@website-next/console",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev -H 127.0.0.1 -p 3134",
-    "build": "next build",
-    "start": "next start -H 0.0.0.0 -p 3134",
-    "lint": "next lint"
+    "dev": "vite --host 127.0.0.1 --port 3134",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 3134",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@mediabunny/mp3-encoder": "^1.28.0",
@@ -22,18 +23,29 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "file-saver": "^2.0.5",
+    "i18next": "^25.6.2",
+    "i18next-browser-languagedetector": "^8.0.0",
     "lucide-react": "^0.468.0",
     "mediabunny": "^1.28.0",
-    "next-intl": "^4.1.0",
     "next-themes": "^0.4.6",
-    "nextjs-toploader": "^3.8.16",
+    "nprogress": "^0.2.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^16.5.3",
+    "react-router-dom": "^7.12.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@types/nprogress": "^0.2.3",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
-    "turbo": "^2.7.4"
+    "typescript": "^5.7.0",
+    "vite": "^7.3.1"
   }
 }
