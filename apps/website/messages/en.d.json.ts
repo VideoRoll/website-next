@@ -242,6 +242,7 @@ declare const messages: {
   },
   "nav": {
     "features": "Features",
+    "tools": "Tools",
     "pricing": "Pricing",
     "faq": "FAQ",
     "documentation": "Documentation",

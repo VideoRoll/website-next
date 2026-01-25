@@ -64,7 +64,7 @@ export type AudioTrackAction =
 
 export type VideoTrackAction =
 	| { type: 'copy' }
-	| { type: 'reencode'; codec?: string; bitrate?: number | Quality }
+	| { type: 'reencode'; codec?: string; bitrate?: number | Quality; rotate?: number }
 	| { type: 'drop' }
 	| { type: 'fail'; reason?: string };
 
@@ -750,14 +750,31 @@ function selectVideoOperation(params: {
 	}
 
 	const wanted = action.codec ?? requestedCodec;
+	const wantedRotate = (action as any).rotate;
+	
 	if (!wanted) {
+		// 如果没有指定编码器，但指定了旋转，需要创建一个新的操作
+		if (wantedRotate !== undefined) {
+			const firstReencode = operations.find((o) => o.type === 'reencode');
+			if (firstReencode && firstReencode.type === 'reencode') {
+				return { type: 'reencode', videoCodec: firstReencode.videoCodec, rotate: wantedRotate };
+			}
+		}
 		return firstVideoReencodeOrDrop(operations);
 	}
 
-	return (
-		operations.find((o) => o.type === 'reencode' && o.videoCodec === wanted) ??
-		firstVideoReencodeOrDrop(operations)
-	);
+	// 查找匹配编码器的操作
+	const matched = operations.find((o) => o.type === 'reencode' && o.videoCodec === wanted);
+	
+	// 如果指定了旋转，需要创建一个新的操作或修改现有操作
+	if (matched && matched.type === 'reencode') {
+		if (wantedRotate !== undefined) {
+			return { type: 'reencode', videoCodec: matched.videoCodec, rotate: wantedRotate };
+		}
+		return matched;
+	}
+
+	return firstVideoReencodeOrDrop(operations);
 }
 
 async function selectAudioOperation(params: {
@@ -855,6 +872,7 @@ function videoOperationToMediabunny(params: {
 		forceTranscode: true,
 		codec: op.videoCodec as any,
 		...(videoBitrate !== undefined ? { bitrate: videoBitrate } : null),
+		...(op.rotate !== undefined ? { rotate: op.rotate } : null),
 		keyFrameInterval: 2,
 	};
 }

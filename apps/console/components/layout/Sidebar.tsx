@@ -1,9 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/contexts/I18nContext";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -15,10 +14,7 @@ import {
   UserCircle,
   CreditCard,
   Info,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
-import { usePathname } from "@/i18n/navigation";
 import { LinkButton } from "@/components/ui/link-button";
 
 interface NavItem {
@@ -34,48 +30,26 @@ const dashboardNavItems: NavItem[] = [
   { id: "about", icon: Info, translationKey: "about" },
 ];
 
-const getNavPath = (id: string) => {
-  return `/${id}` as "/profile";
-};
+function getNavPath(id: string): string {
+  return `/dashboard/${id}`;
+}
 
 interface SidebarProps {
   activeItem: string;
+  isCollapsed: boolean;
 }
 
-export function Sidebar({ activeItem }: SidebarProps) {
+export function Sidebar({ activeItem, isCollapsed }: SidebarProps) {
   const t = useTranslations("dashboard.navigation");
-  const pathname = usePathname();
-  const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   return (
     <TooltipProvider delayDuration={0} skipDelayDuration={0}>
       <aside
         className={cn(
           "flex h-full flex-col transition-all duration-300 overflow-hidden",
-          isCollapsed ? "w-16" : "w-64"
+          isCollapsed ? "w-16" : "w-56"
         )}
       >
-        {/* Logo / Brand */}
-        <div className="flex h-16 items-center px-4">
-          {!isCollapsed && (
-            <span className="text-lg font-semibold text-sidebar-foreground">
-              VideoRoll
-            </span>
-          )}
-          <Button
-            variant="ghost"
-            size="icon"
-            className={cn("ml-auto h-8 w-8", isCollapsed && "mx-auto")}
-            onClick={() => setIsCollapsed(!isCollapsed)}
-          >
-            {isCollapsed ? (
-              <ChevronRight className="h-4 w-4" />
-            ) : (
-              <ChevronLeft className="h-4 w-4" />
-            )}
-          </Button>
-        </div>
-
         {/* Main Navigation */}
         <nav className="flex-1 space-y-1.5 p-3 overflow-y-auto overflow-x-visible custom-scrollbar">
           {dashboardNavItems.map((item) => (
@@ -111,10 +85,9 @@ function NavButton({
   const button = (
     <LinkButton
       href={getNavPath(item.id)}
-      variant={isActive ? "secondary" : "ghost"}
+      variant={isActive ? "default" : "ghost"}
       className={cn(
         "w-full justify-start transition-all duration-200",
-        isActive && "text-primary",
         !isActive && "text-muted-foreground hover:text-foreground",
         isCollapsed && "justify-center px-2"
       )}

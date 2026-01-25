@@ -32,8 +32,8 @@ export async function login(formData: FormData, locale: string = 'en', callback?
 }
 
 export async function signinRedirect(locale: string = 'en') {
-  revalidatePath(`/console/${locale}`, "layout");
-  redirect(`/console/${locale}`);
+  revalidatePath(`/console`, "layout");
+  redirect(`/console`);
   // 开发环境的重定向在客户端组件中处理
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/contexts/I18nContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

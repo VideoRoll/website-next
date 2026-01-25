@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/contexts/I18nContext";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 

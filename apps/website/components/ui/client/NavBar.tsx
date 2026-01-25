@@ -82,7 +82,8 @@ export default function NavBar(props: Props) {
 
   const locale = useLocale();
   const isDev = process.env.NODE_ENV === "development";
-  const consoleUrl = isDev ? `http://localhost:3134/console/${locale}` : `console/${locale}`;
+  const consoleUrl = isDev ? `http://localhost:3134/console` : `console`;
+  const toolsUrl = isDev ? `http://localhost:3134/console/tools` : `console/tools`;
 
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([locale]));
 
@@ -238,6 +239,16 @@ export default function NavBar(props: Props) {
           </Link>
         </NavbarItem>
         <NavbarItem>
+          <RegularLink
+            className="font-bold"
+            color="foreground"
+            href={toolsUrl}
+            target={isDev ? undefined : "_self"}
+          >
+            {t("tools")}
+          </RegularLink>
+        </NavbarItem>
+        <NavbarItem>
           <Link className="font-bold" aria-current="page" href="/pricing">
             {t("pricing")}
           </Link>
@@ -357,6 +368,16 @@ export default function NavBar(props: Props) {
           >
             {t("features")}
           </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="tools">
+          <RegularLink
+            className="w-full"
+            color="foreground"
+            href={toolsUrl}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("tools")}
+          </RegularLink>
         </NavbarMenuItem>
         <NavbarMenuItem key="pricing">
           <Link

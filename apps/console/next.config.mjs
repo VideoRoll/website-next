@@ -1,11 +1,3 @@
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin({
-  experimental: {
-    createMessagesDeclaration: "./messages/en.json",
-  },
-});
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
@@ -31,4 +23,4 @@ const nextConfig = {
   assetPrefix: '/console',
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;
