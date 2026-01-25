@@ -347,7 +347,11 @@ export default function ConvertPage() {
   const onCancel = React.useCallback(() => {
     controller?.cancel();
     addLog('warn', t('logMessages.cancelRequested'));
-  }, [controller, addLog, t]);
+    // 重置状态（但保留已选文件）
+    setController(null);
+    setProgress({ stage: 'idle', fraction: 0, message: '' });
+    clearOutput();
+  }, [controller, addLog, t, clearOutput]);
 
   const onDownload = React.useCallback(() => {
     if (!outputBlob) {
