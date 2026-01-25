@@ -414,7 +414,11 @@ export default function TransformPage() {
   const onCancel = React.useCallback(() => {
     controller?.cancel();
     addLog("warn", t("logMessages.cancelRequested"));
-  }, [controller, addLog, t]);
+    // 重置状态（但保留已选文件）
+    setController(null);
+    setProgress({ stage: "idle", fraction: 0, message: "" });
+    clearOutput();
+  }, [controller, addLog, t, clearOutput]);
 
   const onDownload = React.useCallback(() => {
     if (!outputBlob) {
@@ -611,19 +615,21 @@ export default function TransformPage() {
 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">{t("rotation")}</label>
-                  <div className="flex gap-2">
-                    {rotationOptions.map((opt) => (
-                      <Button
-                        key={opt.value}
-                        variant={rotation === opt.value ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => setRotation(opt.value)}
-                      >
-                        <RotateCw className="h-4 w-4 mr-1" />
-                        {opt.label}
-                      </Button>
-                    ))}
-                  </div>
+                  <Select
+                    value={rotation.toString()}
+                    onValueChange={(v) => setRotation(Number(v) as Rotation)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {rotationOptions.map((opt) => (
+                        <SelectItem key={opt.value} value={opt.value.toString()}>
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="space-y-2">
