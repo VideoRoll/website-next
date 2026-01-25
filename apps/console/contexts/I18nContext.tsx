@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import '@/i18n/config';
+import i18n, { changeLanguage as i18nChangeLanguage, type SupportedLocale } from '@/i18n/config';
 
 // 兼容 next-intl 的 useTranslations hook
 export function useTranslations(namespace?: string) {
@@ -20,12 +20,22 @@ export function useTranslations(namespace?: string) {
 }
 
 // 兼容 next-intl 的 useLocale hook
-export function useLocale() {
-  const { i18n, ready } = useTranslation();
-  // 如果还未准备好，返回默认语言
-  if (!ready || typeof window === 'undefined') return 'en' as const;
-  return (i18n.language || 'en') as 'zh' | 'en';
+export function useLocale(): SupportedLocale {
+  const { i18n: i18nInstance, ready } = useTranslation();
+  const [locale, setLocale] = useState<SupportedLocale>('en');
+
+  useEffect(() => {
+    if (ready && i18nInstance.language) {
+      const lang = i18nInstance.language.split('-')[0] as SupportedLocale;
+      setLocale(lang === 'zh' ? 'zh' : 'en');
+    }
+  }, [i18nInstance.language, ready]);
+
+  return locale;
 }
+
+// 导出 changeLanguage 函数
+export const changeLanguage = i18nChangeLanguage;
 
 // I18nProvider 组件（用于初始化 i18n 和避免 hydration 错误）
 export function I18nProvider({ children }: { children: React.ReactNode }) {

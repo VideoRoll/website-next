@@ -1,14 +1,11 @@
-import { type NextRequest } from 'next/server'
-import { updateSession } from '@website-next/auth/supabase/middleware'
-import createMiddleware from 'next-intl/middleware';
-import {routing} from './i18n/routing';
+import { type NextRequest } from 'next/server';
+import { updateSession } from '@website-next/auth/supabase/middleware';
 import { getAuthConfig } from './lib/auth-init';
- 
-export default createMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
   const config = getAuthConfig();
-  return await updateSession(request, config);
+  // 使用类型断言解决 monorepo 中 Next.js 版本不匹配的问题
+  return await updateSession(request as any, config);
 }
 
 export const config = {
@@ -20,13 +17,7 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    // Enable a redirect to a matching locale at the root
-    "/",
-
-    // Set a cookie to remember the previous locale for
-    // all requests that have a locale prefix
-    "/(zh|en)/:path*",
     '/((?!api|trpc|_next|_vercel|.*\\..*).*)',
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
-}
+};

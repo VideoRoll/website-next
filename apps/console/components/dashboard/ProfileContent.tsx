@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from "react";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations, useLocale } from "@/contexts/I18nContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
@@ -50,7 +50,7 @@ export function ProfileContent() {
 
   const userInitials = userName
     .split(' ')
-    .map(n => n[0])
+    .map((n: string) => n[0])
     .join('')
     .toUpperCase()
     .slice(0, 2) || 'U';

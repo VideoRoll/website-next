@@ -1,14 +1,13 @@
 'use client';
 
 import * as React from "react";
-import { useTranslations } from "@/contexts/I18nContext";
+import { useTranslations, useLocale } from "@/contexts/I18nContext";
 import { usePathname, useRouter } from "next/navigation";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { useUser } from "@/contexts/UserContext";
 import { Button } from "@/components/ui/button";
 import { LogIn, PanelLeftOpen, PanelLeftClose } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 type PanelId =
   | "profile"
@@ -35,13 +34,14 @@ function getHeaderTitle(activePanel: PanelId, navT: (key: string) => string): st
   return navT(`${activePanel}`) || navT('profile');
 }
 
-function renderLoginPrompt(
-  router: ReturnType<typeof useRouter>, 
-  t: (key: string) => string
-) {
+interface LoginPromptProps {
+  t: (key: string) => string;
+  locale: string;
+}
+
+function LoginPrompt({ t, locale }: LoginPromptProps) {
   const handleLogin = () => {
     const isDevelopment = process.env.NODE_ENV === 'development';
-    const locale = 'zh'; // 可以从 context 获取
     
     if (isDevelopment) {
       window.location.href = `http://localhost:3001/${locale}/signin`;
@@ -71,8 +71,8 @@ export default function DashboardLayout({
 }) {
   const navT = useTranslations('dashboard.navigation');
   const commonT = useTranslations('common');
+  const locale = useLocale();
   const pathname = usePathname();
-  const router = useRouter();
   const { currentUser, isLoading } = useUser();
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   
@@ -111,7 +111,7 @@ export default function DashboardLayout({
   }
 
   if (!currentUser) {
-    return renderLoginPrompt(router, commonT);
+    return <LoginPrompt t={commonT} locale={locale} />;
   }
 
   return (
@@ -121,21 +121,25 @@ export default function DashboardLayout({
           activeItem={sidebarProps.activeItem}
           isCollapsed={sidebarProps.isCollapsed}
         />
-        <button
-          type="button"
-          className="absolute -right-3 top-4 z-10 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
-          onClick={handleToggleCollapse}
-          aria-label={isCollapsed ? "展开侧边栏" : "收起侧边栏"}
-        >
-          {isCollapsed ? (
-            <PanelLeftOpen className="h-6 w-6" />
-          ) : (
-            <PanelLeftClose className="h-6 w-6" />
-          )}
-        </button>
       </div>
       <div className="flex flex-1 flex-col overflow-hidden rounded-2xl bg-card/60 backdrop-blur-md border border-border/60 shadow-xl shadow-black/5 dark:shadow-black/20">
-        <Header title={headerTitle} />
+        {/* Header 区域 - 包含展开/收起按钮和标题 */}
+        <header className="flex h-16 items-center border-b border-border/40 bg-card/40 backdrop-blur-sm px-6 rounded-t-2xl relative">
+          {/* 展开/收起按钮 - 位于左侧 */}
+          <button
+            type="button"
+            className="mr-4 cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
+            onClick={handleToggleCollapse}
+            aria-label={isCollapsed ? "展开侧边栏" : "收起侧边栏"}
+          >
+            {isCollapsed ? (
+              <PanelLeftOpen className="h-5 w-5" />
+            ) : (
+              <PanelLeftClose className="h-5 w-5" />
+            )}
+          </button>
+          <h1 className="text-xl font-semibold">{headerTitle}</h1>
+        </header>
         <main className="flex-1 overflow-y-auto p-6 custom-scrollbar">
           {children}
         </main>

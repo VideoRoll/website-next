@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { useTranslations } from '@/contexts/I18nContext';
+import { useTranslations, useLocale } from '@/contexts/I18nContext';
+import { useUser } from '@/contexts/UserContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,7 +16,14 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
-import { Loader2, Download, X, FileVideo, FileAudio } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Badge } from '@/components/ui/badge';
+import { Loader2, Download, X, FileVideo, FileAudio, FileText } from 'lucide-react';
 import { saveAs } from 'file-saver';
 import {
   convertMedia,
@@ -31,9 +39,16 @@ import {
 
 type AudioTrackMode = 'default' | 'copy' | 'first-only';
 
+// 文件大小限制：未登录 200MB，已登录 2GB
+const MAX_FILE_SIZE_GUEST = 200 * 1024 * 1024; // 200MB
+const MAX_FILE_SIZE_LOGGED_IN = 2 * 1024 * 1024 * 1024; // 2GB
+
 export default function ConvertPage() {
   const t = useTranslations('tools.convert');
+  const locale = useLocale();
+  const { currentUser } = useUser();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = React.useState(false);
   const [sourceFile, setSourceFile] = React.useState<File | null>(null);
   const [sourceUrl, setSourceUrl] = React.useState<string>('');
   const [container, setContainer] = React.useState<ContainerFormat>('mp4');
@@ -61,6 +76,7 @@ export default function ConvertPage() {
   const [outputName, setOutputName] = React.useState<string>('');
 
   const [logs, setLogs] = React.useState<Array<{ level: 'info' | 'warn' | 'error'; message: string; time: Date }>>([]);
+  const [isLogsDialogOpen, setIsLogsDialogOpen] = React.useState(false);
 
   const canConvert = React.useMemo(() => {
     return !!sourceFile && progress.stage !== 'converting' && progress.stage !== 'preparing';
@@ -69,6 +85,10 @@ export default function ConvertPage() {
   const isConverting = React.useMemo(() => {
     return progress.stage === 'preparing' || progress.stage === 'converting';
   }, [progress.stage]);
+
+  const hasError = React.useMemo(() => {
+    return progress.stage === 'error' || logs.some(log => log.level === 'error');
+  }, [progress.stage, logs]);
 
   const progressValue = React.useMemo(() => Math.round(progress.fraction * 100), [progress.fraction]);
 
@@ -100,15 +120,43 @@ export default function ConvertPage() {
     }
   }, [sourceUrl]);
 
+  const maxFileSize = React.useMemo(() => {
+    return currentUser ? MAX_FILE_SIZE_LOGGED_IN : MAX_FILE_SIZE_GUEST;
+  }, [currentUser]);
+
+  const formatFileSize = React.useCallback((bytes: number): string => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    if (bytes < 1024 * 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+    return `${(bytes / (1024 * 1024 * 1024)).toFixed(1)} GB`;
+  }, []);
+
+  const validateFileSize = React.useCallback(
+    (file: File): boolean => {
+      if (file.size > maxFileSize) {
+        addLog(
+          'error',
+          `${t('fileTooLarge')}: ${file.name} (${formatFileSize(file.size)}) > ${formatFileSize(maxFileSize)}`
+        );
+        return false;
+      }
+      return true;
+    },
+    [maxFileSize, formatFileSize, addLog, t]
+  );
+
   const setSourceFileHandler = React.useCallback(
     (file: File) => {
+      if (!validateFileSize(file)) {
+        return;
+      }
       clearOutput();
       revokeSourceUrl();
       setSourceFile(file);
       setSourceUrl(URL.createObjectURL(file));
-      addLog('info', `已选择文件: ${file.name} (${Math.round(file.size / 1024)} KB)`);
+      addLog('info', `${t('logMessages.fileSelected')}: ${file.name} (${formatFileSize(file.size)})`);
     },
-    [clearOutput, revokeSourceUrl, addLog]
+    [clearOutput, revokeSourceUrl, addLog, t, validateFileSize, formatFileSize]
   );
 
   const onPickFile = React.useCallback(() => {
@@ -124,6 +172,32 @@ export default function ConvertPage() {
       setSourceFileHandler(file);
       if (e.target) {
         e.target.value = '';
+      }
+    },
+    [setSourceFileHandler]
+  );
+
+  const handleDragOver = React.useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  }, []);
+
+  const handleDragLeave = React.useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  }, []);
+
+  const handleDrop = React.useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
+
+      const file = e.dataTransfer.files?.[0];
+      if (file) {
+        setSourceFileHandler(file);
       }
     },
     [setSourceFileHandler]
@@ -148,13 +222,13 @@ export default function ConvertPage() {
 
         addLog(
           'info',
-          `已加载编码器: container=${nextContainer}, audio=[${a.join(', ')}], video=[${v.join(', ')}]`
+          `${t('logMessages.codecLoaded')}: container=${nextContainer}, audio=[${a.join(', ')}], video=[${v.join(', ')}]`
         );
       } catch (err) {
-        addLog('error', `加载编码器失败: ${err instanceof Error ? err.message : String(err)}`);
+        addLog('error', `${t('logMessages.codecLoadFailed')}: ${err instanceof Error ? err.message : String(err)}`);
       }
     },
-    [addLog]
+    [addLog, t]
   );
 
   React.useEffect(() => {
@@ -219,12 +293,12 @@ export default function ConvertPage() {
     const videoCodec = supportsVideo ? (selectedVideoCodec ?? undefined) : undefined;
     const audioCodec = selectedAudioCodec ?? undefined;
 
-    addLog('info', `开始转换: ${file.name} -> ${container.toUpperCase()}`);
+    addLog('info', `${t('logMessages.conversionStarted')}: ${file.name} -> ${container.toUpperCase()}`);
     if (supportsVideo && videoCodec) {
-      addLog('info', `视频编码器: ${String(videoCodec)}, 视频码率: ${Math.round(videoBitrate / 1000)} kbps`);
+      addLog('info', `${t('logMessages.videoCodecInfo')}: ${String(videoCodec)}, ${t('logMessages.videoBitrateInfo')}: ${Math.round(videoBitrate / 1000)} kbps`);
     }
     if (audioCodec) {
-      addLog('info', `音频编码器: ${String(audioCodec)}, 音频码率: ${Math.round(audioBitrate / 1000)} kbps`);
+      addLog('info', `${t('logMessages.audioCodecInfo')}: ${String(audioCodec)}, ${t('logMessages.audioBitrateInfo')}: ${Math.round(audioBitrate / 1000)} kbps`);
     }
 
     const onAudioTrack = buildOnAudioTrack();
@@ -248,7 +322,7 @@ export default function ConvertPage() {
       setOutputBlob(blob);
       const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
       setOutputName(`${baseName}.${container}`);
-      addLog('info', `转换完成: ${outputName} (${Math.round(blob.size / 1024)} KB)`);
+      addLog('info', `${t('logMessages.conversionCompleted')}: ${outputName} (${Math.round(blob.size / 1024)} KB)`);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       setProgress({ stage: 'error', fraction: 0, message });
@@ -267,12 +341,13 @@ export default function ConvertPage() {
     buildOnAudioTrack,
     addLog,
     outputName,
+    t,
   ]);
 
   const onCancel = React.useCallback(() => {
     controller?.cancel();
-    addLog('warn', '已请求取消');
-  }, [controller, addLog]);
+    addLog('warn', t('logMessages.cancelRequested'));
+  }, [controller, addLog, t]);
 
   const onDownload = React.useCallback(() => {
     if (!outputBlob) {
@@ -280,34 +355,36 @@ export default function ConvertPage() {
     }
     const name = outputName || `output.${container}`;
     saveAs(outputBlob, name);
-    addLog('info', `已保存: ${name}`);
-  }, [outputBlob, outputName, container, addLog]);
+    addLog('info', `${t('logMessages.fileSaved')}: ${name}`);
+  }, [outputBlob, outputName, container, addLog, t]);
 
   const containerOptions = DEFAULT_CONTAINERS.map((c) => ({
     label: c.toUpperCase(),
     value: c,
   }));
 
-  const audioTrackModeOptions = [
-    { label: '默认', value: 'default' as const },
-    { label: '智能复制', value: 'copy' as const },
-    { label: '仅第一条', value: 'first-only' as const },
-  ];
+  const audioTrackModeOptions = React.useMemo(() => [
+    { label: t('audioTrackModes.default'), value: 'default' as const },
+    { label: t('audioTrackModes.copy'), value: 'copy' as const },
+    { label: t('audioTrackModes.firstOnly'), value: 'first-only' as const },
+  ], [t]);
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">{t('title') || '格式转换'}</h1>
+        <h1 className="text-3xl font-bold tracking-tight">{t('title')}</h1>
         <p className="text-muted-foreground mt-2">
-          {t('description') || '转换视频和音频文件格式'}
+          {t('description')}
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 左侧：文件选择和预览 */}
         <div className="space-y-6">
+          {/* 上部分：选择文件和文件信息 */}
           <Card>
             <CardHeader>
-              <CardTitle>选择文件</CardTitle>
+              <CardTitle>{t('selectFile')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <input
@@ -317,76 +394,112 @@ export default function ConvertPage() {
                 className="hidden"
                 onChange={onFileChange}
               />
-              <div className="flex gap-2">
-                <Button onClick={onPickFile}>选择文件</Button>
-                <Button
-                  variant="outline"
-                  disabled={!sourceFile}
-                  onClick={() => {
-                    setSourceFile(null);
-                    clearOutput();
-                    revokeSourceUrl();
-                    setLogs([]);
-                    setProgress({ stage: 'idle', fraction: 0, message: '' });
-                  }}
-                >
-                  <X className="h-4 w-4 mr-2" />
-                  清除
-                </Button>
-              </div>
-
+              
+              {/* 拖拽上传区域或文件按钮 */}
               {sourceFile ? (
-                <div className="text-sm text-muted-foreground space-y-1">
-                  <div className="flex items-center gap-2">
+                <div className="w-full border border-border rounded-lg p-3 px-4 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
                     {sourceFile.type.startsWith('video/') ? (
-                      <FileVideo className="h-4 w-4" />
+                      <FileVideo className="h-4 w-4 flex-shrink-0" />
                     ) : (
-                      <FileAudio className="h-4 w-4" />
+                      <FileAudio className="h-4 w-4 flex-shrink-0" />
                     )}
-                    <span>文件: {sourceFile.name}</span>
+                    <span className="font-medium truncate">{sourceFile.name}</span>
                   </div>
-                  <div>大小: {Math.round(sourceFile.size / 1024)} KB</div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSourceFile(null);
+                      clearOutput();
+                      revokeSourceUrl();
+                      setLogs([]);
+                      setProgress({ stage: 'idle', fraction: 0, message: '' });
+                    }}
+                    className="flex-shrink-0 p-1 hover:bg-accent rounded transition-colors"
+                    aria-label={t('clear')}
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
                 </div>
               ) : (
-                <div className="text-sm text-muted-foreground">
-                  请选择一个视频或音频文件。
-                </div>
-              )}
-
-              {sourceUrl && (
-                <div className="rounded-lg overflow-hidden">
-                  {sourceFile?.type.startsWith('video/') ? (
-                    <video className="w-full max-h-64 rounded" controls src={sourceUrl} />
-                  ) : (
-                    <audio className="w-full" controls src={sourceUrl} />
+                <div
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={onPickFile}
+                  className={`
+                    border-2 border-dashed rounded-lg p-8 text-center cursor-pointer
+                    transition-colors
+                    ${isDragging 
+                      ? "border-primary bg-primary/5" 
+                      : "border-border hover:border-primary/50 hover:bg-accent/50"
+                    }
+                  `}
+                >
+                  <div className="flex justify-center mb-4">
+                    <FileVideo className="h-12 w-12 text-muted-foreground" />
+                    <FileAudio className="h-12 w-12 text-muted-foreground -ml-4" />
+                  </div>
+                  <p className="text-sm font-medium mb-2">{t('dragAndDrop')}</p>
+                  <p className="text-xs text-muted-foreground mb-1">
+                    {t('supportedFormats')}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {t('fileSizeLimit')} {formatFileSize(maxFileSize)}
+                  </p>
+                  {!currentUser && (
+                    <p className="text-xs text-muted-foreground mt-2">
+                      {t('loginForLarger')}{' '}
+                      <button
+                        type="button"
+                        className="h-auto p-0 text-primary underline bg-transparent border-0 cursor-pointer hover:underline"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const isDevelopment = process.env.NODE_ENV === 'development';
+                          if (isDevelopment) {
+                            window.location.href = `http://localhost:3001/${locale}/signin`;
+                          } else {
+                            window.location.href = `${window.location.origin}/${locale}/signin`;
+                          }
+                        }}
+                      >
+                        {t('login')}
+                      </button>
+                    </p>
                   )}
                 </div>
               )}
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>进度</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="text-sm text-muted-foreground">
-                {progress.message || '—'}
-              </div>
-              <Progress value={progressValue} />
-            </CardContent>
-          </Card>
+          {/* 下部分：纯视频/音频预览 */}
+          {sourceUrl && (
+            <Card>
+              <CardContent className="p-0">
+                <div className="rounded-lg overflow-hidden">
+                  {sourceFile?.type.startsWith('video/') ? (
+                    <video className="w-full h-auto rounded" controls src={sourceUrl} />
+                  ) : (
+                    <div className="p-6">
+                      <audio className="w-full" controls src={sourceUrl} />
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
 
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>转换设置</CardTitle>
+              <CardTitle>{t('convertSettings')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">输出容器</label>
+                  <label className="text-sm font-medium">{t('outputContainer')}</label>
                   <Select value={container} onValueChange={(v) => setContainer(v as ContainerFormat)}>
                     <SelectTrigger>
                       <SelectValue />
@@ -402,7 +515,7 @@ export default function ConvertPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">音频轨道策略</label>
+                  <label className="text-sm font-medium">{t('audioTrackStrategy')}</label>
                   <Select
                     value={audioTrackMode}
                     onValueChange={(v) => setAudioTrackMode(v as AudioTrackMode)}
@@ -425,14 +538,14 @@ export default function ConvertPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">音频编码器</label>
+                  <label className="text-sm font-medium">{t('audioCodec')}</label>
                   <Select
                     value={selectedAudioCodec ?? ''}
                     onValueChange={(v) => setSelectedAudioCodec(v || null)}
                     disabled={audioCodecs.length === 0}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="选择编码器" />
+                      <SelectValue placeholder={t('selectCodec')} />
                     </SelectTrigger>
                     <SelectContent>
                       {audioCodecs.map((c) => (
@@ -445,7 +558,7 @@ export default function ConvertPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">音频码率 (bps)</label>
+                  <label className="text-sm font-medium">{t('audioBitrate')}</label>
                   <Input
                     type="number"
                     value={audioBitrate}
@@ -456,7 +569,7 @@ export default function ConvertPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">音频采样率 (Hz，可选)</label>
+                  <label className="text-sm font-medium">{t('audioSampleRate')}</label>
                   <Input
                     type="number"
                     value={audioSampleRate ?? ''}
@@ -465,7 +578,7 @@ export default function ConvertPage() {
                     }
                     min={8000}
                     step={1000}
-                    placeholder="留空=自动"
+                    placeholder={t('autoPlaceholder')}
                   />
                 </div>
               </div>
@@ -475,14 +588,14 @@ export default function ConvertPage() {
                   <Separator />
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">视频编码器</label>
+                      <label className="text-sm font-medium">{t('videoCodec')}</label>
                       <Select
                         value={selectedVideoCodec ?? ''}
                         onValueChange={(v) => setSelectedVideoCodec(v || null)}
                         disabled={videoCodecs.length === 0}
                       >
                         <SelectTrigger>
-                          <SelectValue placeholder="选择编码器" />
+                          <SelectValue placeholder={t('selectCodec')} />
                         </SelectTrigger>
                         <SelectContent>
                           {videoCodecs.map((c) => (
@@ -495,7 +608,7 @@ export default function ConvertPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-medium">视频码率 (bps)</label>
+                      <label className="text-sm font-medium">{t('videoBitrate')}</label>
                       <Input
                         type="number"
                         value={videoBitrate}
@@ -515,37 +628,84 @@ export default function ConvertPage() {
                   {isConverting ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      转换中…
+                      {t('converting')}
                     </>
                   ) : (
-                    '开始转换'
+                    t('startConvert')
                   )}
                 </Button>
                 <Button variant="outline" disabled={!isConverting} onClick={onCancel}>
-                  取消
+                  {t('cancel')}
                 </Button>
                 <Button variant="outline" disabled={!outputBlob} onClick={onDownload}>
                   <Download className="mr-2 h-4 w-4" />
-                  下载
+                  {t('download')}
                 </Button>
               </div>
 
               {outputName && (
-                <div className="text-sm text-muted-foreground">输出文件: {outputName}</div>
+                <div className="text-sm text-muted-foreground">{t('outputFile')}: {outputName}</div>
               )}
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>日志</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Textarea value={logText} rows={10} className="w-full font-mono text-xs" readOnly />
+              {/* 进度展示（转换完成后也显示，仅在 idle 或 error 时隐藏） */}
+              {sourceFile && progress.stage !== 'idle' && progress.stage !== 'error' && (
+                <>
+                  <Separator />
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm font-medium">{t('progress')}</span>
+                      <span className="text-sm text-muted-foreground">{progressValue}%</span>
+                    </div>
+                    <Progress value={progressValue} />
+                    {progress.message && (
+                      <div className="text-sm text-muted-foreground">
+                        {progress.message}
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {/* 日志按钮 */}
+              {logs.length > 0 && (
+                <>
+                  <Separator />
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsLogsDialogOpen(true)}
+                    className="w-full justify-start"
+                  >
+                    <FileText className="mr-2 h-4 w-4" />
+                    <span className="flex-1 text-left">{t('viewLogs')}</span>
+                    {hasError && (
+                      <Badge variant="destructive" className="ml-auto h-5 w-5 p-0 flex items-center justify-center">
+                        !
+                      </Badge>
+                    )}
+                  </Button>
+                </>
+              )}
             </CardContent>
           </Card>
         </div>
       </div>
+
+      {/* 日志弹窗 */}
+      <Dialog open={isLogsDialogOpen} onOpenChange={setIsLogsDialogOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh]">
+          <DialogHeader>
+            <DialogTitle>{t('logs')}</DialogTitle>
+          </DialogHeader>
+          <div className="overflow-auto">
+            <Textarea 
+              value={logText} 
+              rows={15} 
+              className="w-full font-mono text-xs" 
+              readOnly 
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/contexts/I18nContext";
 import { cn } from "@/lib/utils";
 import {
   Tooltip,
@@ -15,9 +15,7 @@ import {
   CreditCard,
   Info,
 } from "lucide-react";
-import { usePathname } from "@/i18n/navigation";
 import { LinkButton } from "@/components/ui/link-button";
-import Image from "next/image";
 
 interface NavItem {
   id: string;
@@ -32,9 +30,9 @@ const dashboardNavItems: NavItem[] = [
   { id: "about", icon: Info, translationKey: "about" },
 ];
 
-const getNavPath = (id: string) => {
-  return `/${id}` as "/profile";
-};
+function getNavPath(id: string): string {
+  return `/dashboard/${id}`;
+}
 
 interface SidebarProps {
   activeItem: string;
@@ -43,7 +41,6 @@ interface SidebarProps {
 
 export function Sidebar({ activeItem, isCollapsed }: SidebarProps) {
   const t = useTranslations("dashboard.navigation");
-  const pathname = usePathname();
 
   return (
     <TooltipProvider delayDuration={0} skipDelayDuration={0}>
@@ -53,18 +50,6 @@ export function Sidebar({ activeItem, isCollapsed }: SidebarProps) {
           isCollapsed ? "w-16" : "w-56"
         )}
       >
-        {/* Logo / Brand */}
-        <div className="flex h-16 items-center justify-start px-4">
-          
-          <Image
-            src="/console/favicon.ico"
-            alt="VideoRoll"
-            width={32}
-            height={32}
-            className="object-contain"
-          />
-        </div>
-
         {/* Main Navigation */}
         <nav className="flex-1 space-y-1.5 p-3 overflow-y-auto overflow-x-visible custom-scrollbar">
           {dashboardNavItems.map((item) => (

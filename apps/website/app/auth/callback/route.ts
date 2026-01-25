@@ -25,7 +25,7 @@ export async function GET(request: Request) {
         // 从 next 路径中提取 locale，如果没有则默认为 'en'
         const localeMatch = next.match(/\/(en|zh)(\/|$)/);
         const locale = localeMatch ? localeMatch[1] : 'en';
-        return NextResponse.redirect(`http://localhost:3134/console/${locale}/profile`);
+        return NextResponse.redirect(`http://localhost:3134/console`);
       }
       
       if (isLocalEnv) {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@/contexts/I18nContext";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -39,7 +39,7 @@ export function AccountContent() {
   const handleDeleteAccount = async () => {
     setIsDeleting(true);
     try {
-      const response = await fetch("/api/delete-user", {
+      const response = await fetch("/console/api/delete-user", {
         method: "POST",
       });
       if (response.ok) {
