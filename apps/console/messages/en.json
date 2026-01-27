@@ -107,6 +107,7 @@
       "browse": "Browse",
       "convert": "Format Converter",
       "transform": "Video Transform",
+      "compress": "Video Compression",
       "comingSoon": "Coming Soon"
     },
     "noTools": "No tools available",
@@ -169,6 +170,54 @@
         "default": "Default",
         "copy": "Smart Copy",
         "firstOnly": "First Only"
+      }
+    },
+    "compress": {
+      "title": "Video Compression",
+      "description": "Compress video files to reduce file size while maintaining quality",
+      "selectFile": "Select File",
+      "clear": "Clear",
+      "dragAndDrop": "Drag and drop files here or click to select",
+      "supportedFormats": "Supported formats: MP4, WebM, MKV, MOV",
+      "fileSizeLimit": "File Size Limit:",
+      "loginForLarger": "To upload larger files, please",
+      "login": "Login",
+      "fileTooLarge": "File Too Large",
+      "progress": "Progress",
+      "compressSettings": "Compression Settings",
+      "outputContainer": "Output Container",
+      "compressionPreset": "Compression Preset",
+      "compressionPresets": {
+        "low": "Low (Smaller file, lower quality)",
+        "medium": "Medium (Balanced)",
+        "high": "High (Larger file, better quality)",
+        "custom": "Custom"
+      },
+      "videoCodec": "Video Codec",
+      "videoBitrate": "Video Bitrate (bps)",
+      "audioCodec": "Audio Codec",
+      "audioBitrate": "Audio Bitrate (bps)",
+      "selectCodec": "Select Codec",
+      "compressing": "Compressing…",
+      "startCompress": "Start Compress",
+      "cancel": "Cancel",
+      "download": "Download",
+      "outputFile": "Output File",
+      "logs": "Logs",
+      "viewLogs": "View Logs",
+      "logMessages": {
+        "fileSelected": "File selected",
+        "codecLoaded": "Codec loaded",
+        "codecLoadFailed": "Failed to load codec",
+        "compressionStarted": "Compression started",
+        "videoCodecInfo": "Video codec",
+        "videoBitrateInfo": "Video bitrate",
+        "audioCodecInfo": "Audio codec",
+        "audioBitrateInfo": "Audio bitrate",
+        "compressionCompleted": "Compression completed",
+        "compressionRatio": "Compression ratio",
+        "cancelRequested": "Cancel requested",
+        "fileSaved": "File saved"
       }
     },
     "browse": {

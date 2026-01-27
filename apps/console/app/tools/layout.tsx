@@ -14,6 +14,9 @@ function getHeaderTitle(pathname: string, navT: (key: string) => string): string
   if (pathname.startsWith("/tools/transform")) {
     return navT("transform") || "Video Transform";
   }
+  if (pathname.startsWith("/tools/compress")) {
+    return navT("compress") || "Video Compression";
+  }
   if (pathname.startsWith("/tools/browse")) {
     return navT("browse") || "Browse";
   }
