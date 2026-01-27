@@ -42,6 +42,7 @@ const toolsNavCategories: NavCategory[] = [
     subNav: [
       { id: "convert", label: "convert", route: "/tools/convert" },
       { id: "transform", label: "transform", route: "/tools/transform" },
+      { id: "compress", label: "compress", route: "/tools/compress" },
     ],
   },
   {
@@ -66,7 +67,7 @@ const toolsNavCategories: NavCategory[] = [
 ];
 
 function getActiveCategory(pathname: string): string | null {
-  if (pathname.startsWith("/tools/convert") || pathname.startsWith("/tools/transform")) return "video";
+  if (pathname.startsWith("/tools/convert") || pathname.startsWith("/tools/transform") || pathname.startsWith("/tools/compress")) return "video";
   // 暂时屏蔽浏览菜单
   // if (pathname.startsWith("/tools/browse")) return "browse";
   return null;
@@ -75,6 +76,7 @@ function getActiveCategory(pathname: string): string | null {
 function getActiveSubNav(pathname: string): string | null {
   if (pathname.startsWith("/tools/convert")) return "convert";
   if (pathname.startsWith("/tools/transform")) return "transform";
+  if (pathname.startsWith("/tools/compress")) return "compress";
   return null;
 }
 

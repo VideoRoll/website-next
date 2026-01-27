@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 
 export const metadata = {
   title: "VideoRoll Console",
-  description: "VideoRoll Dashboard",
+  description: "VideoRoll Console",
 };
 
 export default function RootLayout({
