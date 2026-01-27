@@ -3,9 +3,9 @@ import React from "react";
 import Navbar from "@/components/ui/client/NavBar";
 import { getUserServerSideProps } from "@website-next/auth/auth-helpers/props";
 import Dashboard from "./Dashboard";
-import { setRequestLocale } from 'next-intl/server';
-import { Locale } from 'next-intl';
-import {redirect} from 'next/navigation';
+import { setRequestLocale } from "next-intl/server";
+import { Locale } from "next-intl";
+import { redirect } from "next/navigation";
 import { getAuthConfig } from "@/lib/auth-init";
 
 type Props = {
@@ -20,8 +20,10 @@ export default async function Page({ params }: Props) {
   const config = getAuthConfig();
   const { currentUser } = await getUserServerSideProps(config);
 
-  if (!currentUser) {
-    const isDevelopment = process.env.NODE_ENV === 'development';
+  if (currentUser) {
+    redirect(`/console/dashboard`);
+  } else {
+    const isDevelopment = process.env.NODE_ENV === "development";
     if (isDevelopment) {
       redirect(`http://localhost:3134/${paramsData.locale}/signin`);
     } else {
@@ -31,7 +33,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <main style={{ height: "100%" }} className="bg-background">
-      <Navbar currentUser={currentUser} ></Navbar>
+      <Navbar currentUser={currentUser}></Navbar>
       <Dashboard currentUser={currentUser}></Dashboard>
     </main>
   );

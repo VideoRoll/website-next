@@ -296,8 +296,8 @@ export default function NavBar(props: Props) {
                   </DropdownItem>
                 </DropdownSection>
                 <DropdownSection showDivider aria-label="Profile & Actions">
-                  <DropdownItem key="dashboard" as={Link} href={consoleUrl} locale={locale}>
-                    {t("dashboard")}
+                  <DropdownItem key="dashboard">
+                    <RegularLink href={consoleUrl} color="foreground">{t("dashboard")}</RegularLink>
                   </DropdownItem>
                 </DropdownSection>
                 <DropdownSection aria-label="Profile & Actions">
