@@ -243,6 +243,10 @@ declare const messages: {
   "nav": {
     "features": "Features",
     "tools": "Tools",
+    "toolsSectionVideo": "Video",
+    "toolFormatConvert": "Video Format Convert",
+    "toolRotate": "Video Rotate",
+    "toolCompress": "Video Compress",
     "pricing": "Pricing",
     "faq": "FAQ",
     "documentation": "Documentation",
