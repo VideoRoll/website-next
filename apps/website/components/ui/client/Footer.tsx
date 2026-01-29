@@ -16,11 +16,12 @@ export default function Footer({
   logoHref = '/'
 }: FooterProps) {
   const t = useTranslations('footer');
+  const authT = useTranslations('auth');
   const locale = useLocale();
 
   const FOOTER_LINKS = [
     {
-      label: t('links.termsOfService'),
+      label: authT('termsOfService'),
       href: `https://docs.videoroll.app/${locale === 'zh' ? 'cn' : locale}/docs/terms`,
     },
     {

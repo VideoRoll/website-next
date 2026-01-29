@@ -33,6 +33,7 @@ import { useTheme } from "next-themes";
 import { createClient } from "@website-next/auth/supabase/client";
 import { getAuthConfig } from "@/lib/auth-init";
 import Image from "next/image";
+import Link from "next/link";
 
 function isDashboardRoute(pathname: string): boolean {
   return pathname.startsWith("/dashboard") || (!pathname.startsWith("/tools") && pathname !== "/");
@@ -121,13 +122,15 @@ export function TopNav() {
       <header className="flex h-16 items-center justify-between border-b border-border/40 bg-card/40 backdrop-blur-sm px-6">
         {/* Logo */}
         <div className="flex items-center">
-          <Image
-            src="/console/favicon.ico"
-            alt="VideoRoll"
-            width={32}
+          <Link href={process.env.NODE_ENV === "development" ? "http://localhost:3001" : (typeof window !== "undefined" ? window.location.origin : "/")}>
+            <Image
+              src="/console/favicon.ico"
+              alt="VideoRoll"
+              width={32}
             height={32}
             className="object-contain"
           />
+          </Link>
         </div>
 
         {/* 居中的导航菜单 - 带边框的圆角容器 */}
