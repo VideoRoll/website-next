@@ -11,6 +11,7 @@ import {
   IconUser,
   IconLanguage
 } from "@tabler/icons-react";
+import { SubNavMenu, type SubNavMenuConfig } from "./SubNavMenu";
 import { createClient } from "@website-next/auth/supabase/client";
 import { getAuthConfig } from "@/lib/auth-init";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -52,9 +53,13 @@ export default function NavBar(props: Props) {
   const t = useTranslations("nav");
   const { currentUser } = props;
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isToolsOpen, setIsToolsOpen] = useState(false);
   const [isBlurred, setIsBlurred] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const navbarHoveredRef = useRef(false);
   const rafIdRef = useRef<number | null>(null);
   const lastScrollYRef = useRef<number>(0);
+  const toolsCloseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 手动切换菜单的函数（用于调试）
   const toggleMenu = (e?: React.MouseEvent | React.TouchEvent) => {
@@ -73,6 +78,18 @@ export default function NavBar(props: Props) {
     toggleMenu(e);
   };
 
+  const openToolsMenu = useCallback(() => {
+    if (toolsCloseTimerRef.current) {
+      clearTimeout(toolsCloseTimerRef.current);
+      toolsCloseTimerRef.current = null;
+    }
+    setIsToolsOpen(true);
+  }, []);
+
+  const scheduleCloseToolsMenu = useCallback(() => {
+    toolsCloseTimerRef.current = setTimeout(() => setIsToolsOpen(false), 350);
+  }, []);
+
   const pathname = usePathname();
   const params = useParams();
   const router = useRouter();
@@ -83,7 +100,44 @@ export default function NavBar(props: Props) {
   const locale = useLocale();
   const isDev = process.env.NODE_ENV === "development";
   const consoleUrl = isDev ? `http://localhost:3134/console` : `/console`;
-  const toolsUrl = isDev ? `http://localhost:3134/console/tools` : `/console/tools`;
+  const toolsFormatUrl = isDev ? `http://localhost:3134/console/tools/convert` : `/console/tools/convert`;
+  const toolsRotateUrl = isDev ? `http://localhost:3134/console/tools/transform` : `/console/tools/transform`;
+  const toolsCompressUrl = isDev ? `http://localhost:3134/console/tools/compress` : `/console/tools/compress`;
+
+  const subNavMenuConfig: SubNavMenuConfig = useMemo(
+    () => ({
+      triggerLabel: t("tools"),
+      sections: [
+        {
+          title: t("toolsSectionVideo"),
+          links: [
+            {
+              label: t("toolFormatConvert"),
+              href: toolsFormatUrl,
+              target: isDev ? undefined : "_self",
+            },
+            {
+              label: t("toolRotate"),
+              href: toolsRotateUrl,
+              target: isDev ? undefined : "_self",
+            },
+            {
+              label: t("toolCompress"),
+              href: toolsCompressUrl,
+              target: isDev ? undefined : "_self",
+            },
+          ],
+        },
+      ],
+    }),
+    [
+      t,
+      toolsFormatUrl,
+      toolsRotateUrl,
+      toolsCompressUrl,
+      isDev,
+    ]
+  );
 
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([locale]));
 
@@ -158,16 +212,10 @@ export default function NavBar(props: Props) {
 
       rafIdRef.current = requestAnimationFrame(() => {
         const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-        
-        // 只在状态需要改变时才更新，避免不必要的重渲染
-        setIsBlurred((prevIsBlurred) => {
-          const shouldBlur = scrollY > 80;
-          if (shouldBlur !== prevIsBlurred) {
-            return shouldBlur;
-          }
-          return prevIsBlurred;
-        });
-
+        const shouldBlur = scrollY > 80 || navbarHoveredRef.current;
+        setIsBlurred((prevIsBlurred) =>
+          shouldBlur !== prevIsBlurred ? shouldBlur : prevIsBlurred
+        );
         lastScrollYRef.current = scrollY;
         rafIdRef.current = null;
       });
@@ -175,7 +223,7 @@ export default function NavBar(props: Props) {
 
     // 初始检查
     const initialScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    setIsBlurred(initialScrollY > 500);
+    setIsBlurred(initialScrollY > 80);
     lastScrollYRef.current = initialScrollY;
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -187,14 +235,39 @@ export default function NavBar(props: Props) {
         rafIdRef.current = null;
       }
     };
-  }, []); // 空依赖数组，只在组件挂载时绑定一次
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (toolsCloseTimerRef.current) {
+        clearTimeout(toolsCloseTimerRef.current);
+        toolsCloseTimerRef.current = null;
+      }
+    };
+  }, []);
+
+  const handleHeaderMouseEnter = useCallback(() => {
+    navbarHoveredRef.current = true;
+    setIsBlurred(true);
+  }, []);
+
+  const handleHeaderMouseLeave = useCallback(() => {
+    navbarHoveredRef.current = false;
+    setIsBlurred(lastScrollYRef.current > 80);
+  }, []);
 
   return (
-    <Navbar
-      className="z-[99] top-0 mx-auto touch-manipulation py-[6px]"
+    <div
+      ref={headerRef}
+      className="sticky top-0 z-[99]"
+      onMouseEnter={handleHeaderMouseEnter}
+      onMouseLeave={handleHeaderMouseLeave}
+    >
+      <Navbar
+        className="mx-auto touch-manipulation py-[6px]"
       isMenuOpen={isMenuOpen}
       shouldHideOnScroll={false}
-      position="sticky"
+      position="static"
       isBlurred={isBlurred}
       classNames={{
         base: "bg-transparent",
@@ -239,14 +312,13 @@ export default function NavBar(props: Props) {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <RegularLink
-            className="font-bold"
-            color="foreground"
-            href={toolsUrl}
-            target={isDev ? undefined : "_self"}
-          >
-            {t("tools")}
-          </RegularLink>
+          <SubNavMenu
+            config={subNavMenuConfig}
+            isOpen={isToolsOpen}
+            onMouseEnter={openToolsMenu}
+            onMouseLeave={scheduleCloseToolsMenu}
+            headerRef={headerRef}
+          />
         </NavbarItem>
         <NavbarItem>
           <Link className="font-bold" aria-current="page" href="/pricing">
@@ -369,14 +441,40 @@ export default function NavBar(props: Props) {
             {t("features")}
           </Link>
         </NavbarMenuItem>
-        <NavbarMenuItem key="tools">
+        <NavbarMenuItem key="tools-label">
+          <p className="text-sm text-default-500 font-medium px-2">{t("tools")}</p>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="tools-format">
           <RegularLink
             className="w-full"
             color="foreground"
-            href={toolsUrl}
+            href={toolsFormatUrl}
+            target={isDev ? undefined : "_self"}
             onClick={() => setIsMenuOpen(false)}
           >
-            {t("tools")}
+            {t("toolFormatConvert")}
+          </RegularLink>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="tools-rotate">
+          <RegularLink
+            className="w-full"
+            color="foreground"
+            href={toolsRotateUrl}
+            target={isDev ? undefined : "_self"}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("toolRotate")}
+          </RegularLink>
+        </NavbarMenuItem>
+        <NavbarMenuItem key="tools-compress">
+          <RegularLink
+            className="w-full"
+            color="foreground"
+            href={toolsCompressUrl}
+            target={isDev ? undefined : "_self"}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t("toolCompress")}
           </RegularLink>
         </NavbarMenuItem>
         <NavbarMenuItem key="pricing">
@@ -512,7 +610,8 @@ export default function NavBar(props: Props) {
           </div>
         </NavbarMenuItem>
       </NavbarMenu>
-    </Navbar>
+      </Navbar>
+    </div>
 
     // <nav className={classes.header}>
     //   <Container size="lg">

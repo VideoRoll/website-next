@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 export default async function SignupPage({ params }: { params: { locale: string } }) {
   const paramsData = await params;
 
-  const consoleUrl = process.env.NODE_ENV === "development" ? `http://localhost:3134/console` : `console`;
+  const consoleUrl = process.env.NODE_ENV === "development" ? `http://localhost:3134/console` : `/console`;
 
   // 检查用户是否已登录
   const config = getAuthConfig();

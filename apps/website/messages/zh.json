@@ -206,6 +206,10 @@
   "nav": {
     "features": "功能",
     "tools": "工具",
+    "toolsSectionVideo": "视频",
+    "toolFormatConvert": "视频格式转换",
+    "toolRotate": "视频旋转",
+    "toolCompress": "视频压缩",
     "pricing": "定价",
     "faq": "常见问题",
     "documentation": "文档",

@@ -20,6 +20,10 @@ export default function Footer({
 
   const FOOTER_LINKS = [
     {
+      label: t('links.termsOfService'),
+      href: `https://docs.videoroll.app/${locale === 'zh' ? 'cn' : locale}/docs/terms`,
+    },
+    {
       label: t('links.privacy'),
       href: `https://docs.videoroll.app/${locale === 'zh' ? 'cn' : locale}/docs/privacy`,
     },
