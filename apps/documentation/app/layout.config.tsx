@@ -7,6 +7,7 @@ export function baseOptions(locale: string): BaseLayoutProps {
   return {
     i18n,
     nav: {
+      enabled: true,
       title: (
         <div className="flex flex-row items-center">
           <Image
@@ -20,6 +21,7 @@ export function baseOptions(locale: string): BaseLayoutProps {
         </div>
       ),
       url: "https://videoroll.app",
+      transparentMode: "top"
     },
     // sidebar: {
     //   tabs: false
